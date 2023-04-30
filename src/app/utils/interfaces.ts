@@ -13,3 +13,11 @@ export interface SpaceInfo {
     images?: string[]|null,
     alt?: string|null
 }
+
+export interface CarouselSlides {
+    id: string,
+    src: string,
+    title: string,
+    subtitle: string,
+    routerLink: string
+}

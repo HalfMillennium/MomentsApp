@@ -1,5 +1,5 @@
 import { MenuItem } from "./interfaces";
-import {SpaceInfo} from "./interfaces";
+import {SpaceInfo, CarouselSlides} from "./interfaces";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -62,3 +62,27 @@ export const MOCK_SPACES: SpaceInfo[] = [{
     images: ["https://static.stereogum.com/uploads/2023/04/frank-ocean-coachella-1681738729-1000x750.jpg"],
     alt: "Photo of Frank Ocean concert"
   }];
+
+export const MOCK_CAROUSEL_SLIDES: CarouselSlides[] = [
+  {
+    id: '0',
+    src: 'https://kenyaholidays.travel/wp-content/uploads/2020/08/African-Wild-Dog-portrait.jpg',
+    title: 'Kenyorgi dogs',
+    subtitle: 'New dog breed discovered in Kenya',
+    routerLink: ''
+  },
+  {
+    id: '1',
+    src: 'https://i0.wp.com/mpala.org/wp-content/uploads/2020/01/Two-wild-dogs.jpg?fit=739%2C415&ssl=1',
+    title: 'Kenyorgi dogs',
+    subtitle: 'New dog breed discovered in Kenya',
+    routerLink: ''
+  },
+  {
+    id: '2',
+    src: 'https://optimise2.assets-servd.host/maniacal-finch/production/animals/painted-dog-01-01.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1658934200&s=81da609829d4362aa959790573f32085',
+    title: 'Kenyorgi dogs',
+    subtitle: 'New dog breed discovered in Kenya',
+    routerLink: ''
+  }
+]
