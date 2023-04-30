@@ -1,0 +1,15 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<section>
+<button mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
+  <mat-menu class="menu" #menu="matMenu">
+    <button mat-menu-item *ngFor="let item of menuItems">
+      <mat-icon>{{item.icon}}</mat-icon>
+      {{item.label}}
+    </button>
+  </mat-menu>
+</section>
+<section class="main">
+  <router-outlet></router-outlet>
+</section>

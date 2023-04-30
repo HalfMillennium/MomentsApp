@@ -1,0 +1,8 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+// All items auto-centered horizontally
+.main {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
