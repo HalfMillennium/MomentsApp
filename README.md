@@ -1,4 +1,4 @@
-# Moments
+# The Moments App
 
 The complete vision of "Moments" is still not fully defined, but it will be an angular application.
 
