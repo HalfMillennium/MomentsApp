@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Dashboard } from './pages/dashboard/dashboard.component';
 import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
+import { Overview } from './pages/overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatFormFieldModule,
     Dashboard,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Overview
   ],
   providers: [],
   bootstrap: [AppComponent]

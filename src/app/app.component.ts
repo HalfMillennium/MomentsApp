@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from './utils/interfaces';
-import {menuItems} from './utils/resources';
+import {MENU_ITEMS} from './utils/resources';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import {menuItems} from './utils/resources';
 })
 export class AppComponent {
   title = 'moments';
-  readonly menuItems = menuItems;
+  readonly MENU_ITEMS = MENU_ITEMS;
 }

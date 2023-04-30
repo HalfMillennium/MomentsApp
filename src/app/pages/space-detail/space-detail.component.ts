@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router, RoutesRecognized } from '@angular/route
 import { ReplaySubject, takeUntil, tap, switchMap, of as observableOf} from 'rxjs';
 import { MaterialModule } from 'src/material.module';
 import { SpaceInfo } from 'src/app/utils/interfaces';
-import {testApiResponse} from 'src/app/utils/resources';
+import {TEST_API_RESPONSE} from 'src/app/utils/resources';
 
 @Component({
   selector: 'space-detail',
@@ -24,9 +24,9 @@ export class SpaceDetail implements OnDestroy {
     // fetch spaceInfo using spaceId - using test data for now
     this.currentSpace = {
       id: params.get('id'),
-      title: testApiResponse['title'],
-      images: [testApiResponse['image']],
-      alt: testApiResponse['alt']
+      title: TEST_API_RESPONSE['title'],
+      images: [TEST_API_RESPONSE['image']],
+      alt: TEST_API_RESPONSE['alt']
     }
     
   }
