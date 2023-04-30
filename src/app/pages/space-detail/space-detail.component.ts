@@ -23,7 +23,6 @@ export class SpaceDetail implements OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     const params = this.activatedRoute.snapshot.paramMap;
-    const spaceId = params.get('id');
     // fetch spaceInfo using spaceId - using test data for now
     this.currentSpace = {
       id: params.get('id'),

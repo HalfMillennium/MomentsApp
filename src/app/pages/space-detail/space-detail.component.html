@@ -8,27 +8,32 @@
     </div>
     <span class="mat-h3"><strong>Space subtitle: </strong><u>{{currentSpace.desc}}</u></span>
     <div class="carousel-container">
-        <c-carousel [interval]="5000">
-            <c-carousel-inner>
-            <c-carousel-item *ngFor="let slide of MOCK_CAROUSEL_SLIDES">
-                <img
-                alt="{{slide.title}}"
-                class="d-block w-100"
-                loading="lazy"
-                src="{{slide.src}}"
-                />
-                <c-carousel-caption class="d-none d-md-block">
-                <h3 class="mat-h3">{{slide.title}}</h3>
-                <p class="mat-h4">{{slide.subtitle}}</p>
-                </c-carousel-caption>
-            </c-carousel-item>
-            </c-carousel-inner>
-            <c-carousel-control [routerLink] direction="prev">
-                <mat-icon>skip_previous</mat-icon>
-            </c-carousel-control>
-            <c-carousel-control [routerLink] direction="next">
-                <mat-icon>skip_next</mat-icon>
-            </c-carousel-control>
-        </c-carousel>
+        <mat-card>
+            <c-carousel [interval]="5000">
+                <c-carousel-inner>
+                <c-carousel-item *ngFor="let slide of MOCK_CAROUSEL_SLIDES">
+                    <img
+                    alt="{{slide.title}}"
+                    class="d-block w-100"
+                    loading="lazy"
+                    src="{{slide.src}}"
+                    />
+                    <c-carousel-caption class="d-none d-md-block">
+                    <h3 class="mat-h3">{{slide.title}}</h3>
+                    <p class="mat-h4">{{slide.subtitle}}</p>
+                    </c-carousel-caption>
+                </c-carousel-item>
+                </c-carousel-inner>
+                <c-carousel-control [routerLink] direction="prev">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </c-carousel-control>
+                <c-carousel-control [routerLink] direction="next">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </c-carousel-control>
+            </c-carousel>
+            <mat-card-actions>
+                <button mat-raised-button color="accent"><span class="mat-h5">View Angles</span></button>
+            </mat-card-actions>
+        </mat-card>
     </div>
 </div>
