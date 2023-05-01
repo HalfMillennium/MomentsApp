@@ -3,7 +3,8 @@ export interface MenuItem {
     name: string,
     icon: string,
     label: string,
-    routerLink: string
+    routerLink: string,
+    auth?: boolean
 }
 
 export interface SpaceInfo {

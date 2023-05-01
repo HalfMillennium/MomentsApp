@@ -1,4 +1,14 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="row">
+  <div class="column">
+    <h3 class="mat-headline-4"><b>April 30th</b>, 2023</h3>
+    <h4 class="mat-headline-5">[ {{currentTimeOfDay}} ]</h4>
+  </div>
+  <div class="column align-right">
+    <h3 class="mat-headline-4"><strong>{{headerText}}</strong></h3>
+    <h4 class="mat-headline-5">{{subHeaderText}}</h4>
+  </div>
+</div>
 <div class="flex-container space-above">
     <mat-card class="max-card-width" *ngFor="let space of MOCK_SPACES">
         <mat-card-header>

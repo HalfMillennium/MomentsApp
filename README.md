@@ -1,27 +1,12 @@
-# Moments
+# The Moments App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+The complete vision of "Moments" is still not fully defined, but it will be an angular application.
 
-## Development server
+Users will be able to create accounts, and select preferences (e.g. hobbies, interests, etc.).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This data will be used to filter Google Trends data and present users with **spaces** corresponding to stories that would likely interest them.
 
-## Code scaffolding
+When a user enters this space, they will be guided through the different aspects of the event/phenomenon in a series of chunks, with the content curated by ChatGPT. In this way, ChatGPT will act as a *reporter* that will digest several articles on a particular topic and not only present users with adequate summaries, but also highlight and explain potential plans of action, or further related reading.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Tech Stack:
+NodeJS-based Angular, with Firebase to be used for user data storage.
