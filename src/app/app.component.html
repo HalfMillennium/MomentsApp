@@ -1,14 +1,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <section>
 <button mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
   <mat-menu class="menu" #menu="matMenu">
     <button mat-menu-item *ngFor="let item of MENU_ITEMS" 
     [disabled]="item.routerLink === ''" 
     (click)="(item.auth) ? openAuthDialog() : navigateTo(item.routerLink)">
-      <mat-icon>{{item.icon}}</mat-icon>
-      {{item.label}}
+      <mat-icon [class.material-symbols-outlined]="item.icon.type === IconTypeEnum.GOOGLE_ICON">{{item.icon.value}}</mat-icon>
+      {{(item.icon.type === IconTypeEnum.ANGULAR_MAT) ? item.label : 'Sign In / Sign Up'}}
     </button>
   </mat-menu>
 </section>

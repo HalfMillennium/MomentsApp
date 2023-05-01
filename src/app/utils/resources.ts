@@ -1,32 +1,33 @@
 import { MenuItem } from "./interfaces";
 import {SpaceInfo, CarouselSlides} from "./interfaces";
+import { IconTypeEnum } from "./interfaces";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
     {
-        name: 'dash_home',
-        icon: 'dashboard',
-        label: 'Dashboard',
-        routerLink: '/',
+      name: 'dash_home',
+      icon: {value: 'dashboard', type: IconTypeEnum.ANGULAR_MAT},
+      label: 'Dashboard',
+      routerLink: '/',
     },
     {
-    name: 'account',
-    icon: 'account_circle',
-    label: 'Account',
-    routerLink: '/',
-    auth: true,
+      name: 'account',
+      icon: {value: 'login', type: IconTypeEnum.GOOGLE_ICON},
+      label: 'Account',
+      routerLink: '/',
+      auth: true,
     },
     {
-    name: 'saved_stories',
-    icon: 'save',
-    label: 'Saved Stories',
-    routerLink: ''
+      name: 'saved_stories',
+      icon: {value: 'save', type: IconTypeEnum.ANGULAR_MAT},
+      label: 'Saved Stories',
+      routerLink: ''
     },
     {
-    name: 'about',
-    icon: 'info',
-    label: 'What Is This?',
-    routerLink: '/info'
+      name: 'about',
+      icon: {value: 'info', type: IconTypeEnum.ANGULAR_MAT},
+      label: 'What Is This?',
+      routerLink: '/info'
     }
 ]
 

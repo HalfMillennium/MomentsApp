@@ -1,7 +1,7 @@
 /** Interface for menu items */
 export interface MenuItem {
     name: string,
-    icon: string,
+    icon: IconType,
     label: string,
     routerLink: string,
     auth?: boolean
@@ -21,4 +21,14 @@ export interface CarouselSlides {
     title: string,
     subtitle: string,
     routerLink: string
+}
+
+export enum IconTypeEnum {
+    ANGULAR_MAT = 'ANGULAR_MAT',
+    GOOGLE_ICON = 'GOOGLE_ICON'
+}
+
+export interface IconType {
+    value: string,
+    type: IconTypeEnum
 }
