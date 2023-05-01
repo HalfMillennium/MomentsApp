@@ -4,13 +4,36 @@
 
 <div *ngIf="currentSpace && viewLoaded">
     <div class="page-title">
-        <h3 class="mat-h6">Currently viewing temporary space #{{currentSpace.id}}</h3>
+        <span class="mat-h5">Currently viewing temporary space #{{currentSpace.id}}</span>
     </div>
     <span class="mat-h3"><strong>Space subtitle: </strong><u>{{currentSpace.desc}}</u></span>
-    <mat-card>
-        <mat-card-header class="mat-h4">
-            {{currentSpace.title}}
-        </mat-card-header>
-        <img mat-card-image src="https://www.science.org/do/10.1126/article.22522/abs/singledog.png"/>
-    </mat-card>
+    <div class="carousel-container">
+        <mat-card>
+            <c-carousel [interval]="slideIntervalMs">
+                <c-carousel-inner>
+                <c-carousel-item *ngFor="let slide of MOCK_CAROUSEL_SLIDES">
+                    <img
+                    alt="{{slide.title}}"
+                    class="d-block w-100"
+                    loading="lazy"
+                    src="{{slide.src}}"
+                    />
+                    <c-carousel-caption class="d-none d-md-block">
+                    <h3 class="mat-h3">{{slide.title}}</h3>
+                    <p class="mat-h4">{{slide.subtitle}}</p>
+                    </c-carousel-caption>
+                </c-carousel-item>
+                </c-carousel-inner>
+                <c-carousel-control [routerLink] direction="prev">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </c-carousel-control>
+                <c-carousel-control [routerLink] direction="next">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </c-carousel-control>
+            </c-carousel>
+            <mat-card-actions>
+                <button mat-raised-button color="accent"><span class="mat-h5">View Angles</span></button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

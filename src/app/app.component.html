@@ -4,7 +4,9 @@
 <section>
 <button mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
   <mat-menu class="menu" #menu="matMenu">
-    <button mat-menu-item *ngFor="let item of MENU_ITEMS" [routerLink]="item.routerLink" [disabled]="item.routerLink === ''">
+    <button mat-menu-item *ngFor="let item of MENU_ITEMS" 
+    [disabled]="item.routerLink === ''" 
+    (click)="(item.auth) ? openAuthDialog() : navigateTo(item.routerLink)">
       <mat-icon>{{item.icon}}</mat-icon>
       {{item.label}}
     </button>

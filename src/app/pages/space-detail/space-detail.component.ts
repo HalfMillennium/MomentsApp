@@ -4,12 +4,14 @@ import { ActivatedRoute, Params, Router, RoutesRecognized } from '@angular/route
 import { ReplaySubject, takeUntil, tap, switchMap, of as observableOf} from 'rxjs';
 import { MaterialModule } from 'src/material.module';
 import { SpaceInfo } from 'src/app/utils/interfaces';
-import {TEST_API_RESPONSE} from 'src/app/utils/resources';
+import {TEST_API_RESPONSE, MOCK_CAROUSEL_SLIDES} from 'src/app/utils/resources';
+import { CarouselModule } from '@coreui/angular';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'space-detail',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, CarouselModule, RouterModule],
   templateUrl: './space-detail.component.html',
   styleUrls: ['./space-detail.component.scss']
 })
@@ -17,10 +19,11 @@ export class SpaceDetail implements OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   currentSpace: SpaceInfo;
   viewLoaded = false;
+  readonly MOCK_CAROUSEL_SLIDES = MOCK_CAROUSEL_SLIDES;
+  slideIntervalMs = 5000;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     const params = this.activatedRoute.snapshot.paramMap;
-    const spaceId = params.get('id');
     // fetch spaceInfo using spaceId - using test data for now
     this.currentSpace = {
       id: params.get('id'),
@@ -42,6 +45,10 @@ export class SpaceDetail implements OnDestroy {
         }
       })
     this.viewLoaded = true;
+  }
+
+  slideChange($event: any) {
+    console.log("Slide changed.");
   }
 
   ngOnDestroy() {

@@ -9,6 +9,7 @@ import { Dashboard } from './pages/dashboard/dashboard.component';
 import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { Overview } from './pages/overview/overview.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { Overview } from './pages/overview/overview.component';
     Dashboard,
     MaterialModule,
     AppRoutingModule,
-    Overview
+    Overview,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

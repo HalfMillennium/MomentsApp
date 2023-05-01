@@ -3,7 +3,8 @@ export interface MenuItem {
     name: string,
     icon: string,
     label: string,
-    routerLink: string
+    routerLink: string,
+    auth?: boolean
 }
 
 export interface SpaceInfo {
@@ -12,4 +13,12 @@ export interface SpaceInfo {
     desc?: string|null,
     images?: string[]|null,
     alt?: string|null
+}
+
+export interface CarouselSlides {
+    id: string,
+    src: string,
+    title: string,
+    subtitle: string,
+    routerLink: string
 }
