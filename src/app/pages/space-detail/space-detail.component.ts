@@ -7,6 +7,10 @@ import { SpaceInfo } from 'src/app/utils/interfaces';
 import {TEST_API_RESPONSE, MOCK_CAROUSEL_SLIDES} from 'src/app/utils/resources';
 import { CarouselModule } from '@coreui/angular';
 import { RouterModule } from '@angular/router';
+import { environment } from 'src/environments/environment';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 @Component({
   selector: 'space-detail',
@@ -32,6 +36,13 @@ export class SpaceDetail implements OnDestroy {
       alt: TEST_API_RESPONSE['alt']
     }
     
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Initialize Firebase
+    const app = initializeApp(environment.firebase);
+    const analytics = getAnalytics(app);
+
   }
 
   async ngOnInit(): Promise<void> {
