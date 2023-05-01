@@ -4,6 +4,7 @@ import {MaterialModule} from '../../../material.module';
 import { MOCK_SPACES } from '../../utils/resources';
 import { Router, RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'dashboard',
   standalone: true,
