@@ -6,10 +6,11 @@
 <button mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
   <mat-menu class="menu" #menu="matMenu">
     <button mat-menu-item *ngFor="let item of MENU_ITEMS" 
-    [disabled]="item.routerLink === ''" 
+    [routerLink]="item.routerLink" 
+    [disabled]="item.routerLink === ''"
     (click)="(item.auth) ? openAuthDialog() : navigateTo(item.routerLink)">
-      <mat-icon [class.material-symbols-outlined]="item.icon.type === IconTypeEnum.GOOGLE_ICON">{{item.icon.value}}</mat-icon>
-      {{(item.icon.type === IconTypeEnum.ANGULAR_MAT) ? item.label : 'Sign In / Sign Up'}}
+      <mat-icon>{{ (item.name === 'account') ?  ((userAuthenticated) ? 'account_circle' : 'login') : item.icon }}</mat-icon>
+      {{ (item.name === 'account') ?  ((userAuthenticated) ? 'Account' : 'Sign In / Sign Up') : item.label }}
     </button>
   </mat-menu>
 </section>

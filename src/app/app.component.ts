@@ -4,7 +4,6 @@ import {MENU_ITEMS} from './utils/resources';
 import { AuthDialog } from './pages/auth_dialog/auth-dialog/auth-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import { IconTypeEnum } from './utils/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +13,7 @@ import { IconTypeEnum } from './utils/interfaces';
 export class AppComponent {
   title = 'moments';
   readonly MENU_ITEMS = MENU_ITEMS;
-  readonly IconTypeEnum = IconTypeEnum;
-
+  userAuthenticated = false;
   constructor(private dialog: MatDialog, private router: Router) {}
 
   navigateTo(url: string) {
