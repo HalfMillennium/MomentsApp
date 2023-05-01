@@ -7,13 +7,14 @@ export const MENU_ITEMS: MenuItem[] = [
         name: 'dash_home',
         icon: 'dashboard',
         label: 'Dashboard',
-        routerLink: '/'
+        routerLink: '/',
     },
     {
     name: 'account',
     icon: 'account_circle',
     label: 'Account',
-    routerLink: ''
+    routerLink: '/',
+    auth: true,
     },
     {
     name: 'saved_stories',
