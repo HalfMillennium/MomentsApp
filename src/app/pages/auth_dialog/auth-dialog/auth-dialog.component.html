@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="mat-h2">Sign In</h2>
+<div mat-dialog-content>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username">
+            <mat-hint>Make it cool.</mat-hint>
+        </mat-form-field>
+        </p>
+        <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password">
+            <mat-hint>Greater than 10 characters.</mat-hint>
+        </mat-form-field>
+    </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Sign In</button>
+</div>
