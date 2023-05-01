@@ -20,6 +20,7 @@ export class SpaceDetail implements OnDestroy {
   currentSpace: SpaceInfo;
   viewLoaded = false;
   readonly MOCK_CAROUSEL_SLIDES = MOCK_CAROUSEL_SLIDES;
+  slideIntervalMs = 5000;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     const params = this.activatedRoute.snapshot.paramMap;

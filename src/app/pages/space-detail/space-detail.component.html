@@ -9,7 +9,7 @@
     <span class="mat-h3"><strong>Space subtitle: </strong><u>{{currentSpace.desc}}</u></span>
     <div class="carousel-container">
         <mat-card>
-            <c-carousel [interval]="5000">
+            <c-carousel [interval]="slideIntervalMs">
                 <c-carousel-inner>
                 <c-carousel-item *ngFor="let slide of MOCK_CAROUSEL_SLIDES">
                     <img
