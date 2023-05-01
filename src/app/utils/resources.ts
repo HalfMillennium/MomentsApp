@@ -10,12 +10,6 @@ export const MENU_ITEMS: MenuItem[] = [
         routerLink: '/'
     },
     {
-    name: 'account',
-    icon: 'account_circle',
-    label: 'Account',
-    routerLink: ''
-    },
-    {
     name: 'saved_stories',
     icon: 'save',
     label: 'Saved Stories',
@@ -26,7 +20,13 @@ export const MENU_ITEMS: MenuItem[] = [
     icon: 'info',
     label: 'What Is This?',
     routerLink: '/info'
-    }
+    },
+    {
+      name: 'account',
+      icon: 'account_circle',
+      label: 'Account',
+      routerLink: '/account'
+    },
 ]
 
 /** Test API response for... testing */

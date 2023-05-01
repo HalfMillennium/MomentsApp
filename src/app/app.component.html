@@ -5,8 +5,8 @@
 <button mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
   <mat-menu class="menu" #menu="matMenu">
     <button mat-menu-item *ngFor="let item of MENU_ITEMS" [routerLink]="item.routerLink" [disabled]="item.routerLink === ''">
-      <mat-icon>{{item.icon}}</mat-icon>
-      {{item.label}}
+      <mat-icon>{{ (item.name === 'account') ?  ((userAuthenticated) ? 'account' : 'info') : item.icon }}</mat-icon>
+      {{ (item.name === 'account') ?  ((userAuthenticated) ? 'Account' : 'Sign In / Sign Up') : item.label }}
     </button>
   </mat-menu>
 </section>
