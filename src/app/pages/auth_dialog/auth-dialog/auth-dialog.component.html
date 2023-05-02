@@ -1,19 +1,15 @@
-<span mat-dialog-title class="mat-h2 dialog-title">Sign In</span>
+<h1 mat-dialog-title>Sign In</h1>
 <div mat-dialog-content class="dialog-content">
-    <p class="dialog-content">
-        <mat-form-field appearance="outline" class="dialog-content">
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="Username">
-            <mat-hint>Make it cool.</mat-hint>
+            <input matInput />
         </mat-form-field>
-        </p>
-    <p class="dialog-content">
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password">
-            <mat-hint>Greater than 10 characters.</mat-hint>
+            <input matInput />
         </mat-form-field>
-    </p>
+    </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="dialogRef.close()">Cancel</button>

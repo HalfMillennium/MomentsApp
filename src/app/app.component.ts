@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   openAuthDialog() {
-    let dialogRef = this.dialog.open(AuthDialog, {height: "300px", width: "300px"});
+    let dialogRef = this.dialog.open(AuthDialog, {width: '300px'});
     dialogRef.afterClosed().subscribe(result => {
       console.log('AuthDialog has closed.');
     });
