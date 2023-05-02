@@ -1,5 +1,5 @@
 import { MenuItem } from "./interfaces";
-import {SpaceInfo, CarouselSlides} from "./interfaces";
+import {SpaceInfo, CarouselSlides, User} from "./interfaces";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -86,3 +86,10 @@ export const MOCK_CAROUSEL_SLIDES: CarouselSlides[] = [
     routerLink: ''
   }
 ]
+
+export const DEFAULT_EMPTY_USER: User = {
+  uid: 'DEF',
+  email: 'test@test',
+  displayName: 'def',
+  emailVerified: false
+}
