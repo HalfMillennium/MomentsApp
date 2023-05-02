@@ -1,5 +1,5 @@
 import { MenuItem } from "./interfaces";
-import {SpaceInfo, CarouselSlides} from "./interfaces";
+import {SpaceInfo, CarouselSlides, User} from "./interfaces";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -102,4 +102,11 @@ export const MONTHS: Record<number,string> = {
   9: 'October',
   10: 'November',
   11: 'December'
+}
+
+export const DEFAULT_EMPTY_USER: User = {
+  uid: 'DEF',
+  email: 'test@test',
+  displayName: 'def',
+  emailVerified: false
 }

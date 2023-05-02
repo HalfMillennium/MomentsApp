@@ -10,6 +10,13 @@ import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { Overview } from './pages/overview/overview.component';
 import { MatDialogModule } from '@angular/material/dialog';
+// Firebase services + environment module
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MaterialModule,
     AppRoutingModule,
     Overview,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
