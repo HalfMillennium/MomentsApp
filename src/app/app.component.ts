@@ -4,6 +4,7 @@ import {MENU_ITEMS} from './utils/resources';
 import { AuthDialog } from './pages/auth_dialog/auth-dialog/auth-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import { IconTypeEnum } from './utils/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'moments';
   readonly MENU_ITEMS = MENU_ITEMS;
+  readonly IconTypeEnum = IconTypeEnum;
 
   constructor(private dialog: MatDialog, private router: Router) {}
 
@@ -21,7 +23,7 @@ export class AppComponent {
   }
 
   openAuthDialog() {
-    let dialogRef = this.dialog.open(AuthDialog, {height: "300px", width: "300px"});
+    let dialogRef = this.dialog.open(AuthDialog, {width: '300px'});
     dialogRef.afterClosed().subscribe(result => {
       console.log('AuthDialog has closed.');
     });

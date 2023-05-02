@@ -1,33 +1,34 @@
 import { MenuItem } from "./interfaces";
 import {SpaceInfo, CarouselSlides} from "./interfaces";
+import { IconTypeEnum } from "./interfaces";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
     {
-        name: 'dash_home',
-        icon: 'dashboard',
-        label: 'Dashboard',
-        routerLink: '/',
+      name: 'dash_home',
+      icon: {value: 'dashboard', type: IconTypeEnum.ANGULAR_MAT},
+      label: 'Dashboard',
+      routerLink: '/',
     },
     {
-    name: 'account',
-    icon: 'account_circle',
-    label: 'Account',
-    routerLink: '/',
-    auth: true,
+      name: 'saved_stories',
+      icon: {value: 'save', type: IconTypeEnum.ANGULAR_MAT},
+      label: 'Saved Stories',
+      routerLink: ''
     },
     {
-    name: 'saved_stories',
-    icon: 'save',
-    label: 'Saved Stories',
-    routerLink: ''
+      name: 'about',
+      icon: {value: 'info', type: IconTypeEnum.ANGULAR_MAT},
+      label: 'What Is This?',
+      routerLink: '/info'
     },
     {
-    name: 'about',
-    icon: 'info',
-    label: 'What Is This?',
-    routerLink: '/info'
-    }
+      name: 'account',
+      icon: {value: 'login', type: IconTypeEnum.GOOGLE_ICON},
+      label: 'Account',
+      routerLink: '/',
+      auth: true,
+    },
 ]
 
 /** Test API response for... testing */
@@ -87,3 +88,19 @@ export const MOCK_CAROUSEL_SLIDES: CarouselSlides[] = [
     routerLink: ''
   }
 ]
+
+/** -_- */
+export const MONTHS: Record<number,string> = {
+  0: 'January',
+  1: 'February',
+  2: 'March',
+  3: 'April',
+  4: 'May',
+  5: 'June',
+  6: 'July',
+  7: 'August',
+  8: 'September',
+  9: 'October',
+  10: 'November',
+  11: 'December'
+}
