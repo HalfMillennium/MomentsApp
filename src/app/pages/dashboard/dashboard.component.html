@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
   <div class="column">
-    <h3 class="mat-headline-4"><b>April 30th</b>, 2023</h3>
+    <h3 class="mat-headline-4"><b>{{currentMonthDay}}</b>, {{currentYear}}</h3>
     <h4 class="mat-headline-5">[ {{currentTimeOfDay}} ]</h4>
   </div>
   <div class="column align-right">
@@ -21,7 +21,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button [routerLink]="['/space', space.id]" mat-button >Enter Space</button>
+          <button [routerLink]="['/space', space.id]" mat-button>Enter Space</button>
         </mat-card-actions>
       </mat-card>
 </div>
