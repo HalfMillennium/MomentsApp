@@ -27,7 +27,7 @@ export class AppComponent {
     const credentials: Credentials = {type: AuthTypesEnum.EMAIL_PASS, 
                                 'email': email, 
                                 'password': password};
-    const result = await this.firebaseAuthService.createUser(AuthTypesEnum.EMAIL_PASS, credentials);
+    const result = await this.firebaseAuthService.signIn(AuthTypesEnum.EMAIL_PASS, credentials);
     result.pipe(take(1)).subscribe((response) => {
       if(this.isAuthError(response)) {
         console.log(`AuthError { type: ${response.type}, code: ${response.code}, message: ${response.message} }`);
@@ -39,6 +39,17 @@ export class AppComponent {
   }
 
   async registerUserEmail(email: string, password: string) {
-    
+    const credentials: Credentials = {type: AuthTypesEnum.EMAIL_PASS, 
+      'email': email, 
+      'password': password};
+    const result = await this.firebaseAuthService.createUser(AuthTypesEnum.EMAIL_PASS, credentials);
+    result.pipe(take(1)).subscribe((response) => {
+      if(this.isAuthError(response)) {
+        console.log(`AuthError { type: ${response.type}, code: ${response.code}, message: ${response.message} }`);
+      } else {
+        this.userCredential = response;
+        console.log(`User successfully created! CREDENTIAL: ${this.userCredential}`);
+      }
+    })
   }
 }
