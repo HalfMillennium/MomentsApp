@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MenuItem } from './utils/interfaces';
 import {MENU_ITEMS} from './utils/resources';
-import { environment } from 'src/environments/environment';
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {FirebaseAuthService} from './shared/auth/service';
+import { AuthTypesEnum } from './utils/resources';
+import { Credentials, AuthError } from './utils/interfaces';
+import {take} from 'rxjs/operators';
+import { UserCredential } from 'firebase/auth';
 
 @Component({
   selector: 'app-root',
@@ -15,33 +16,29 @@ export class AppComponent {
   title = 'moments';
   readonly MENU_ITEMS = MENU_ITEMS;
   userAuthenticated = false;
+  userCredential: UserCredential|undefined = undefined;
+  private readonly firebaseAuthService: FirebaseAuthService = new FirebaseAuthService();
+
+  isAuthError(obj: UserCredential|AuthError): obj is AuthError {
+    return ((obj as AuthError).code) ? true : false;
+  }
 
   async signInUserEmail(email: string, password: string) {
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Initialize Firebase
-    const app = initializeApp(environment.firebase);
-    const auth = getAuth(app);
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        this.userAuthenticated = true;
-      })
-      .catch((error) => {
-        console.log(`Fatal error [signInUserEmail]: ${error.code},${error.message}`);
-      });
+    const credentials: Credentials = {type: AuthTypesEnum.EMAIL_PASS, 
+                                'email': email, 
+                                'password': password};
+    const result = await this.firebaseAuthService.createUser(AuthTypesEnum.EMAIL_PASS, credentials);
+    result.pipe(take(1)).subscribe((response) => {
+      if(this.isAuthError(response)) {
+        console.log(`AuthError { type: ${response.type}, code: ${response.code}, message: ${response.message} }`);
+      } else {
+        this.userCredential = response;
+        console.log(`User successfully signedIn! CREDENTIAL: ${this.userCredential}`);
+      }
+    })
   }
 
   async registerUserEmail(email: string, password: string) {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        this.userAuthenticated = true;
-      })
-      .catch((error) => {
-        console.log(`Fatal error [registerUserEmail]: ${error.code},${error.message}`);
-      });
+    
   }
 }

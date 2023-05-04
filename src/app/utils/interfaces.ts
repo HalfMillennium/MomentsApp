@@ -1,3 +1,5 @@
+import { AuthTypesEnum } from "./resources"
+
 /** Interface for menu items */
 export interface MenuItem {
     name: string,
@@ -28,4 +30,15 @@ export interface User {
     displayName: string|null,
     photoURL?: string|null,
     emailVerified: boolean,
+}
+
+export interface AuthError {
+    type: AuthTypesEnum,
+    code: string,
+    message: string
+}
+
+export interface Credentials {
+    type: string;
+    [x: string]: any;
 }
