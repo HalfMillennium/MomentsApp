@@ -110,3 +110,10 @@ export const DEFAULT_EMPTY_USER: User = {
   displayName: 'def',
   emailVerified: false
 }
+
+// Enum with all currently supported sign in types
+export enum AuthTypesEnum {
+  EMAIL_PASS = 'email_pass',
+  GOOGLE = 'google',
+  // others..
+}

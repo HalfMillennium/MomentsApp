@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuItem } from './utils/interfaces';
 import {MENU_ITEMS} from './utils/resources';
 import { AuthDialog } from './pages/auth_dialog/auth-dialog/auth-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
