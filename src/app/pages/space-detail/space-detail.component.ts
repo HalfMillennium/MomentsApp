@@ -27,7 +27,7 @@ export class SpaceDetail implements OnDestroy {
     // fetch spaceInfo using spaceId - using test data for now
     this.currentSpace = {
       id: params.get('id'),
-      title: TEST_API_RESPONSE['title'],
+      title: TEST_API_RESPONSE['title']   ,
       images: [TEST_API_RESPONSE['image']],
       alt: TEST_API_RESPONSE['alt']
     }
