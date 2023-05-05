@@ -18,7 +18,7 @@ export class FirebaseAuthService {
     analytics = getAnalytics(this.app);
     
     private async createUserWithEmailAndPasswordInternal(email: string, password: string) {
-        const auth = getAuth();
+        const auth = getAuth(this.app);
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
@@ -36,7 +36,7 @@ export class FirebaseAuthService {
         if (type !== AuthTypesEnum.EMAIL_PASS) {
             return observableOf({type, code: '400', message: '..Unsupported sign in type..'});
         }
-        await this.createUserWithEmailAndPasswordInternal(credentials['email'], credentials['pass'])
+        await this.createUserWithEmailAndPasswordInternal(credentials['email'], credentials['password'])
                             .then((credential) => {
                                 this.userCredential = credential;
                             })
