@@ -36,17 +36,15 @@ export class FirebaseAuthService {
         if (type !== AuthTypesEnum.EMAIL_PASS) {
             return observableOf({type, code: '400', message: '..Unsupported sign in type..'});
         }
-        await this.createUserWithEmailAndPasswordInternal(credentials['email'], credentials['password'])
+        return await this.createUserWithEmailAndPasswordInternal(credentials['email'], credentials['password'])
                             .then((credential) => {
-                                this.userCredential = credential;
+                                //this.userCredential = credential;
+                                return observableOf(credential);
                             })
-                            .catch((error) => {
-                                throw(error);
+                            .catch((error) => { 
+                                console.log(error);
+                                return (error);
                             });
-        if(!this.userCredential) {
-            return observableOf({type, code: '500', message: '..UNKNOWN CREATE USER ERROR..'})
-        }
-        return observableOf(this.userCredential);
     }
 
     private async signInWithEmailAndPasswordInternal(email: string, password: string): Promise<UserCredential> {
