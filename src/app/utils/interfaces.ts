@@ -43,3 +43,8 @@ export interface Credentials {
     type: string;
     [x: string]: any;
 }
+
+export interface SignUpDialogData {
+    email: string,
+    password: string
+}
