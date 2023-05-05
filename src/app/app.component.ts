@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from './utils/interfaces';
 import {MENU_ITEMS} from './utils/resources';
 import {FirebaseAuthService} from './shared/auth/service';
@@ -12,12 +12,16 @@ import { UserCredential } from 'firebase/auth';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'moments';
   readonly MENU_ITEMS = MENU_ITEMS;
   userAuthenticated = false;
   userCredential: UserCredential|undefined = undefined;
   private readonly firebaseAuthService: FirebaseAuthService = new FirebaseAuthService();
+
+  ngOnInit() {
+    this.registerUserEmail('test@gmail.com','testP@sswordWe@k');
+  }
 
   isAuthError(obj: UserCredential|AuthError): obj is AuthError {
     return ((obj as AuthError).code) ? true : false;
