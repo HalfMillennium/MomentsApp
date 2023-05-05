@@ -3,7 +3,7 @@ import { AuthTypesEnum } from "./resources"
 /** Interface for menu items */
 export interface MenuItem {
     name: string,
-    icon: IconType,
+    icon: string,
     label: string,
     routerLink: string,
     auth?: boolean
