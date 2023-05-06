@@ -26,6 +26,11 @@ export class AuthDialog {
   signIn = true;
   readonly firebaseAuthService = new FirebaseAuthService();
 
+  // TODO: Instead of using these, use form control's built-in error handling
+  generalAuthError = false;
+  emailTakenError = false;
+  passwordMustMatchError = false;
+
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AuthDialog>,
@@ -33,6 +38,7 @@ export class AuthDialog {
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
     this.userAuthForm = this.fb.group({
+      // TODO: This seems weird and unnecessary
       email: '',
       password: ''
     });
@@ -65,10 +71,11 @@ export class AuthDialog {
                 .then((credential) => {
                   credential.pipe(take(1)).subscribe((result) => {
                     if(this.isAuthError(result)) {
-                      console.log("Auth Error:",result);
+                      // show error
+                      this.generalAuthError = true;
                     } else {
                       this.credential = result;
-                      this.router.navigateByUrl('/welcome-confirmation')
+                      this.router.navigateByUrl('/welcome-confirmation');
                     }
                   })
                 })

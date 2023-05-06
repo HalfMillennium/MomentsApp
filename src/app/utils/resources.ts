@@ -117,3 +117,6 @@ export enum AuthTypesEnum {
   // GOOGLE = 'google',
   // others..
 }
+
+// Favicon URL
+export const FAVICON_URL = 'https://img.icons8.com/ios/50/f9f9f9/apple-news.png'

@@ -8,8 +8,15 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password"/>
+                <input type="password" matInput formControlName="password" required>
             </mat-form-field>
+            <mat-error *ngIf="emailTakenError">Email address taken.</mat-error>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput formControlName="conf_password" required>
+            </mat-form-field>
+            <mat-error *ngIf="generalAuthError">Authentication error. Please try again.</mat-error>
+            <mat-error *ngIf="passwordMustMatchError">Passwords must match.</mat-error>
         </form>
     </div>
     <button mat-button class="form-type-switch" (click)="updateFormType()"><u>Sign {{(signIn) ? 'Up' : 'In'}}</u></button>
