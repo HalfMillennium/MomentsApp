@@ -8,20 +8,46 @@ import { AuthTypesEnum } from 'src/app/utils/resources';
 import { Credentials, AuthError } from '../../../utils/interfaces';
 import {UserCredential } from 'firebase/auth';
 import {take} from 'rxjs/operators';
+import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'auth-dialog',
   standalone: true,
   templateUrl: 'auth-dialog.component.html',
-  imports: [MaterialModule, CommonModule]
+  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class AuthDialog {
+  userAuthForm: FormGroup;
   credential: UserCredential|undefined;
+  userEmail: string|undefined;
+  userPass: string|undefined;
+  // whether this auth dialog is signing a user in or signing one up
+  signIn = true;
   readonly firebaseAuthService = new FirebaseAuthService();
 
-  constructor(public dialogRef: MatDialogRef<AuthDialog>,
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AuthDialog>,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
-  ) {}
+  ) {
+    this.userAuthForm = this.fb.group({
+      email: '',
+      password: ''
+    });
+  }
+
+  setValue() {
+    this.userEmail = this.userAuthForm.get('email')?.value; // input value retrieved
+    this.userPass = this.userAuthForm.get('password')?.value;
+  }
+
+  authenticate() {
+    if(this.signIn) {
+      this.signInUserEmail(`${this.userEmail}`, `${this.userPass}`);
+    } else {
+      this.registerUserEmail(`${this.userEmail}`, `${this.userPass}`);
+    }
+  }
 
   private isAuthError(obj: UserCredential|AuthError): obj is AuthError {
     return ((obj as AuthError)?.code) ? true : false;
@@ -44,7 +70,7 @@ export class AuthDialog {
                   })
                 })
                 .catch((error) => {
-                  console.log("Unknown Auth Error:",error);
+                  console.log("Unknown Registration Error:", error);
                 })
   }
 
@@ -65,8 +91,12 @@ export class AuthDialog {
                   })
                 })
                 .catch((error) => {
-                  
+                  console.log("Unknown Sign In Error:", error);
                 })
+  }
+
+  updateFormType() {
+    this.signIn = !this.signIn;
   }
 
   onNoClick(): void {
