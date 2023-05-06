@@ -8,6 +8,7 @@ import { AuthTypesEnum } from 'src/app/utils/resources';
 import { Credentials, AuthError } from '../../../utils/interfaces';
 import {UserCredential } from 'firebase/auth';
 import {take} from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
 @Component({
@@ -28,6 +29,7 @@ export class AuthDialog {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AuthDialog>,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
     this.userAuthForm = this.fb.group({
@@ -66,6 +68,7 @@ export class AuthDialog {
                       console.log("Auth Error:",result);
                     } else {
                       this.credential = result;
+                      this.router.navigateByUrl('/welcome-confirmation')
                     }
                   })
                 })

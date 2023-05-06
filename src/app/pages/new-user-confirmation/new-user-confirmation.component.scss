@@ -1,0 +1,17 @@
+.content-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    float: left;
+}
+
+.text-content {
+    float: right;
+}
