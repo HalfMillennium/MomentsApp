@@ -27,7 +27,7 @@ export class Dashboard implements AfterViewInit {
 
   ngAfterViewInit() {
     const d = new Date();
-    this.currentMonthDay = `${MONTHS[d.getMonth()]} ${d.getDay()}`;
+    this.currentMonthDay = `${MONTHS[d.getMonth()]} ${d.getDate()}`;
     this.currentYear = `${d.getFullYear()}`;
     this.currentTimeOfDay = `${d.getHours()}h:${d.getMinutes()}m:${d.getSeconds()}s`;
   }
