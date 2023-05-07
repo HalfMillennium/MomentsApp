@@ -1,6 +1,6 @@
-import { MenuItem } from "./interfaces";
+import { UserCredential } from "firebase/auth";
+import { MenuItem, SessionState, Reducer, AuthError } from "./interfaces";
 import {SpaceInfo, CarouselSlides, User} from "./interfaces";
-
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
     {
@@ -120,3 +120,13 @@ export enum AuthTypesEnum {
 
 // Favicon URL
 export const FAVICON_URL = 'https://img.icons8.com/ios/50/f9f9f9/apple-news.png'
+
+interface K {
+  type: string,
+  [x: string]: any
+};
+
+// Returns whether or not auth API response was error or UserCredential
+export function isAuthError(obj: AuthError|UserCredential): obj is AuthError {
+  return (obj as AuthError)?.code ? true : false;
+}

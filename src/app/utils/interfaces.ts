@@ -1,5 +1,6 @@
 import { UserCredential } from "firebase/auth"
 import { AuthTypesEnum } from "./resources"
+import { Action } from "@ngrx/store"
 
 /** Interface for menu items */
 export interface MenuItem {
@@ -52,6 +53,13 @@ export interface SignUpDialogData {
 }
 
 export interface SessionState {
-    userCredential: UserCredential|undefined;
+    userCredential: Promise<UserCredential | undefined>|undefined;
+    userEmail: string|undefined,
+    userPassword: string|undefined,
     // TODO: Add more values
+}
+
+export interface Reducer {
+    type: AuthTypesEnum;
+    reduce: ((state: SessionState, action: Action) => SessionState)
 }

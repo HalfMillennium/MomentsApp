@@ -10,6 +10,7 @@ import {UserCredential } from 'firebase/auth';
 import {take} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import {isAuthError} from '../../../utils/resources';
 
 @Component({
   selector: 'auth-dialog',
@@ -65,10 +66,6 @@ export class AuthDialog {
     }
   }
 
-  private isAuthError(obj: UserCredential|AuthError): obj is AuthError {
-    return ((obj as AuthError)?.code) ? true : false;
-  }
-
   registerUserEmail(email: string, password: string, confPassword: string) {
     const credentials: Credentials = {
       type: AuthTypesEnum.EMAIL_PASS,
@@ -78,7 +75,7 @@ export class AuthDialog {
     this.firebaseAuthService.createUser(AuthTypesEnum.EMAIL_PASS, credentials)
                 .then((credential) => {
                   credential.pipe(take(1)).subscribe((result) => {
-                    if(this.isAuthError(result)) {
+                    if(isAuthError(result)) {
                       // show error
                       this.generalAuthRegError = true;
                     } else {
@@ -104,7 +101,7 @@ export class AuthDialog {
     this.firebaseAuthService.signIn(AuthTypesEnum.EMAIL_PASS, credentials)
                 .then((credential) => {
                   credential.pipe(take(1)).subscribe((result) => {
-                    if(this.isAuthError(result)) {
+                    if(isAuthError(result)) {
                       console.log("Auth Error:",result);
                     } else {
                       this.credential = result;

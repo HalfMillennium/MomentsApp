@@ -24,6 +24,8 @@ export class AppComponent {
               private dialog: MatDialog, 
               private router: Router,
               private store: Store<SessionState>) {
+      this.userCredential$ = store.select('userCredential');
+      
   }
 
   navigateTo(url: string) {
