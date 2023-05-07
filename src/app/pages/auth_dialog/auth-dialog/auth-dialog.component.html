@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>{{ (signIn) ? 'Sign In' : 'Sign Up' }}</h1>
+<h1 *ngIf="!signIn" mat-dialog-title>Nice to finally meet. <mat-icon>handshake</mat-icon></h1>
+<h1 *ngIf="signIn" mat-dialog-title>Welcome back. <mat-icon>waving_hand</mat-icon></h1>
 <div mat-dialog-content class="dialog-content">
     <div mat-dialog-content>
         <form [formGroup]="userAuthForm">
@@ -20,9 +21,11 @@
             <mat-error *ngIf="passwordMustMatchError">Passwords must match.</mat-error>
         </form>
     </div>
-    <p class="form-type-switch mat-body-1" (click)="updateFormType()"><u>...or Sign {{(signIn) ? 'Up' : 'In'}}</u></p>
+    <span class="form-type-switch mat-body-1" (click)="updateFormType()">
+        <u>...or Sign {{(signIn) ? 'Up' : 'In'}}</u>
+    </span>
 </div>
-<div mat-dialog-actions>
+<mat-dialog-actions align="end">
     <button mat-button (click)="dialogRef.close()">Cancel</button>
     <button mat-button cdkFocusInitial (click)="authenticate()">{{ (signIn) ? 'Sign In' : 'Sign Up' }}</button>
-</div>
+</mat-dialog-actions>
