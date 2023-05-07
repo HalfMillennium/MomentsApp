@@ -130,3 +130,8 @@ interface K {
 export function isAuthError(obj: AuthError|UserCredential): obj is AuthError {
   return (obj as AuthError)?.code ? true : false;
 }
+
+// Type container all currently supported reducers
+export type AppReducers = {
+  sessionReducer: SessionState
+}

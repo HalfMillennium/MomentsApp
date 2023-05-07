@@ -1,6 +1,6 @@
 import { UserCredential } from "firebase/auth"
 import { AuthTypesEnum } from "./resources"
-import { Action } from "@ngrx/store"
+import { Action, ActionReducer } from "@ngrx/store"
 
 /** Interface for menu items */
 export interface MenuItem {
@@ -62,4 +62,9 @@ export interface SessionState {
 export interface Reducer {
     type: AuthTypesEnum;
     reduce: ((state: SessionState, action: Action) => SessionState)
+}
+
+// Includes all currently supported reducers
+export interface ReducerState { 
+    sessionReducer: ActionReducer<SessionState, Action>; 
 }

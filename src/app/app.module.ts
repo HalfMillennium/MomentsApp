@@ -40,9 +40,7 @@ import { reducers, metaReducers } from './shared/store/reducer';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
+    StoreModule.forRoot(reducers),
   ],
   providers: [],
   bootstrap: [AppComponent]
