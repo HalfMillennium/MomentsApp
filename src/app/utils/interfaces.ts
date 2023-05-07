@@ -1,3 +1,4 @@
+import { UserCredential } from "firebase/auth"
 import { AuthTypesEnum } from "./resources"
 
 /** Interface for menu items */
@@ -46,5 +47,11 @@ export interface Credentials {
 
 export interface SignUpDialogData {
     email: string,
-    password: string
+    password: string,
+    confPassword: string,
+}
+
+export interface SessionState {
+    userCredential: UserCredential|undefined;
+    // TODO: Add more values
 }

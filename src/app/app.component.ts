@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {MENU_ITEMS} from './utils/resources';
+import {SessionState} from './utils/interfaces';
 import { AuthDialog } from './pages/auth_dialog/auth-dialog/auth-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import { AngularFaviconService } from 'angular-favicon';
 import {FAVICON_URL} from './utils/resources';
+import { Store } from '@ngrx/store';
+import { UserCredential } from 'firebase/auth';
+import {Observable, ReplaySubject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +17,14 @@ import {FAVICON_URL} from './utils/resources';
 })
 export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
-  userAuthenticated = false;
+  readonly destroyObs$ = new ReplaySubject(1);
+
+  userCredential$: Observable<UserCredential|undefined>|undefined = undefined;
   constructor(private ngxFavicon: AngularFaviconService, 
               private dialog: MatDialog, 
-              private router: Router) {}
+              private router: Router,
+              private store: Store<SessionState>) {
+  }
 
   navigateTo(url: string) {
     this.router.navigateByUrl(url);

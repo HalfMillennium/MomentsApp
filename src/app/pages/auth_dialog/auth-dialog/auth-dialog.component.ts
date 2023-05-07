@@ -21,14 +21,14 @@ export class AuthDialog {
   userAuthForm: FormGroup;
   credential: UserCredential|undefined;
   userEmail: string|undefined;
-  userPass: string|undefined;
+  userPassword: string|undefined;
+  userConfPassword: string|undefined;
   // whether this auth dialog is signing a user in or signing one up
-  signIn = true;
+  signIn = false;
   readonly firebaseAuthService = new FirebaseAuthService();
 
   // TODO: Instead of using these, use form control's built-in error handling
-  generalAuthError = false;
-  emailTakenError = false;
+  generalAuthRegError = false;
   passwordMustMatchError = false;
 
   constructor(
@@ -37,23 +37,31 @@ export class AuthDialog {
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
-    this.userAuthForm = this.fb.group({
+    this.userAuthForm = this.fb.group<SignUpDialogData>({
       // TODO: This seems weird and unnecessary
       email: '',
-      password: ''
+      password: '',
+      confPassword: '',
     });
   }
 
   setValue() {
     this.userEmail = this.userAuthForm.get('email')?.value; // input value retrieved
-    this.userPass = this.userAuthForm.get('password')?.value;
+    this.userPassword = this.userAuthForm.get('password')?.value;
+    this.userConfPassword = this.userAuthForm.get('confPassword')?.value;
   }
 
   authenticate() {
+    this.setValue();
     if(this.signIn) {
-      this.signInUserEmail(`${this.userEmail}`, `${this.userPass}`);
+      this.signInUserEmail(`${this.userEmail}`, `${this.userPassword}`);
+    } else if(this.userPassword === this.userConfPassword) {
+      this.registerUserEmail(`${this.userEmail}`, `${this.userPassword}`, `${this.userConfPassword}`);
     } else {
-      this.registerUserEmail(`${this.userEmail}`, `${this.userPass}`);
+      this.passwordMustMatchError = true;
+    }
+    if(this.credential) {
+      this.dialogRef.close();
     }
   }
 
@@ -61,25 +69,28 @@ export class AuthDialog {
     return ((obj as AuthError)?.code) ? true : false;
   }
 
-  registerUserEmail(email: string, password: string) {
+  registerUserEmail(email: string, password: string, confPassword: string) {
     const credentials: Credentials = {
       type: AuthTypesEnum.EMAIL_PASS,
       'email': email,
-      'password': password
+      'password': password,
     };
     this.firebaseAuthService.createUser(AuthTypesEnum.EMAIL_PASS, credentials)
                 .then((credential) => {
                   credential.pipe(take(1)).subscribe((result) => {
                     if(this.isAuthError(result)) {
                       // show error
-                      this.generalAuthError = true;
+                      this.generalAuthRegError = true;
                     } else {
+                      // ensure error is
+                      this.generalAuthRegError = false;
                       this.credential = result;
                       this.router.navigateByUrl('/welcome-confirmation');
                     }
                   })
                 })
                 .catch((error) => {
+                  this.generalAuthRegError = true;
                   console.log("Unknown Registration Error:", error);
                 })
   }

@@ -9,8 +9,8 @@
       [routerLink]="item.routerLink" 
       [disabled]="item.routerLink === ''"
       (click)="(item.auth) ? openAuthDialog() : navigateTo(item.routerLink)">
-        <mat-icon>{{ (item.name === 'account') ?  ((userAuthenticated) ? 'account_circle' : 'login') : item.icon }}</mat-icon>
-        {{ (item.name === 'account') ?  ((userAuthenticated) ? 'Account' : 'Sign In / Sign Up') : item.label }}
+        <mat-icon>{{ (item.name === 'account') ?  ((userCredential) ? 'account_circle' : 'login') : item.icon }}</mat-icon>
+        {{ (item.name === 'account') ?  ((userCredential) ? 'Account' : 'Sign In / Sign Up') : item.label }}
       </button>
     </mat-menu>
 </section>

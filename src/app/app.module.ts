@@ -17,6 +17,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,9 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

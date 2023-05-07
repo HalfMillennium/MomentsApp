@@ -4,24 +4,25 @@
         <form [formGroup]="userAuthForm">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput formControlName="email" />
+                <input matInput formControlName="email" required>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input type="password" matInput formControlName="password" required>
             </mat-form-field>
-            <mat-error *ngIf="emailTakenError">Email address taken.</mat-error>
-            <mat-form-field appearance="outline">
-                <mat-label>Confirm Password</mat-label>
-                <input type="password" matInput formControlName="conf_password" required>
-            </mat-form-field>
-            <mat-error *ngIf="generalAuthError">Authentication error. Please try again.</mat-error>
+            <div *ngIf="!signIn">
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" matInput formControlName="confPassword" required>
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="generalAuthRegError">Could not create user. Possibly taken email address?</mat-error>
             <mat-error *ngIf="passwordMustMatchError">Passwords must match.</mat-error>
         </form>
     </div>
-    <button mat-button class="form-type-switch" (click)="updateFormType()"><u>Sign {{(signIn) ? 'Up' : 'In'}}</u></button>
+    <p class="form-type-switch mat-body-1" (click)="updateFormType()"><u>...or Sign {{(signIn) ? 'Up' : 'In'}}</u></p>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="dialogRef.close()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="authenticate()">{{ (signIn) ? 'Sign In' : 'Sign Up' }}</button>
+    <button mat-button cdkFocusInitial (click)="authenticate()">{{ (signIn) ? 'Sign In' : 'Sign Up' }}</button>
 </div>
