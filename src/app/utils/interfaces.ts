@@ -63,10 +63,7 @@ export interface EmailAuthCredentials extends Credentials {
 }
 
 export interface SessionState {
-    isAuthenticated: boolean,
     userCredential: Promise<UserCredential | undefined>|undefined;
-    userEmail: string|undefined,
-    userPassword: string|undefined,
     // TODO: Add more values
 }
 
@@ -78,4 +75,9 @@ export interface Reducer {
 // Includes all currently supported reducers
 export interface ReducerState { 
     sessionReducer: ActionReducer<SessionState, Action>; 
+}
+
+export interface AuthState {
+    userCredential: Promise<UserCredential|undefined>|undefined;
+    isAuthenticated: boolean;
 }

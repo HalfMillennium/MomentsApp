@@ -1,22 +1,18 @@
 import { isDevMode } from '@angular/core';
 import {
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer
 } from '@ngrx/store';
 import { createReducer, on } from '@ngrx/store';
-import { register, signIn } from './actions';
+import { registerEmail, signInEmail } from './actions';
 import { AuthTypesEnum, isAuthError, AppReducers } from '../../utils/resources';
 import { FirebaseAuthService } from '../auth/service';
 import { Observable } from 'rxjs';
 import {map, take} from 'rxjs/operators';
-import {Auth, User, UserCredential } from 'firebase/auth';
-import {AuthError} from 'src/app/utils/interfaces';
+import { UserCredential } from 'firebase/auth';
+import {AuthError, AuthState} from 'src/app/utils/interfaces';
 import { SessionState } from 'src/app/utils/interfaces';
-import {ReducerState, Credentials} from '../../utils/interfaces';
-import { Action } from '@ngrx/store';
+import {Credentials} from '../../utils/interfaces';
 
 const EMPTY_CREDENTIAL: Credentials = {
     type: 'email',
@@ -30,21 +26,21 @@ const firebaseAuthService = new FirebaseAuthService();
 
 export const metaReducers: MetaReducer<SessionState>[] = isDevMode() ? [] : [];
 
-export const initialState: SessionState = { userCredential: undefined, userEmail: '', userPassword: '' };
+export const initialState: AuthState = { userCredential: undefined, isAuthenticated: false };
 
-const sessionReducer = createReducer(
+const authReducer = createReducer(
     initialState,
-    on(register, state => ({ ...state,
+    on(registerEmail, (state, {userEmail, userPassword}) => ({ ...state,
             userCredential: 
                 (parseAuthResponse(firebaseAuthService.createUser(
                     AuthTypesEnum.EMAIL_PASS, 
-                    currentUserCredential(state.userEmail, state.userPassword))))
+                    currentUserCredential(userEmail, userPassword))))
                 })),
-    on(signIn, state => ({ ...state,
+    on(signInEmail, (state, {userEmail, userPassword}) => ({ ...state,
         userCredential: 
             (parseAuthResponse(firebaseAuthService.signIn(
                 AuthTypesEnum.EMAIL_PASS, 
-                currentUserCredential(state.userEmail, state.userPassword))))
+                currentUserCredential(userEmail, userPassword))))
             })),
   );
 
@@ -62,5 +58,5 @@ async function parseAuthResponse(response: Promise<Observable<UserCredential | A
 }
 
 export const reducers: ActionReducerMap<AppReducers> = {
-    sessionReducer
+    authReducer
 }

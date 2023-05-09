@@ -2,9 +2,14 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { AuthState } from '../../utils/interfaces';
 import {Features} from '../../utils/resources';
 
-export const authFeature = createFeatureSelector(Features.Auth);
+export const authFeature = createFeatureSelector<AuthState>(Features.Auth);
 
-const selector = (selectorFn: <T>(state: AuthState) => T) => createSelector(authFeature, selectorFn);
+export const userCredentialSelector = createSelector(
+    authFeature,
+    (state: AuthState) => state.userCredential
+);
 
-const books = createSelector(bookState, state => state.books);
-const authors = createSelector(authorsState, state => state.authors);
+export const isAuthenticatedSelector = createSelector(
+    authFeature,
+    (state: AuthState) => state.isAuthenticated
+);

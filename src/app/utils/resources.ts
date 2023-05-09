@@ -1,5 +1,5 @@
 import { UserCredential } from "firebase/auth";
-import { MenuItem, SessionState, Reducer, AuthError } from "./interfaces";
+import { MenuItem, AuthError, AuthState } from "./interfaces";
 import {SpaceInfo, CarouselSlides, User} from "./interfaces";
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -138,5 +138,5 @@ export function isAuthError(obj: AuthError|UserCredential): obj is AuthError {
 
 // Type container all currently supported reducers
 export type AppReducers = {
-  sessionReducer: SessionState
+  authReducer: AuthState
 }
