@@ -1,9 +1,15 @@
 import { ActionCreator, createAction } from '@ngrx/store';
-import { AuthTypesEnum } from 'src/app/utils/resources';
+import { props } from '@ngrx/store';
 
-export function register(type: AuthTypesEnum): ActionCreator {
-    return createAction(`[Auth Dialog Component] Register [${type}]`);
-}
-export function signIn(type: AuthTypesEnum): ActionCreator {
-    return createAction(`[Auth Dialog Component] Sign In [${type}]`);
-}
+
+/** Action to register user from auth dialog */
+export const register = createAction(
+    '[Auth Dialog Component] Register',
+    props<{userEmail: string; userPassword: string;}>(),
+)
+
+/** Action to sign in user from auth dialog */
+export const signIn = createAction(
+    '[Auth Dialog Component] Sign In',
+    props<{userEmail: string; userPassword: string;}>(),
+)

@@ -52,7 +52,18 @@ export interface SignUpDialogData {
     confPassword: string,
 }
 
+export interface RegisterRequest {
+    type: string,
+    credentials: Credentials,
+}
+
+export interface EmailAuthCredentials extends Credentials {
+    userEmail: string,
+    userPassword: string
+}
+
 export interface SessionState {
+    isAuthenticated: boolean,
     userCredential: Promise<UserCredential | undefined>|undefined;
     userEmail: string|undefined,
     userPassword: string|undefined,

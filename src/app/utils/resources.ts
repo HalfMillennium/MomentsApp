@@ -118,6 +118,11 @@ export enum AuthTypesEnum {
   // others..
 }
 
+export enum Features {
+  Auth = 'Auth',
+  // others
+}
+
 // Favicon URL
 export const FAVICON_URL = 'https://img.icons8.com/ios/50/f9f9f9/apple-news.png'
 

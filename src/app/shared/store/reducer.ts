@@ -34,13 +34,13 @@ export const initialState: SessionState = { userCredential: undefined, userEmail
 
 const sessionReducer = createReducer(
     initialState,
-    on(register(AuthTypesEnum.EMAIL_PASS), state => ({ ...state,
+    on(register, state => ({ ...state,
             userCredential: 
                 (parseAuthResponse(firebaseAuthService.createUser(
                     AuthTypesEnum.EMAIL_PASS, 
                     currentUserCredential(state.userEmail, state.userPassword))))
                 })),
-    on(signIn(AuthTypesEnum.EMAIL_PASS), state => ({ ...state,
+    on(signIn, state => ({ ...state,
         userCredential: 
             (parseAuthResponse(firebaseAuthService.signIn(
                 AuthTypesEnum.EMAIL_PASS, 
