@@ -9,4 +9,4 @@ This data will be used to filter Google Trends data and present users with **spa
 When a user enters this space, they will be guided through the different aspects of the event/phenomenon in a series of chunks, with the content curated by ChatGPT. In this way, ChatGPT will act as a *reporter* that will digest several articles on a particular topic and not only present users with adequate summaries, but also highlight and explain potential plans of action, or further related reading.
 
 ## Tech Stack:
-NodeJS-based Angular, with Firebase to be used for user data storage.
+NodeJS-based Angular, with Firebase to be used for user data storage. Redux (NgRx) used for local state management.
