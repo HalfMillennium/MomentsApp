@@ -1,5 +1,5 @@
-<h1 *ngIf="!signIn" mat-dialog-title>Nice to finally meet. <mat-icon>handshake</mat-icon></h1>
-<h1 *ngIf="signIn" mat-dialog-title>Welcome back. <mat-icon>waving_hand</mat-icon></h1>
+<h1 *ngIf="!signInMode" mat-dialog-title>Nice to finally meet. <mat-icon>handshake</mat-icon></h1>
+<h1 *ngIf="signInMode" mat-dialog-title>Welcome back. <mat-icon>waving_hand</mat-icon></h1>
 <div mat-dialog-content class="dialog-content">
     <div mat-dialog-content>
         <form [formGroup]="userAuthForm">
@@ -11,21 +11,21 @@
                 <mat-label>Password</mat-label>
                 <input type="password" matInput formControlName="password" required>
             </mat-form-field>
-            <div *ngIf="!signIn">
+            <div *ngIf="!signInMode">
                 <mat-form-field appearance="outline">
                     <mat-label>Confirm Password</mat-label>
                     <input type="password" matInput formControlName="confPassword" required>
                 </mat-form-field>
             </div>
-            <mat-error *ngIf="generalAuthRegError">Could not create user. Possibly taken email address?</mat-error>
-            <mat-error *ngIf="passwordMustMatchError">Passwords must match.</mat-error>
+            <mat-error *ngIf="userAuthError === WarningsEnum.EMAIL_TAKEN">Email address taken. Try a different one or sign in.</mat-error>
+            <mat-error *ngIf="userAuthError === WarningsEnum.PASSWORD_MATCH">Passwords must match.</mat-error>
         </form>
     </div>
     <span class="form-type-switch mat-body-1" (click)="updateFormType()">
-        <u>...or Sign {{(signIn) ? 'Up' : 'In'}}</u>
+        <u>...or Sign {{(signInMode) ? 'Up' : 'In'}}</u>
     </span>
 </div>
 <mat-dialog-actions align="end">
     <button mat-button (click)="dialogRef.close()">Cancel</button>
-    <button mat-button cdkFocusInitial (click)="authenticate()">{{ (signIn) ? 'Sign In' : 'Sign Up' }}</button>
+    <button mat-button cdkFocusInitial (click)="authenticate()">{{ (signInMode) ? 'Sign In' : 'Sign Up' }}</button>
 </mat-dialog-actions>

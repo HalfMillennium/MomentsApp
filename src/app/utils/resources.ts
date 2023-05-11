@@ -1,6 +1,5 @@
 import { UserCredential } from "firebase/auth";
-import { MenuItem, AuthError, AuthState } from "./interfaces";
-import {SpaceInfo, CarouselSlides, User} from "./interfaces";
+import {SpaceInfo, CarouselSlides, User, MenuItem, AuthError, AuthState, Credentials} from "./interfaces";
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
     {
@@ -118,6 +117,15 @@ export enum AuthTypesEnum {
   // others..
 }
 
+// Enum of all user warnings supported by UI (i.e. that will display an explicit error message)
+export enum WarningsEnum {
+  PASSWORD_MATCH = 'password_word',
+  EMAIL_TAKEN = 'email_taken',
+  UNSUPPORTED_TYPE = 'unsupported_type',
+  OTHER = 'other'
+  // others
+}
+
 export enum Features {
   Auth = 'Auth',
   // others
@@ -126,13 +134,8 @@ export enum Features {
 // Favicon URL
 export const FAVICON_URL = 'https://img.icons8.com/ios/50/f9f9f9/apple-news.png'
 
-interface K {
-  type: string,
-  [x: string]: any
-};
-
 // Returns whether or not auth API response was error or UserCredential
-export function isAuthError(obj: AuthError|UserCredential): obj is AuthError {
+export function isAuthError(obj: AuthError|UserCredential|undefined): obj is AuthError {
   return (obj as AuthError)?.code ? true : false;
 }
 
@@ -140,3 +143,16 @@ export function isAuthError(obj: AuthError|UserCredential): obj is AuthError {
 export type AppReducers = {
   authReducer: AuthState
 }
+
+export const UNKNOWN_EMAIL_AUTH_SERVER_ERROR = {
+  authType: AuthTypesEnum.EMAIL_PASS,
+  errorType: WarningsEnum.OTHER,
+  code: '500',
+  message: 'Unknown server error...'
+};
+
+export const EMPTY_CREDENTIAL: Credentials = {
+  type: AuthTypesEnum.EMAIL_PASS,
+}
+
+export const FIREBASE_AUTH_ERROR_EMAIL_IN_USE = 'Firebase: Error (auth/email-already-in-use).';

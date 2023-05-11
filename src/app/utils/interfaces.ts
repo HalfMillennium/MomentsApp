@@ -1,5 +1,5 @@
 import { UserCredential } from "firebase/auth"
-import { AuthTypesEnum } from "./resources"
+import { AuthTypesEnum, WarningsEnum } from "./resources"
 import { Action, ActionReducer } from "@ngrx/store"
 
 /** Interface for menu items */
@@ -36,13 +36,14 @@ export interface User {
 }
 
 export interface AuthError {
-    type: AuthTypesEnum,
+    authType: AuthTypesEnum,
+    errorType: WarningsEnum,
     code: string,
     message: string
 }
 
 export interface Credentials {
-    type: string;
+    type: AuthTypesEnum;
     [x: string]: any;
 }
 
@@ -78,6 +79,6 @@ export interface ReducerState {
 }
 
 export interface AuthState {
-    userCredential: Promise<UserCredential|undefined>|undefined;
-    isAuthenticated: boolean;
+    userCredential?: UserCredential|AuthError;
+    userAuthError?: AuthError|undefined;
 }

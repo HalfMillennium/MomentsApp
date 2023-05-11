@@ -9,7 +9,7 @@ export const userCredentialSelector = createSelector(
     (state: AuthState) => state.userCredential
 );
 
-export const isAuthenticatedSelector = createSelector(
+export const userAuthErrorSelector = createSelector(
     authFeature,
-    (state: AuthState) => state.isAuthenticated
+    (state: AuthState) => state.userAuthError
 );

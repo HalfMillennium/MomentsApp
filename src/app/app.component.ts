@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {MENU_ITEMS} from './utils/resources';
-import {SessionState} from './utils/interfaces';
+import {AuthError} from './utils/interfaces';
 import { AuthDialog } from './pages/auth_dialog/auth-dialog/auth-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import { AngularFaviconService } from 'angular-favicon';
-import {FAVICON_URL} from './utils/resources';
+import {FAVICON_URL, isAuthError} from './utils/resources';
 import { Store } from '@ngrx/store';
 import { User, UserCredential } from 'firebase/auth';
 import {Observable, ReplaySubject, map, takeUntil} from 'rxjs';
+import { AuthState } from './utils/interfaces';
+import { WarningsEnum } from './utils/resources';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +21,13 @@ export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
   readonly destroyObs$ = new ReplaySubject(1);
 
-  userCredential$: Promise<UserCredential|undefined>|undefined = undefined;
+  userCredential$: Promise<UserCredential|AuthError>|undefined = undefined;
 
   constructor(private ngxFavicon: AngularFaviconService, 
               private dialog: MatDialog, 
               private router: Router,
-              private store: Store<SessionState>) {
-      store.select('userCredential').pipe(takeUntil(this.destroyObs$), 
+              private authStore: Store<AuthState>) {
+      this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$), 
         map((credentials) => {
           if(credentials) {
             this.userCredential$ = credentials;

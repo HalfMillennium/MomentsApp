@@ -23,6 +23,7 @@
     "@coreui/angular": "^4.4.7",
     "@coreui/coreui": "^4.2.6",
     "@coreui/icons-angular": "^4.4.7",
+    "@ngrx/effects": "^15.4.0",
     "@ngrx/store": "^15.4.0",
     "angular-favicon": "^1.0.9",
     "firebase": "^9.21.0",

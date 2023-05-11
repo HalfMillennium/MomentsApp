@@ -13,5 +13,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./new-user-confirmation.component.scss']
 })
 export class NewUserConfirmation {
-
+  
 }

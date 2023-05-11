@@ -19,6 +19,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './shared/store/reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { reducers, metaReducers } from './shared/store/reducer';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]
