@@ -1,6 +1,7 @@
 import { UserCredential } from "firebase/auth"
 import { AuthTypesEnum, WarningsEnum } from "./resources"
 import { Action, ActionReducer } from "@ngrx/store"
+import {FormControl} from "@angular/forms"
 
 /** Interface for menu items */
 export interface MenuItem {
@@ -48,9 +49,9 @@ export interface Credentials {
 }
 
 export interface SignUpDialogData {
-    email: string,
-    password: string,
-    confPassword: string,
+    email: FormControl<string>,
+    password: FormControl<string>,
+    confPassword: FormControl<string>,
 }
 
 export interface RegisterRequest {

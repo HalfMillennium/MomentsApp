@@ -8,7 +8,7 @@ import { WarningsEnum } from 'src/app/utils/resources';
 import { AuthState, AuthError } from '../../../utils/interfaces';
 import {UserCredential } from 'firebase/auth';
 import { Router } from '@angular/router';
-import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import {isAuthError} from '../../../utils/resources';
 import { Store } from '@ngrx/store';
 import {registerEmail, signInEmail} from '../../../shared/store/actions';
@@ -35,11 +35,8 @@ export class AuthDialog {
   signInMode = false;
   readonly firebaseAuthService = new FirebaseAuthService();
 
-  userCredential$: Promise<UserCredential|AuthError>|undefined = undefined;
-
-  // TODO: Instead of using these, use form control's built-in error handling
-  generalAuthRegError = false;
-  passwordMustMatchError = false;
+  userCredential$: Observable<UserCredential | AuthError | undefined> |undefined;
+  userAuthError$: Observable<AuthError|undefined>|undefined;
 
   isAuthenticated = false;
 
@@ -50,33 +47,22 @@ export class AuthDialog {
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
     this.userAuthForm = this.fb.group<SignUpDialogData>({
-      // TODO: This smells weird
-      email: '',
-      password: '',
-      confPassword: '',
+      email: this.fb.nonNullable.control<string>(''),
+      password: this.fb.nonNullable.control<string>(''),
+      confPassword: this.fb.nonNullable.control<string>(''),
     });
-    this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$), 
-        map((credentials) => {
-          if(credentials) {
-            this.userCredential$ = credentials;
-          }
-      }));
-
-    this.authStore.select('userAuthError').pipe(take(1), map(async (authError) => {
-        if(authError) {
-          this.userAuthError = (await authError).errorType
-        }
-    }))
+    this.userCredential$ = this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$));
+    this.userAuthError$ = this.authStore.select('userAuthError').pipe(takeUntil(this.destroyObs$));
   }
 
-  setValue() {
-    this.userEmail = this.userAuthForm.get('email')?.value; // input value retrieved
+  setFormValue() {
+    this.userEmail = this.userAuthForm.get('email')?.value;
     this.userPassword = this.userAuthForm.get('password')?.value;
     this.userConfPassword = this.userAuthForm.get('confPassword')?.value;
   }
 
   authenticate() {
-    this.setValue();
+    this.setFormValue();
     if(this.signInMode) {
       this.signInUserEmail(`${this.userEmail}`, `${this.userPassword}`);
     } else if(this.userPassword === this.userConfPassword) {
