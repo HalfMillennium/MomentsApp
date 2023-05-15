@@ -17,8 +17,17 @@
                     <input type="password" matInput formControlName="confPassword" required>
                 </mat-form-field>
             </div>
-            <mat-error *ngIf="userAuthError === WarningsEnum.EMAIL_TAKEN">Email address taken. Try a different one or sign in.</mat-error>
-            <mat-error *ngIf="userAuthError === WarningsEnum.PASSWORD_MATCH">Passwords must match.</mat-error>
+            <div *ngIf="(userAuthState$ | async | authError) as authError">
+                <mat-error>
+                    <span *ngIf="authError && authError.errorType === WarningsEnum.EMAIL_TAKEN">Email address taken. Try a different one or sign in.</span>
+                </mat-error>
+                <mat-error *ngIf="userAuthError === WarningsEnum.PASSWORD_MATCH">
+                    Passwords must match.
+                </mat-error>
+            </div>
+            <div *ngIf="(userAuthState$ | async | authCredential) as authCredential">
+                <mat-hint><strong>Successful test user creation! Welcome, {{ authCredential.user }}.</strong></mat-hint>
+            </div>
         </form>
     </div>
     <span class="form-type-switch mat-body-1" (click)="updateFormType()">

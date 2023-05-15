@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from 'src/material.module';
@@ -14,16 +14,26 @@ import { Store } from '@ngrx/store';
 import {registerEmail, signInEmail} from '../../../shared/store/actions';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
+import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';
+import {AuthCredentialPipe} from 'src/app/utils/pipes/auth-credential.pipe';
 
 @Component({
   selector: 'auth-dialog',
   standalone: true,
   templateUrl: 'auth-dialog.component.html',
-  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [
+    MaterialModule, 
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    AuthErrorPipe, 
+    AuthCredentialPipe,
+  ],
 })
-export class AuthDialog {
+export class AuthDialog implements OnDestroy {
   readonly destroyObs$ = new ReplaySubject(1);
   readonly WarningsEnum = WarningsEnum;
+  readonly isAuthError = isAuthError;
 
   userAuthForm: FormGroup;
   userAuthError: WarningsEnum|undefined = undefined;
@@ -35,15 +45,15 @@ export class AuthDialog {
   signInMode = false;
   readonly firebaseAuthService = new FirebaseAuthService();
 
-  userCredential$: Observable<UserCredential | AuthError | undefined> |undefined;
-  userAuthError$: Observable<AuthError|undefined>|undefined;
+  userAuthState$: Observable<AuthState> = 
+    this.store.select('auth').pipe(takeUntil(this.destroyObs$));
 
   isAuthenticated = false;
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AuthDialog>,
-    private authStore: Store<AuthState>,
+    private store: Store<any>,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
     this.userAuthForm = this.fb.group<SignUpDialogData>({
@@ -51,8 +61,6 @@ export class AuthDialog {
       password: this.fb.nonNullable.control<string>(''),
       confPassword: this.fb.nonNullable.control<string>(''),
     });
-    this.userCredential$ = this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$));
-    this.userAuthError$ = this.authStore.select('userAuthError').pipe(takeUntil(this.destroyObs$));
   }
 
   setFormValue() {
@@ -77,11 +85,11 @@ export class AuthDialog {
 
   // TODO: Abstract auth functions into a Record or object
   registerUserEmail(email: string, password: string) {
-    this.authStore.dispatch(registerEmail({userEmail: email, userPassword: password}))
+    this.store.dispatch(registerEmail({userEmail: email, userPassword: password}));
   }
 
   signInUserEmail(email: string, password: string) {
-    this.authStore.dispatch(signInEmail({userEmail: email, userPassword: password}))
+    this.store.dispatch(signInEmail({userEmail: email, userPassword: password}))
   }
 
   updateFormType() {
@@ -90,5 +98,9 @@ export class AuthDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyObs$.complete();
   }
 }

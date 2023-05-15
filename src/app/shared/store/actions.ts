@@ -7,7 +7,7 @@ import { AuthError } from 'src/app/utils/interfaces';
 export const registerEmail = createAction(
     '[Auth Dialog Component] Register',
     props<{userEmail: string; userPassword: string;}>(),
-)
+);
 export const registerEmailSuccess = createAction('[Auth Dialog Component] Register Email Success', props<{userCredential: UserCredential}>());
 export const registerEmailFailure = createAction('[Auth Dialog Component] Register Email Failure', props<{error: AuthError}>());
 

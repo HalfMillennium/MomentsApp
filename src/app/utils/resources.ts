@@ -1,5 +1,7 @@
 import { UserCredential } from "firebase/auth";
 import {SpaceInfo, CarouselSlides, User, MenuItem, AuthError, AuthState, Credentials} from "./interfaces";
+import { OperationType } from "firebase/auth";
+
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
     {
@@ -135,7 +137,7 @@ export enum Features {
 export const FAVICON_URL = 'https://img.icons8.com/ios/50/f9f9f9/apple-news.png'
 
 // Returns whether or not auth API response was error or UserCredential
-export function isAuthError(obj: AuthError|UserCredential|undefined): obj is AuthError {
+export function isAuthError(obj: AuthError|UserCredential|undefined|null): obj is AuthError {
   return (obj as AuthError)?.code ? true : false;
 }
 
@@ -156,3 +158,18 @@ export const EMPTY_CREDENTIAL: Credentials = {
 }
 
 export const FIREBASE_AUTH_ERROR_EMAIL_IN_USE = 'Firebase: Error (auth/email-already-in-use).';
+
+export const TEST_USER_CREDENTIAL = {
+  /**
+   * The user authenticated by this credential.
+   */
+  user: 'user' as unknown as User,
+  /**
+   * The provider which was used to authenticate the user.
+   */
+  providerId: 'id',
+  /**
+   * The type of operation which was used to authenticate the user (such as sign-in or link).
+   */
+  operationType: 'val'
+}

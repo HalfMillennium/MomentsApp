@@ -11,18 +11,16 @@ import { Observable } from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import { Auth, UserCredential } from 'firebase/auth';
 import {AuthError, AuthState} from 'src/app/utils/interfaces';
-import { SessionState } from 'src/app/utils/interfaces';
 import {Credentials} from '../../utils/interfaces';
-
-
-export const metaReducers: MetaReducer<SessionState>[] = isDevMode() ? [] : [];
+import { Action } from '@ngrx/store';
+export const metaReducers: MetaReducer<{}>[] = isDevMode() ? [] : [];
 
 const initialState: AuthState = {};
 
-const authReducer = createReducer(
+export const authReducer = createReducer(
     initialState,
-    on(registerEmailSuccess, ((state: AuthState, {userCredential}) => { return { ...state, userCredential }; })),
-    on(registerEmailFailure, ((state: AuthState, {error}) => { return { ...state, userAuthError: error}; })),
+    on(registerEmailSuccess, (state: AuthState, {userCredential}) => ({...state, userCredential})),
+    on(registerEmailFailure, (state: AuthState, {error}) => ({...state, error})),
   );
 
 export const reducers: ActionReducerMap<AppReducers> = {

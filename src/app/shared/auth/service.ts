@@ -12,7 +12,6 @@ import {AuthError, Credentials} from '../../utils/interfaces';
 export class FirebaseAuthService {
     userCredential: UserCredential|undefined|void = undefined;
     readonly getAuth = getAuth;
-    readonly createUserWithEmailAndPassword = createUserWithEmailAndPassword;
     // Initialize Firebase
     app = initializeApp(FIREBASE_CONFIG);
     analytics = getAnalytics(this.app);

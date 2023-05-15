@@ -2,18 +2,18 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import { FirebaseAuthService } from '../auth/service';
 import {Injectable} from '@angular/core';
 import {registerEmail, registerEmailSuccess, registerEmailFailure} from './actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
-import {of, Observable, take} from 'rxjs';
+import {catchError, exhaustMap, map, switchMap} from 'rxjs/operators';
+import {of, Observable, take, EMPTY} from 'rxjs';
 import { AuthState, Credentials, AuthError } from 'src/app/utils/interfaces';
-import { AuthTypesEnum, UNKNOWN_EMAIL_AUTH_SERVER_ERROR, EMPTY_CREDENTIAL, isAuthError, WarningsEnum } from 'src/app/utils/resources';
+import { AuthTypesEnum, UNKNOWN_EMAIL_AUTH_SERVER_ERROR, isAuthError, TEST_USER_CREDENTIAL } from 'src/app/utils/resources';
 import {UserCredential} from 'firebase/auth';
 
 @Injectable()
 export class AuthEffects {
-    userCredential$ = createEffect(() =>
+    /*userCredential$ = createEffect(() =>
             this.actions$.pipe(
                 ofType(registerEmail),
-                switchMap(async (action) => await this.createUserService(action.userEmail, action.userPassword)
+                switchMap((action) => this.createUserService(action.userEmail, action.userPassword)
                     .then((authState: AuthState) => {
                         const credential = authState.userCredential;
                         if(!isAuthError(credential)) {
@@ -26,11 +26,33 @@ export class AuthEffects {
                             });
                         }
                     })
-                    .catch(async () => registerEmailFailure({
+                    .catch((error) => 
+                    {
+                        console.log('auth error:',error);
+                        return registerEmailFailure({
                         error: UNKNOWN_EMAIL_AUTH_SERVER_ERROR
-                    }))
+                    });})
                 ))
-            );
+            );*/
+
+    userCredential$ = createEffect(() => this.actions$.pipe(
+        ofType(registerEmail),
+        exhaustMap((action) => this.createUserService(action.userEmail, action.userPassword)
+            .pipe(
+            map((authState: AuthState) => {
+                const credential = authState.userCredential;
+                if(!isAuthError(credential)) {
+                    return registerEmailSuccess({
+                        userCredential: credential!
+                    });
+                } else {
+                    return registerEmailFailure({
+                        error: credential
+                    });
+                }
+            }),
+            catchError(() => EMPTY))
+        )));
 
     constructor(
         private actions$: Actions,
@@ -50,14 +72,15 @@ export class AuthEffects {
         return ;
     }
 
-    async createUserService(userEmail: string, userPassword: string): Promise<AuthState> {
-        const authResult = await (this.parseAuthResponse(this.firebaseAuthService.createUser(
+    createUserService(userEmail: string, userPassword: string): Observable<AuthState> {
+        /*const authResult = await (this.parseAuthResponse(this.firebaseAuthService.createUser(
             AuthTypesEnum.EMAIL_PASS, { 
                 type: AuthTypesEnum.EMAIL_PASS, 
                 userEmail, 
                 userPassword })));
         return {userCredential: authResult, 
-            userAuthError: (isAuthError(authResult)) ? authResult : undefined }
+            userAuthError: (isAuthError(authResult)) ? authResult : undefined }*/
+        return of({userCredential: TEST_USER_CREDENTIAL as UserCredential});
     }
 
     async parseAuthResponse(response: Promise<Observable<UserCredential | AuthError>>): Promise<UserCredential|AuthError> {

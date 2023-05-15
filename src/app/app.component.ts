@@ -21,18 +21,15 @@ export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
   readonly destroyObs$ = new ReplaySubject(1);
 
-  userCredential$: Promise<UserCredential|AuthError>|undefined = undefined;
+  userCredential$: Observable<UserCredential|AuthError|undefined>;
+  userAuthError$: Observable<AuthError|undefined>;
 
   constructor(private ngxFavicon: AngularFaviconService, 
               private dialog: MatDialog, 
               private router: Router,
               private authStore: Store<AuthState>) {
-      this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$), 
-        map((credentials) => {
-          if(credentials) {
-            this.userCredential$ = credentials;
-          }
-      }));
+      this.userCredential$ = this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$));
+      this.userAuthError$ = this.authStore.select('userAuthError').pipe(takeUntil(this.destroyObs$));
   }
 
   navigateTo(url: string) {

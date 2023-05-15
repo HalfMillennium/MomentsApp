@@ -64,22 +64,7 @@ export interface EmailAuthCredentials extends Credentials {
     userPassword: string
 }
 
-export interface SessionState {
-    userCredential: Promise<UserCredential | undefined>|undefined;
-    // TODO: Add more values
-}
-
-export interface Reducer {
-    type: AuthTypesEnum;
-    reduce: ((state: SessionState, action: Action) => SessionState)
-}
-
-// Includes all currently supported reducers
-export interface ReducerState { 
-    sessionReducer: ActionReducer<SessionState, Action>; 
-}
-
 export interface AuthState {
-    userCredential?: UserCredential|AuthError;
+    userCredential?: UserCredential|undefined;
     userAuthError?: AuthError|undefined;
 }
