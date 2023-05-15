@@ -16,6 +16,7 @@ import { map, take, takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';
 import {AuthCredentialPipe} from 'src/app/utils/pipes/auth-credential.pipe';
+import { UserNamePipe } from 'src/app/utils/pipes/user-name.pipe';
 
 @Component({
   selector: 'auth-dialog',
@@ -28,6 +29,7 @@ import {AuthCredentialPipe} from 'src/app/utils/pipes/auth-credential.pipe';
     ReactiveFormsModule, 
     AuthErrorPipe, 
     AuthCredentialPipe,
+    UserNamePipe,
   ],
 })
 export class AuthDialog implements OnDestroy {
@@ -61,6 +63,16 @@ export class AuthDialog implements OnDestroy {
       password: this.fb.nonNullable.control<string>(''),
       confPassword: this.fb.nonNullable.control<string>(''),
     });
+    this.userAuthState$.pipe(takeUntil(this.destroyObs$)).subscribe((newAuthState) => {
+      if(newAuthState.userAuthError) {
+        this.userAuthError = newAuthState.userAuthError.errorType;
+        this.isAuthenticated = false;
+        console.log('Auth Error Found:',this.userAuthError);
+      } else if(newAuthState.userCredential) {
+        this.isAuthenticated = true;
+        console.log('User successfully authenticated.');
+      }
+    })
   }
 
   setFormValue() {
