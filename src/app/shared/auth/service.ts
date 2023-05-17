@@ -11,16 +11,16 @@ import {AuthError, Credentials} from '../../utils/interfaces';
 
 export class FirebaseAuthService {
     userCredential: UserCredential|undefined|void = undefined;
-    readonly getAuth = getAuth;
     // Initialize Firebase
     app = initializeApp(FIREBASE_CONFIG);
-    analytics = getAnalytics(this.app);
+    //analytics = getAnalytics(this.app);
+    auth = getAuth(this.app);
 
     async createUser(authType: AuthTypesEnum, credentials: Credentials): Promise<Observable<UserCredential | AuthError>> {
         if (authType !== AuthTypesEnum.EMAIL_PASS) {
             return observableOf({authType, errorType: WarningsEnum.UNSUPPORTED_TYPE, code: '400', message: '..Unsupported create user type..'});
         }
-        return createUserWithEmailAndPassword(getAuth(), credentials['email'], credentials['password'])
+        return createUserWithEmailAndPassword(this.auth, credentials['email'], credentials['password'])
                             .then((credential) => {
                                 return observableOf(credential);
                             })
@@ -37,7 +37,7 @@ export class FirebaseAuthService {
         if (authType !== AuthTypesEnum.EMAIL_PASS) {
             return observableOf({authType, errorType: WarningsEnum.OTHER, code: '400', message: '..Unsupported sign in type..'});
         }
-        return signInWithEmailAndPassword(getAuth(), credentials['email'], credentials['pass'])
+        return signInWithEmailAndPassword(this.auth, credentials['email'], credentials['pass'])
                             .then((credential) => {
                                 return observableOf(credential);
                             })

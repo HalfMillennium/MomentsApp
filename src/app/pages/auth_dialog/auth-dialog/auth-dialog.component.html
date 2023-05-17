@@ -24,9 +24,12 @@
                 <mat-error *ngIf="userAuthError === WarningsEnum.PASSWORD_MATCH">
                     Passwords must match.
                 </mat-error>
+                <mat-error *ngIf="userAuthError === WarningsEnum.OTHER">
+                    Could not create user. Try again later.
+                </mat-error>
             </div>
             <div *ngIf="isAuthenticated">
-                <mat-hint><strong>Successful test user creation! Welcome, {{ userAuthState$ | async | authCredential | userName }}.</strong></mat-hint>
+                <mat-hint><strong>Successful test user creation! Welcome, "{{ userAuthState$ | async | authCredential | userName }}".</strong></mat-hint>
             </div>
         </form>
     </div>

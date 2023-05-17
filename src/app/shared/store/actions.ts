@@ -9,7 +9,7 @@ export const registerEmail = createAction(
     props<{userEmail: string; userPassword: string;}>(),
 );
 export const registerEmailSuccess = createAction('[Auth Dialog Component] Register Email Success', props<{userCredential: UserCredential}>());
-export const registerEmailFailure = createAction('[Auth Dialog Component] Register Email Failure', props<{error: AuthError}>());
+export const registerEmailFailure = createAction('[Auth Dialog Component] Register Email Failure', props<{userAuthError: AuthError}>());
 
 /** Action to sign in user from auth dialog */
 export const signInEmail = createAction(

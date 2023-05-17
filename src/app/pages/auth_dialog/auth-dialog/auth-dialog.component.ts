@@ -39,7 +39,7 @@ export class AuthDialog implements OnDestroy {
 
   userAuthForm: FormGroup;
   userAuthError: WarningsEnum|undefined = undefined;
-  credential: UserCredential|undefined;
+  userCredential: UserCredential|undefined;
   userEmail: string|undefined;
   userPassword: string|undefined;
   userConfPassword: string|undefined;
@@ -64,12 +64,14 @@ export class AuthDialog implements OnDestroy {
       confPassword: this.fb.nonNullable.control<string>(''),
     });
     this.userAuthState$.pipe(takeUntil(this.destroyObs$)).subscribe((newAuthState) => {
+      console.log('newAuthState:',newAuthState);
       if(newAuthState.userAuthError) {
         this.userAuthError = newAuthState.userAuthError.errorType;
         this.isAuthenticated = false;
         console.log('Auth Error Found:',this.userAuthError);
       } else if(newAuthState.userCredential) {
         this.isAuthenticated = true;
+        this.dialogRef.close(); // close dialog if its open
         console.log('User successfully authenticated.');
       }
     })
@@ -89,9 +91,6 @@ export class AuthDialog implements OnDestroy {
       this.registerUserEmail(`${this.userEmail}`, `${this.userPassword}`);
     } else {
       this.userAuthError = WarningsEnum.PASSWORD_MATCH;
-    }
-    if(this.credential) {
-      this.dialogRef.close();
     }
   }
 

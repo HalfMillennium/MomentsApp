@@ -9,8 +9,7 @@ import {FAVICON_URL, isAuthError} from './utils/resources';
 import { Store } from '@ngrx/store';
 import { User, UserCredential } from 'firebase/auth';
 import {Observable, ReplaySubject, map, takeUntil} from 'rxjs';
-import { AuthState } from './utils/interfaces';
-import { WarningsEnum } from './utils/resources';
+import { AuthState, MetaStores } from './utils/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -21,15 +20,13 @@ export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
   readonly destroyObs$ = new ReplaySubject(1);
 
-  userCredential$: Observable<UserCredential|AuthError|undefined>;
-  userAuthError$: Observable<AuthError|undefined>;
+  userAuthState$: Observable<AuthState> = 
+    this.store.select('auth').pipe(takeUntil(this.destroyObs$));
 
   constructor(private ngxFavicon: AngularFaviconService, 
               private dialog: MatDialog, 
               private router: Router,
-              private authStore: Store<AuthState>) {
-      this.userCredential$ = this.authStore.select('userCredential').pipe(takeUntil(this.destroyObs$));
-      this.userAuthError$ = this.authStore.select('userAuthError').pipe(takeUntil(this.destroyObs$));
+              private store: Store<MetaStores>) {
   }
 
   navigateTo(url: string) {

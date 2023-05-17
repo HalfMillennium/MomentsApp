@@ -2,6 +2,7 @@ import { UserCredential } from "firebase/auth"
 import { AuthTypesEnum, WarningsEnum } from "./resources"
 import { Action, ActionReducer } from "@ngrx/store"
 import {FormControl} from "@angular/forms"
+import { Store } from "@ngrx/store"
 
 /** Interface for menu items */
 export interface MenuItem {
@@ -67,4 +68,9 @@ export interface EmailAuthCredentials extends Credentials {
 export interface AuthState {
     userCredential?: UserCredential|undefined;
     userAuthError?: AuthError|undefined;
+}
+
+export declare interface MetaStores {
+    auth: AuthState;
+    // other stores to follow..
 }

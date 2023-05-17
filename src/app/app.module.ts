@@ -22,6 +22,8 @@ import { authReducer } from './shared/store/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './shared/store/effects';
 import { FirebaseAuthService } from './shared/auth/service';
+import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
+import { UserNamePipe } from './utils/pipes/user-name.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { FirebaseAuthService } from './shared/auth/service';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AuthCredentialPipe,
+    UserNamePipe,
     StoreModule.forRoot({auth: authReducer}),
     EffectsModule.forRoot([AuthEffects]),
   ],

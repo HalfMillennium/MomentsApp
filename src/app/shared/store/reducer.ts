@@ -20,7 +20,7 @@ const initialState: AuthState = {};
 export const authReducer = createReducer(
     initialState,
     on(registerEmailSuccess, (state: AuthState, {userCredential}) => ({...state, userCredential})),
-    on(registerEmailFailure, (state: AuthState, {error}) => ({...state, error})),
+    on(registerEmailFailure, (state: AuthState, {userAuthError}) => ({...state, userAuthError})),
   );
 
 export const reducers: ActionReducerMap<AppReducers> = {
