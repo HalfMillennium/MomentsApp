@@ -1,36 +1,25 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserCredential, User } from "firebase/auth";
 import {FIREBASE_CONFIG} from './config';
 import {Observable, of as observableOf} from 'rxjs';
 import {AuthTypesEnum, WarningsEnum, FIREBASE_AUTH_ERROR_EMAIL_IN_USE} from '../../utils/resources';
 import {AuthError, Credentials} from '../../utils/interfaces';
 
-/*
-export interface AuthError {
-    authType: AuthTypesEnum,
-    errorType: WarningsEnum,
-    code: string,
-    message: string
-}
-*/
-
 export class FirebaseAuthService {
     userCredential: UserCredential|undefined|void = undefined;
     // Initialize Firebase
     app = initializeApp(FIREBASE_CONFIG);
-    //analytics = getAnalytics(this.app);
     auth = getAuth(this.app);
 
     createWarning(e: any): { errorType: WarningsEnum, code: string, message: string} {
         const error = `${e}`;
-        /*if(error.includes('EMAIL_TAKEN')) {
-            return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400'}
-        }*/
-        return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400', message: 'Email already taken!' };
+        if(error.includes('email-already-in-use')) {
+            return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400', message: 'Email address already in use.'}
+        }
+        if(error.includes('weak-password')) {
+            return { errorType: WarningsEnum.WEAK_PASSWORD, code: '400', message: 'Password must be at least 6 characters.'}
+        }
+        return { errorType: WarningsEnum.OTHER, code: '500', message: 'Unknown server error. Try again later.' };
     }
 
     async createUser(authType: AuthTypesEnum, credentials: Credentials): Promise<Observable<UserCredential | AuthError>> {
@@ -59,5 +48,11 @@ export class FirebaseAuthService {
                             });
     }
   
-
+    /** A "UserBasic" is defined here as being a user's basic attributes such as email and username */
+    async updateUserBasics(user: User, displayName?: string, photoURL?: string) {
+        updateProfile(user, {
+            displayName,
+            photoURL
+        })
+    }
 }

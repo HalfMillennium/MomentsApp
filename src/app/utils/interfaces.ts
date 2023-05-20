@@ -50,6 +50,7 @@ export interface Credentials {
 }
 
 export interface SignUpDialogData {
+    userName: FormControl<string>,
     email: FormControl<string>,
     password: FormControl<string>,
     confPassword: FormControl<string>,

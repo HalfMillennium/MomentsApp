@@ -124,6 +124,7 @@ export enum WarningsEnum {
   PASSWORD_MATCH = 'password_word',
   EMAIL_TAKEN = 'email_taken',
   UNSUPPORTED_TYPE = 'unsupported_type',
+  WEAK_PASSWORD = 'weak_password',
   OTHER = 'other'
   // others
 }

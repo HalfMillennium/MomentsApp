@@ -40,6 +40,8 @@ export class AuthDialog implements OnDestroy {
   userAuthForm: FormGroup;
   userAuthError: WarningsEnum|undefined = undefined;
   userCredential: UserCredential|undefined;
+
+  userName: string|undefined;
   userEmail: string|undefined;
   userPassword: string|undefined;
   userConfPassword: string|undefined;
@@ -59,26 +61,26 @@ export class AuthDialog implements OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
     this.userAuthForm = this.fb.group<SignUpDialogData>({
+      userName: this.fb.nonNullable.control<string>(''),
       email: this.fb.nonNullable.control<string>(''),
       password: this.fb.nonNullable.control<string>(''),
       confPassword: this.fb.nonNullable.control<string>(''),
     });
     this.userAuthState$.pipe(takeUntil(this.destroyObs$)).subscribe((newAuthState) => {
-      console.log('newAuthState:',newAuthState);
       if(newAuthState.userAuthError) {
-        this.userAuthError = newAuthState.userAuthError.errorType;
         this.isAuthenticated = false;
-        console.log('Auth Error Found:',this.userAuthError);
+        this.userAuthError = newAuthState.userAuthError.errorType;
       } else if(newAuthState.userCredential) {
         this.isAuthenticated = true;
         this.userAuthError = undefined;
         this.onNoClick();
-        console.log('User successfully authenticated.');
+        console.log('User successfully authenticated!');
       }
     })
   }
 
   setFormValue() {
+    this.userName = this.userAuthForm.get('userName')?.value;
     this.userEmail = this.userAuthForm.get('email')?.value;
     this.userPassword = this.userAuthForm.get('password')?.value;
     this.userConfPassword = this.userAuthForm.get('confPassword')?.value;
