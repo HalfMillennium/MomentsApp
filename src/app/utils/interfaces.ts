@@ -71,6 +71,11 @@ export interface AuthState {
     userAuthError?: AuthError|undefined;
 }
 
+export interface UserState {
+    displayName?: string;
+    photoURL?: string;
+}
+
 export declare interface MetaStores {
     auth: AuthState;
     // other stores to follow..

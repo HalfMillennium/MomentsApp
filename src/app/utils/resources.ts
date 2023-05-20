@@ -1,5 +1,5 @@
 import { UserCredential } from "firebase/auth";
-import {SpaceInfo, CarouselSlides, User, MenuItem, AuthError, AuthState, Credentials} from "./interfaces";
+import {SpaceInfo, CarouselSlides, User, MenuItem, AuthError, AuthState, Credentials, UserState} from "./interfaces";
 import { OperationType } from "firebase/auth";
 
 /** Menu items */
@@ -144,7 +144,8 @@ export function isAuthError(obj: AuthError|UserCredential|undefined|null): obj i
 
 // Type container all currently supported reducers
 export type AppReducers = {
-  authReducer: AuthState
+  authReducer: AuthState,
+  userReducer: UserState
 }
 
 export const UNKNOWN_EMAIL_AUTH_SERVER_ERROR = {

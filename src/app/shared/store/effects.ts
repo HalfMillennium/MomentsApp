@@ -2,8 +2,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import { FirebaseAuthService } from '../auth/service';
 import {Injectable} from '@angular/core';
 import {registerEmail, registerEmailSuccess, registerEmailFailure} from './actions';
-import {catchError, mergeMap, map, switchMap} from 'rxjs/operators';
-import {of as observableOf, Observable, take, from, EMPTY} from 'rxjs';
+import {catchError, mergeMap, map, switchMap, tap} from 'rxjs/operators';
+import {of as observableOf, Observable, take, from, EMPTY, merge} from 'rxjs';
 import { AuthState, Credentials, AuthError } from 'src/app/utils/interfaces';
 import { AuthTypesEnum, UNKNOWN_EMAIL_AUTH_SERVER_ERROR, isAuthError, TEST_USER_CREDENTIAL } from 'src/app/utils/resources';
 import {User, UserCredential} from 'firebase/auth';
@@ -58,7 +58,9 @@ export class AuthEffects {
             console.log('resultCredential:',resultCredential);
                 resultCredential = authResponse;
         }));
-
+        if(resultCredential) {
+            
+        }
         return resultCredential ?? UNKNOWN_EMAIL_AUTH_SERVER_ERROR;
     }
 }
