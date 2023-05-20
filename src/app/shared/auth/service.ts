@@ -9,6 +9,15 @@ import {Observable, of as observableOf} from 'rxjs';
 import {AuthTypesEnum, WarningsEnum, FIREBASE_AUTH_ERROR_EMAIL_IN_USE} from '../../utils/resources';
 import {AuthError, Credentials} from '../../utils/interfaces';
 
+/*
+export interface AuthError {
+    authType: AuthTypesEnum,
+    errorType: WarningsEnum,
+    code: string,
+    message: string
+}
+*/
+
 export class FirebaseAuthService {
     userCredential: UserCredential|undefined|void = undefined;
     // Initialize Firebase
@@ -16,20 +25,27 @@ export class FirebaseAuthService {
     //analytics = getAnalytics(this.app);
     auth = getAuth(this.app);
 
+    createWarning(e: any): { errorType: WarningsEnum, code: string, message: string} {
+        const error = `${e}`;
+        /*if(error.includes('EMAIL_TAKEN')) {
+            return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400'}
+        }*/
+        return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400', message: 'Email already taken!' };
+    }
+
     async createUser(authType: AuthTypesEnum, credentials: Credentials): Promise<Observable<UserCredential | AuthError>> {
         if (authType !== AuthTypesEnum.EMAIL_PASS) {
             return observableOf({authType, errorType: WarningsEnum.UNSUPPORTED_TYPE, code: '400', message: '..Unsupported create user type..'});
         }
-        return createUserWithEmailAndPassword(this.auth, credentials['email'], credentials['password'])
+        return createUserWithEmailAndPassword(this.auth, credentials['userEmail'], credentials['userPassword'])
                             .then((credential) => {
                                 return observableOf(credential);
                             })
-                            .catch((error: AuthError) => {
-                                const isEmailTakenError = (error.message == FIREBASE_AUTH_ERROR_EMAIL_IN_USE);
-                                return observableOf({authType, 
-                                    errorType: (isEmailTakenError) ? WarningsEnum.EMAIL_TAKEN : WarningsEnum.OTHER,
-                                    code: (isEmailTakenError) ? '400' : '500',
-                                    message: `${error}`});
+                            .catch((error) => {
+                                return observableOf({
+                                    ...this.createWarning(error),
+                                    authType: AuthTypesEnum.EMAIL_PASS,
+                                })
                             });
     }
 
@@ -40,9 +56,6 @@ export class FirebaseAuthService {
         return signInWithEmailAndPassword(this.auth, credentials['email'], credentials['pass'])
                             .then((credential) => {
                                 return observableOf(credential);
-                            })
-                            .catch((error) => {
-                                return observableOf({authType, errorType: WarningsEnum.OTHER, code: '500', message: `${error}`});
                             });
     }
   

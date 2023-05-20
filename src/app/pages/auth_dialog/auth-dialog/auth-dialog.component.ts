@@ -71,7 +71,8 @@ export class AuthDialog implements OnDestroy {
         console.log('Auth Error Found:',this.userAuthError);
       } else if(newAuthState.userCredential) {
         this.isAuthenticated = true;
-        this.dialogRef.close(); // close dialog if its open
+        this.userAuthError = undefined;
+        this.onNoClick();
         console.log('User successfully authenticated.');
       }
     })
@@ -108,7 +109,9 @@ export class AuthDialog implements OnDestroy {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    setTimeout(()=>{
+      this.dialogRef.close();
+    },1000); // give user a second to read registration confirmation message
   }
 
   ngOnDestroy(): void {
