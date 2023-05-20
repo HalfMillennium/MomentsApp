@@ -17,6 +17,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';
 import {AuthCredentialPipe} from 'src/app/utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from 'src/app/utils/pipes/user-name.pipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'auth-dialog',
@@ -58,6 +59,7 @@ export class AuthDialog implements OnDestroy {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AuthDialog>,
     private store: Store<any>,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
     this.userAuthForm = this.fb.group<SignUpDialogData>({
@@ -73,7 +75,8 @@ export class AuthDialog implements OnDestroy {
       } else if(newAuthState.userCredential) {
         this.isAuthenticated = true;
         this.userAuthError = undefined;
-        this.onNoClick();
+        this.snackBar.open('Welcome new user!', 'Nice');
+        this.onNoClick(); // close dialog
         console.log('User successfully authenticated!');
       }
     })
@@ -111,9 +114,7 @@ export class AuthDialog implements OnDestroy {
   }
 
   onNoClick(): void {
-    setTimeout(()=>{
-      this.dialogRef.close();
-    },1000); // give user a second to read registration confirmation message
+    this.dialogRef.close();
   }
 
   ngOnDestroy(): void {

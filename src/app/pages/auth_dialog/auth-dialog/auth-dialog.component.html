@@ -34,9 +34,6 @@
                     Could not create user. Try again later.
                 </mat-error>
             </div>
-            <div *ngIf="isAuthenticated">
-                <mat-hint><strong>Successful test user creation! Welcome, "{{ userAuthState$ | async | authCredential | userName }}".</strong></mat-hint>
-            </div>
         </form>
     </div>
     <span class="form-type-switch mat-body-1" (click)="updateFormType()">
