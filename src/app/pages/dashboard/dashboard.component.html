@@ -3,12 +3,21 @@
   <div class="column">
     <h3 class="mat-headline-4"><b>{{currentMonthDay}}</b>, {{currentYear}}</h3>
     <h4 class="mat-headline-5">[ {{currentTimeOfDay}} ]</h4>
-    <span *ngIf="displayName$ | async | userName as userName" class="mat-h4">
+    <span *ngIf="displayNameCookie as userName" class="mat-h4">
       <mat-icon>check</mat-icon>
       User authenticated
       <div>
         <span class="display-name-label mat-h5">
           Hi there, <b>{{ userName }}</b>.
+        </span>
+      </div>
+    </span>
+    <span *ngIf="!displayNameCookie" class="mat-h4">
+      <mat-icon>check</mat-icon>
+      No user found
+      <div>
+        <span class="display-name-label mat-h5">
+          Who's there? Sign in or register to continue.
         </span>
       </div>
     </span>

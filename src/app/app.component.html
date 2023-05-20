@@ -5,13 +5,17 @@
 <section class="header">
   <button mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu class="menu" #menu="matMenu">
-      <button mat-menu-item *ngFor="let item of MENU_ITEMS" 
-      [routerLink]="item.routerLink" 
-      [disabled]="item.routerLink === ''"
-      (click)="(item.auth) ? openAuthDialog() : navigateTo(item.routerLink)">
-        <mat-icon>{{ (item.name === 'account') ?  ((userAuthState$ | async | authCredential) ? 'account_circle' : 'login') : item.icon }}</mat-icon>
-        {{ (item.name === 'account') ?  ((userAuthState$ | async | authCredential) ? 'Account' : 'Sign In / Sign Up') : item.label }}
-      </button>
+      <div 
+        *ngFor="let item of MENU_ITEMS">
+        <button mat-menu-item 
+        *ngIf="!(item.name === 'sign_out') || currentUserCredential"
+        [routerLink]="item.routerLink" 
+        [disabled]="item.routerLink === ''"
+        (click)="getOnClick(item)">
+          <mat-icon>{{ (item.name === 'account') ?  (currentUserCredential ? 'account_circle' : 'login') : item.icon }}</mat-icon>
+          {{ (item.name === 'account') ?  (currentUserCredential ? 'Account' : 'Sign In / Sign Up') : item.label }}
+        </button>
+      </div>
     </mat-menu>
 </section>
 <section class="main">

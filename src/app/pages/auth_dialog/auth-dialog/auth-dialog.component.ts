@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, inject, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from 'src/material.module';
@@ -18,6 +18,7 @@ import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';
 import {AuthCredentialPipe} from 'src/app/utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from 'src/app/utils/pipes/user-name.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'auth-dialog',
@@ -37,6 +38,8 @@ export class AuthDialog implements OnDestroy {
   readonly destroyObs$ = new ReplaySubject(1);
   readonly WarningsEnum = WarningsEnum;
   readonly isAuthError = isAuthError;
+
+  private cookieService = inject(CookieService);
 
   userAuthForm: FormGroup;
   userAuthError: WarningsEnum|undefined = undefined;
@@ -75,11 +78,13 @@ export class AuthDialog implements OnDestroy {
         this.isAuthenticated = false;
         this.userAuthError = newAuthState.userAuthError.errorType;
       } else if(newAuthState.userCredential) {
+        this.cookieService.set('userCredential', JSON.stringify(newAuthState.userCredential));
+        this.cookieService.set('displayName', `${this.userName}`);
         this.store.dispatch(updateUserBasics({userCredential: newAuthState.userCredential, 
-                                    displayName: `${this.userName}`}))
-        this.snackBar.open('Welcome new user!', 'Nice');
+                                    displayName: `${this.userName}`}));
         this.onNoClick(); // close dialog
-        console.log('User successfully authenticated!');
+        this.reloadPage(); // TODO: Smells a little bit, but is prob fine for now
+        console.log(`User successfully authenticated! Username: ${this.userName}, AuthState: ${newAuthState}`);
       }
     })
     this.displayName$.pipe(takeUntil(this.destroyObs$)).subscribe((userState: UserState) => {
@@ -87,6 +92,7 @@ export class AuthDialog implements OnDestroy {
               this.isAuthenticated = true;
               this.userAuthError = undefined;
               this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
+              this.snackBar.open('Welcome to the Moments app!', 'Very cool');
             }
         });
   }
@@ -124,6 +130,10 @@ export class AuthDialog implements OnDestroy {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
   ngOnDestroy(): void {

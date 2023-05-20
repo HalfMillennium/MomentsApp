@@ -31,6 +31,12 @@ export const MENU_ITEMS: MenuItem[] = [
       routerLink: '/account',
       auth: true
     },
+    {
+      name: 'sign_out',
+      icon: 'logout',
+      label: 'Sign Out',
+      auth: true
+    }
 ]
 
 /** Test API response for... testing */
@@ -184,3 +190,8 @@ export const APP_REDUCERS = {
 }
 
 export const APP_EFFECTS = [AuthEffects];
+
+/** Parses userAuthState from cookies */
+export function parseUserAuthState(rawAuthState: string|undefined) {
+  return (rawAuthState) ? (JSON.parse(rawAuthState) as AuthState) : undefined;
+}

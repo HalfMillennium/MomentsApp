@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserCredential, User } from "firebase/auth";
+import { signOut, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserCredential, User } from "firebase/auth";
 import {FIREBASE_CONFIG} from './config';
 import {Observable, of as observableOf} from 'rxjs';
 import {AuthTypesEnum, WarningsEnum, FIREBASE_AUTH_ERROR_EMAIL_IN_USE} from '../../utils/resources';
@@ -11,13 +11,15 @@ export class FirebaseAuthService {
     app = initializeApp(FIREBASE_CONFIG);
     auth = getAuth(this.app);
 
-    createWarning(e: any): { errorType: WarningsEnum, code: string, message: string} {
+    createWarning(login: boolean, e: any): { errorType: WarningsEnum, code: string, message: string} {
         const error = `${e}`;
-        if(error.includes('email-already-in-use')) {
-            return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400', message: 'Email address already in use.'}
-        }
-        if(error.includes('weak-password')) {
-            return { errorType: WarningsEnum.WEAK_PASSWORD, code: '400', message: 'Password must be at least 6 characters.'}
+        if(!login) {
+            if(error.includes('email-already-in-use')) {
+                return { errorType: WarningsEnum.EMAIL_TAKEN, code: '400', message: 'Email address already in use.'}
+            }
+            if(error.includes('weak-password')) {
+                return { errorType: WarningsEnum.WEAK_PASSWORD, code: '400', message: 'Password must be at least 6 characters.'}
+            }
         }
         return { errorType: WarningsEnum.OTHER, code: '500', message: 'Unknown server error. Try again later.' };
     }
@@ -32,7 +34,7 @@ export class FirebaseAuthService {
                             })
                             .catch((error) => {
                                 return observableOf({
-                                    ...this.createWarning(error),
+                                    ...this.createWarning(false, error),
                                     authType: AuthTypesEnum.EMAIL_PASS,
                                 })
                             });
@@ -42,10 +44,24 @@ export class FirebaseAuthService {
         if (authType !== AuthTypesEnum.EMAIL_PASS) {
             return observableOf({authType, errorType: WarningsEnum.OTHER, code: '400', message: '..Unsupported sign in type..'});
         }
-        return signInWithEmailAndPassword(this.auth, credentials['email'], credentials['pass'])
+        return signInWithEmailAndPassword(this.auth, credentials['userEmail'], credentials['userPassword'])
                             .then((credential) => {
                                 return observableOf(credential);
+                            })
+                            .catch((error) => {
+                                return observableOf({
+                                    ...this.createWarning(true, error),
+                                    authType: AuthTypesEnum.EMAIL_PASS,
+                                })
                             });
+    }
+
+    async signOut(): Promise<string|undefined> {
+        return signOut(this.auth).then(() => {
+            return undefined;
+          }).catch((error) => {
+            return `SERVER ERROR: ${error}`;
+          });
     }
   
     /** A "UserBasic" is defined here as being a user's basic attributes such as email and username */

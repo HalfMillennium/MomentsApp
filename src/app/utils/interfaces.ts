@@ -9,8 +9,8 @@ export interface MenuItem {
     name: string,
     icon: string,
     label: string,
-    routerLink: string,
-    auth?: boolean
+    routerLink?: string,
+    auth?: boolean // this is set when the menu items presence depends on user authentication state
 }
 
 export interface SpaceInfo {

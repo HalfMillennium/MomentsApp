@@ -1,12 +1,13 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MaterialModule} from '../../../material.module';
-import { MOCK_SPACES, MONTHS } from '../../utils/resources';
+import { MOCK_SPACES, MONTHS, parseUserAuthState } from '../../utils/resources';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject, takeUntil } from 'rxjs';
-import { UserState, MetaStores } from 'src/app/utils/interfaces';
+import { AuthState, MetaStores } from 'src/app/utils/interfaces';
 import { UserNamePipe } from '../../utils/pipes/user-name.pipe';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'dashboard',
@@ -18,6 +19,7 @@ import { UserNamePipe } from '../../utils/pipes/user-name.pipe';
 export class Dashboard implements AfterViewInit {
   readonly destroyObs$ = new ReplaySubject(1);
   readonly MOCK_SPACES = MOCK_SPACES;
+  private readonly cookieService = inject(CookieService);
 
   headerText: string|undefined = undefined;
   subHeaderText: string|undefined = undefined;
@@ -25,8 +27,11 @@ export class Dashboard implements AfterViewInit {
   currentMonthDay: string|undefined = undefined;
   currentYear: string|undefined = undefined;
 
-  displayName$: Observable<UserState> = 
-    this.store.select('user').pipe(takeUntil(this.destroyObs$));
+  displayNameCookie = this.cookieService.get('displayName');
+  userCredentialCookie = this.cookieService.get('userCredential');
+
+  // Simple, non-nullable UserCredential
+  currentUserCredential = parseUserAuthState(this.userCredentialCookie);
   
   constructor(private router: Router, private store: Store<MetaStores>) {
     this.headerText = "Welcome back.";
