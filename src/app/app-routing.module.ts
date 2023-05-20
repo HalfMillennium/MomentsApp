@@ -5,7 +5,6 @@ import { SpaceDetail } from './pages/space-detail/space-detail.component';
 import { Overview } from './pages/overview/overview.component';
 import { NewUserConfirmation } from './pages/new-user-confirmation/new-user-confirmation.component';
 import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
-import { UserNamePipe } from './utils/pipes/user-name.pipe';
 
 const routes: Routes = [
     { path: '', component:  Dashboard},
@@ -26,7 +25,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     AuthCredentialPipe,
-    UserNamePipe,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]

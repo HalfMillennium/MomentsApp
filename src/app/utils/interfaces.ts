@@ -78,5 +78,6 @@ export interface UserState {
 
 export declare interface MetaStores {
     auth: AuthState;
+    user: UserState;
     // other stores to follow..
 }

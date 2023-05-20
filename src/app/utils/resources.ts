@@ -1,6 +1,8 @@
 import { UserCredential } from "firebase/auth";
 import {SpaceInfo, CarouselSlides, User, MenuItem, AuthError, AuthState, Credentials, UserState} from "./interfaces";
 import { OperationType } from "firebase/auth";
+import { authReducer, userReducer } from '../shared/store/reducer';
+import { AuthEffects } from "../shared/store/effects";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -175,3 +177,10 @@ export const TEST_USER_CREDENTIAL = {
    */
   operationType: 'val'
 }
+
+export const APP_REDUCERS = {
+  auth: authReducer,
+  user: userReducer
+}
+
+export const APP_EFFECTS = [AuthEffects];

@@ -2,16 +2,16 @@ import {Component, Inject, OnDestroy} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from 'src/material.module';
-import {SignUpDialogData} from '../../../utils/interfaces';
+import {SignUpDialogData, UserState} from '../../../utils/interfaces';
 import { FirebaseAuthService } from 'src/app/shared/auth/service';
 import { WarningsEnum } from 'src/app/utils/resources';
-import { AuthState, AuthError } from '../../../utils/interfaces';
+import { AuthState, MetaStores } from '../../../utils/interfaces';
 import {UserCredential } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import {isAuthError} from '../../../utils/resources';
 import { Store } from '@ngrx/store';
-import {registerEmail, signInEmail} from '../../../shared/store/actions';
+import {registerEmail, signInEmail, updateUserBasics} from '../../../shared/store/actions';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';
@@ -52,13 +52,15 @@ export class AuthDialog implements OnDestroy {
 
   userAuthState$: Observable<AuthState> = 
     this.store.select('auth').pipe(takeUntil(this.destroyObs$));
+  displayName$: Observable<UserState> =
+    this.store.select('user').pipe(takeUntil(this.destroyObs$));
 
   isAuthenticated = false;
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AuthDialog>,
-    private store: Store<any>,
+    private store: Store<MetaStores>,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
@@ -73,13 +75,20 @@ export class AuthDialog implements OnDestroy {
         this.isAuthenticated = false;
         this.userAuthError = newAuthState.userAuthError.errorType;
       } else if(newAuthState.userCredential) {
-        this.isAuthenticated = true;
-        this.userAuthError = undefined;
+        this.store.dispatch(updateUserBasics({userCredential: newAuthState.userCredential, 
+                                    displayName: `${this.userName}`}))
         this.snackBar.open('Welcome new user!', 'Nice');
         this.onNoClick(); // close dialog
         console.log('User successfully authenticated!');
       }
     })
+    this.displayName$.pipe(takeUntil(this.destroyObs$)).subscribe((userState: UserState) => {
+            if(userState.displayName && !this.isAuthenticated) {
+              this.isAuthenticated = true;
+              this.userAuthError = undefined;
+              this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
+            }
+        });
   }
 
   setFormValue() {
