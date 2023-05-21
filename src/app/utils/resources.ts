@@ -1,5 +1,8 @@
-import { MenuItem } from "./interfaces";
-import {SpaceInfo, CarouselSlides, User} from "./interfaces";
+import { UserCredential } from "firebase/auth";
+import {SpaceInfo, CarouselSlides, User, MenuItem, AuthError, AuthState, Credentials, UserState} from "./interfaces";
+import { OperationType } from "firebase/auth";
+import { authReducer, userReducer } from '../shared/store/reducer';
+import { AuthEffects } from "../shared/store/effects";
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -28,6 +31,12 @@ export const MENU_ITEMS: MenuItem[] = [
       routerLink: '/account',
       auth: true
     },
+    {
+      name: 'sign_out',
+      icon: 'logout',
+      label: 'Sign Out',
+      auth: true
+    }
 ]
 
 /** Test API response for... testing */
@@ -118,5 +127,75 @@ export enum AuthTypesEnum {
   // others..
 }
 
+// Enum of all user warnings supported by UI (i.e. that will display an explicit error message)
+export enum WarningsEnum {
+  PASSWORD_MATCH = 'password_word',
+  EMAIL_TAKEN = 'email_taken',
+  UNSUPPORTED_TYPE = 'unsupported_type',
+  WEAK_PASSWORD = 'weak_password',
+  OTHER = 'other'
+  // others
+}
+
+export enum Features {
+  Auth = 'Auth',
+  // others
+}
+
 // Favicon URL
 export const FAVICON_URL = 'https://img.icons8.com/ios/50/f9f9f9/apple-news.png'
+
+// Returns whether or not auth API response was error or UserCredential
+export function isAuthError(obj: AuthError|UserCredential|undefined|null): obj is AuthError {
+  return (obj as AuthError)?.code ? true : false;
+}
+
+// Type container all currently supported reducers
+export type AppReducers = {
+  authReducer: AuthState,
+  userReducer: UserState
+}
+
+export const UNKNOWN_EMAIL_AUTH_SERVER_ERROR = {
+  authType: AuthTypesEnum.EMAIL_PASS,
+  errorType: WarningsEnum.OTHER,
+  code: '500',
+  message: 'Unknown server error...'
+};
+
+export const EMPTY_CREDENTIAL: Credentials = {
+  type: AuthTypesEnum.EMAIL_PASS,
+}
+
+export const FIREBASE_AUTH_ERROR_EMAIL_IN_USE = 'Firebase: Error (auth/email-already-in-use).';
+
+export const TEST_USER_CREDENTIAL = {
+  /**
+   * The user authenticated by this credential.
+   */
+  user: 'user' as unknown as User,
+  /**
+   * The provider which was used to authenticate the user.
+   */
+  providerId: 'id',
+  /**
+   * The type of operation which was used to authenticate the user (such as sign-in or link).
+   */
+  operationType: 'val'
+}
+
+export const APP_REDUCERS = {
+  auth: authReducer,
+  user: userReducer
+}
+
+export const APP_EFFECTS = [AuthEffects];
+
+/** Parses userAuthState from cookies */
+export function parseUserAuthState(rawAuthState: string|undefined) {
+  return (rawAuthState) ? (JSON.parse(rawAuthState) as AuthState) : undefined;
+}
+
+export function reloadPage() {
+  window.location.reload();
+}

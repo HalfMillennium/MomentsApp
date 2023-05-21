@@ -18,7 +18,12 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './shared/store/effects';
+import { FirebaseAuthService } from './shared/auth/service';
+import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
+import { UserNamePipe } from './utils/pipes/user-name.pipe';
+import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
 
 @NgModule({
   declarations: [
@@ -40,11 +45,12 @@ import { reducers, metaReducers } from './reducers';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
+    AuthCredentialPipe,
+    UserNamePipe,
+    StoreModule.forRoot(APP_REDUCERS),
+    EffectsModule.forRoot(APP_EFFECTS),
   ],
-  providers: [],
+  providers: [FirebaseAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

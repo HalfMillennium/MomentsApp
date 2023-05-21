@@ -1,13 +1,16 @@
 import { UserCredential } from "firebase/auth"
-import { AuthTypesEnum } from "./resources"
+import { AuthTypesEnum, WarningsEnum } from "./resources"
+import { Action, ActionReducer } from "@ngrx/store"
+import {FormControl} from "@angular/forms"
+import { Store } from "@ngrx/store"
 
 /** Interface for menu items */
 export interface MenuItem {
     name: string,
     icon: string,
     label: string,
-    routerLink: string,
-    auth?: boolean
+    routerLink?: string,
+    auth?: boolean // this is set when the menu items presence depends on user authentication state
 }
 
 export interface SpaceInfo {
@@ -35,23 +38,46 @@ export interface User {
 }
 
 export interface AuthError {
-    type: AuthTypesEnum,
+    authType: AuthTypesEnum,
+    errorType: WarningsEnum,
     code: string,
     message: string
 }
 
 export interface Credentials {
-    type: string;
+    type: AuthTypesEnum;
     [x: string]: any;
 }
 
 export interface SignUpDialogData {
-    email: string,
-    password: string,
-    confPassword: string,
+    userName: FormControl<string>,
+    email: FormControl<string>,
+    password: FormControl<string>,
+    confPassword: FormControl<string>,
 }
 
-export interface SessionState {
-    userCredential: UserCredential|undefined;
-    // TODO: Add more values
+export interface RegisterRequest {
+    type: string,
+    credentials: Credentials,
+}
+
+export interface EmailAuthCredentials extends Credentials {
+    userEmail: string,
+    userPassword: string
+}
+
+export interface AuthState {
+    userCredential?: UserCredential|undefined;
+    userAuthError?: AuthError|undefined;
+}
+
+export interface UserState {
+    displayName?: string;
+    photoURL?: string;
+}
+
+export declare interface MetaStores {
+    auth: AuthState;
+    user: UserState;
+    // other stores to follow..
 }
