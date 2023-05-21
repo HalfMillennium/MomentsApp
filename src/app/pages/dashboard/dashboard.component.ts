@@ -8,6 +8,8 @@ import { Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { AuthState, MetaStores } from 'src/app/utils/interfaces';
 import { UserNamePipe } from '../../utils/pipes/user-name.pipe';
 import { CookieService } from 'ngx-cookie-service';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthDialog } from '../auth_dialog/auth-dialog/auth-dialog.component';
 
 @Component({
   selector: 'dashboard',
@@ -33,7 +35,10 @@ export class Dashboard implements AfterViewInit {
   // Simple, non-nullable UserCredential
   currentUserCredential = parseUserAuthState(this.userCredentialCookie);
   
-  constructor(private router: Router, private store: Store<MetaStores>) {
+  constructor(
+    private router: Router, 
+    private store: Store<MetaStores>,
+    private dialog: MatDialog) {
     this.headerText = "Welcome back.";
     this.subHeaderText = "New spaces below...";
   }
@@ -45,4 +50,10 @@ export class Dashboard implements AfterViewInit {
     this.currentTimeOfDay = `${d.getHours()}h:${d.getMinutes()}m:${d.getSeconds()}s`;
   }
   
+  openAuthDialog() {
+    let dialogRef = this.dialog.open(AuthDialog, {width: '325px'});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('AuthDialog has closed.');
+    });
+  }
 }

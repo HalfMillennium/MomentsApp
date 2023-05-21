@@ -195,3 +195,7 @@ export const APP_EFFECTS = [AuthEffects];
 export function parseUserAuthState(rawAuthState: string|undefined) {
   return (rawAuthState) ? (JSON.parse(rawAuthState) as AuthState) : undefined;
 }
+
+export function reloadPage() {
+  window.location.reload();
+}

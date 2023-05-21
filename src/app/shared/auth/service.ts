@@ -60,7 +60,9 @@ export class FirebaseAuthService {
         return signOut(this.auth).then(() => {
             return undefined;
           }).catch((error) => {
-            return `SERVER ERROR: ${error}`;
+            const result = `SERVER ERROR: ${error}`;
+            console.log(result);
+            return result;
           });
     }
   

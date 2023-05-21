@@ -4,7 +4,7 @@ import { AuthDialog } from './pages/auth_dialog/auth-dialog/auth-dialog.componen
 import { MatDialog } from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import { AngularFaviconService } from 'angular-favicon';
-import {FAVICON_URL, parseUserAuthState} from './utils/resources';
+import {FAVICON_URL, parseUserAuthState, reloadPage} from './utils/resources';
 import { Store } from '@ngrx/store';
 import {Observable, ReplaySubject, map, takeUntil} from 'rxjs';
 import { AuthState, MenuItem, MetaStores } from './utils/interfaces';
@@ -68,14 +68,15 @@ export class AppComponent {
             this.snackBar.open(`Could not sign out user: ${error}`);
           } else {
             this.snackBar.open('User signed out.');
-            //this.clearAuthCookies();
+            this.clearAuthCookies();
+            reloadPage();
           }
       })
   }
 
   clearAuthCookies() {
-    this.cookieService.delete('userCredential');
-    this.cookieService.delete('displayName');
+    this.cookieService.delete('userCredential', '/');
+    this.cookieService.delete('displayName', '/');
   }
 
   ngOnInit() {
