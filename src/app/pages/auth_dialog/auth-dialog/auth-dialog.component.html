@@ -33,7 +33,7 @@
                 <mat-error *ngIf="userAuthError === WarningsEnum.OTHER">
                     Could not create user. Try again later.
                 </mat-error>
-                <mat-error>
+                <mat-error *ngIf="userAuthError === WarningsEnum.EMAIL_PASSWORD_INCORRECT">
                     Email/password incorrect.
                 </mat-error>
             </div>
