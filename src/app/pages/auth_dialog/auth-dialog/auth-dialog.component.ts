@@ -1,4 +1,4 @@
-import {Component, Inject, inject, OnDestroy} from '@angular/core';
+import {Component, Inject, inject, OnDestroy, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from 'src/material.module';
@@ -41,14 +41,22 @@ export class AuthDialog implements OnDestroy {
 
   private cookieService = inject(CookieService);
 
-  userAuthForm: FormGroup;
+  userAuthForm: FormGroup = this.fb.group<SignUpDialogData>({
+    userName: this.fb.nonNullable.control<string>(''),
+    email: this.fb.nonNullable.control<string>(''),
+    password: this.fb.nonNullable.control<string>(''),
+    confPassword: this.fb.nonNullable.control<string>(''),
+  });
+
+  userName: string|undefined;
+  userPassword: string|undefined;
+  userConfPassword: string|undefined;
+  displayName: string|undefined;
+  userEmail: string|undefined;
+
   userAuthError: WarningsEnum|undefined = undefined;
   userCredential: UserCredential|undefined;
 
-  userName: string|undefined;
-  userEmail: string|undefined;
-  userPassword: string|undefined;
-  userConfPassword: string|undefined;
   // whether this auth dialog is signing a user in or signing one up
   signInMode = false;
   readonly firebaseAuthService = new FirebaseAuthService();
@@ -67,12 +75,7 @@ export class AuthDialog implements OnDestroy {
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
   ) {
-    this.userAuthForm = this.fb.group<SignUpDialogData>({
-      userName: this.fb.nonNullable.control<string>(''),
-      email: this.fb.nonNullable.control<string>(''),
-      password: this.fb.nonNullable.control<string>(''),
-      confPassword: this.fb.nonNullable.control<string>(''),
-    });
+    this.userAuthError = undefined;
     this.userAuthState$.pipe(takeUntil(this.destroyObs$)).subscribe((newAuthState) => {
       if(newAuthState.userAuthError) {
         this.isAuthenticated = false;
@@ -97,7 +100,7 @@ export class AuthDialog implements OnDestroy {
         });
   }
 
-  setFormValue() {
+  setFormValues() {
     this.userName = this.userAuthForm.get('userName')?.value;
     this.userEmail = this.userAuthForm.get('email')?.value;
     this.userPassword = this.userAuthForm.get('password')?.value;
@@ -105,10 +108,12 @@ export class AuthDialog implements OnDestroy {
   }
 
   authenticate() {
-    this.setFormValue();
+    this.userAuthError = undefined;
+    this.setFormValues();
     if(this.signInMode) {
       this.signInUserEmail(`${this.userEmail}`, `${this.userPassword}`);
     } else if(this.userPassword === this.userConfPassword) {
+      console.log("Registration attempted, email:",this.userEmail,'password:',this.userPassword)
       this.registerUserEmail(`${this.userEmail}`, `${this.userPassword}`);
     } else {
       this.userAuthError = WarningsEnum.PASSWORD_MATCH;

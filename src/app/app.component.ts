@@ -50,14 +50,15 @@ export class AppComponent {
   }
 
   getOnClick(item: MenuItem) {
-    if(item.auth) {
-      if(item.name === 'sign_out') {
+    switch(item.name) {
+      case 'sign_out':
         this.signOut();
-      } else if(item.name === 'sign_in_out'){
+        break;
+      case 'account':
         this.openAuthDialog();
-      } else {
+        break;
+      default:
         this.navigateTo(item.routerLink!);
-      }
     }
   }
 

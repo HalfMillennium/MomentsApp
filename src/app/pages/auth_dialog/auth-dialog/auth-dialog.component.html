@@ -25,13 +25,16 @@
             </div>
             <div *ngIf="!isAuthenticated">
                 <mat-error>
-                    <span *ngIf="userAuthError && userAuthError === WarningsEnum.EMAIL_TAKEN">Email address taken. Try a different one or sign in.</span>
+                    <span *ngIf="userAuthError === WarningsEnum.EMAIL_TAKEN">Email address taken. Try a different one or sign in.</span>
                 </mat-error>
                 <mat-error *ngIf="userAuthError === WarningsEnum.PASSWORD_MATCH">
                     Passwords must match.
                 </mat-error>
                 <mat-error *ngIf="userAuthError === WarningsEnum.OTHER">
                     Could not create user. Try again later.
+                </mat-error>
+                <mat-error>
+                    Email/password incorrect.
                 </mat-error>
             </div>
         </form>
