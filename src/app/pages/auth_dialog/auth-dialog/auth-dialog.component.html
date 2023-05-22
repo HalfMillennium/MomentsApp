@@ -31,7 +31,7 @@
                     Passwords must match.
                 </mat-error>
                 <mat-error *ngIf="userAuthError === WarningsEnum.OTHER">
-                    Could not create user. Try again later.
+                    Could not {{ (signInMode) ? 'sign in' : 'create' }} user.
                 </mat-error>
                 <mat-error *ngIf="userAuthError === WarningsEnum.EMAIL_PASSWORD_INCORRECT">
                     Email/password incorrect.

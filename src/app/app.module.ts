@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,9 +26,7 @@ import { UserNamePipe } from './utils/pipes/user-name.pipe';
 import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     MatMenuModule,
@@ -50,7 +48,6 @@ import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
     StoreModule.forRoot(APP_REDUCERS),
     EffectsModule.forRoot(APP_EFFECTS),
   ],
-  providers: [FirebaseAuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

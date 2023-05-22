@@ -28,7 +28,8 @@ export class AuthEffects {
       switchMap(async (action) => {
         const result = await this.createUserService(
           action.userEmail,
-          action.userPassword
+          action.userPassword,
+          action.displayName
         );
         return result.pipe(
           map((response: UserCredential | AuthError) => {
@@ -83,13 +84,15 @@ export class AuthEffects {
 
   async createUserService(
     userEmail: string,
-    userPassword: string
+    userPassword: string,
+    displayName: string
   ): Promise<Observable<UserCredential | AuthError>> {
     return await this.firebaseAuthService
       .createUser(AuthTypesEnum.EMAIL_PASS, {
         type: AuthTypesEnum.EMAIL_PASS,
         userEmail,
         userPassword,
+        displayName,
       })
       .then((result) => {
         return result;
