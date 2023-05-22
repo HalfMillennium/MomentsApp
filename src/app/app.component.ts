@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { FIREBASE_CONFIG } from './shared/common/config/firebase';
+import { signOutAction } from './shared/store/actions';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ import { FIREBASE_CONFIG } from './shared/common/config/firebase';
 export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
   readonly destroyObs$ = new ReplaySubject(1);
-  readonly app: FirebaseApp = initializeApp(FIREBASE_CONFIG);
+  //readonly app: FirebaseApp = initializeApp(FIREBASE_CONFIG);
 
   userCredentialCookie = this.cookieService.get('userCredential');
 
@@ -67,7 +68,9 @@ export class AppComponent {
     }
   }
 
-  signOut() {}
+  signOut() {
+    this.store.dispatch(signOutAction());
+  }
 
   clearAuthCookies() {
     this.cookieService.delete('userCredential', '/');

@@ -22,7 +22,7 @@ export class FirebaseAuthService {
   constructor(private readonly app: FirebaseApp) {}
   userCredential: UserCredential | undefined | void = undefined;
   // Initialize Firebase
-  auth = getAuth(this.app);
+  auth = getAuth();
 
   createWarning(
     login: boolean,

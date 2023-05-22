@@ -19,8 +19,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './shared/store/effects';
-import { FirebaseAuthService } from './shared/auth/service';
 import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from './utils/pipes/user-name.pipe';
 import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
