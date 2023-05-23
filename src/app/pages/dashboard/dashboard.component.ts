@@ -23,7 +23,7 @@ import { User } from 'firebase/auth';
 export class Dashboard implements AfterViewInit {
   readonly destroyObs$ = new ReplaySubject(1);
   readonly MOCK_SPACES = MOCK_SPACES;
-
+  
   user: User | undefined;
 
   headerText: string | undefined = undefined;

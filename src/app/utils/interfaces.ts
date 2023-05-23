@@ -7,7 +7,7 @@ import { Store } from "@ngrx/store"
 /** Interface for menu items */
 export interface MenuItem {
     name: string,
-    icon: string,
+    icon: IconType,
     label: string,
     routerLink?: string,
     auth?: boolean // this is set when the menu items presence depends on user authentication state

@@ -19,6 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
+
   readonly destroyObs$ = new ReplaySubject(1);
 
   userCredentialCookie = this.cookieService.get('userCredential');
