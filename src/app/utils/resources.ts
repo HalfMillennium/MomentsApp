@@ -10,7 +10,7 @@ import {
   UserState,
 } from './interfaces';
 import { OperationType } from 'firebase/auth';
-import { authReducer, userReducer } from '../shared/store/reducer';
+import { authReducer } from '../shared/store/reducer';
 import { AuthEffects } from '../shared/store/effects';
 
 /** Menu items */
@@ -177,7 +177,7 @@ export function isAuthError(
 // Type container all currently supported reducers
 export type AppReducers = {
   authReducer: AuthState;
-  userReducer: UserState;
+  userReducer?: UserState;
 };
 
 export const UNKNOWN_EMAIL_AUTH_SERVER_ERROR = {
@@ -211,7 +211,6 @@ export const TEST_USER_CREDENTIAL = {
 
 export const APP_REDUCERS = {
   auth: authReducer,
-  user: userReducer,
 };
 
 export const APP_EFFECTS = [AuthEffects];

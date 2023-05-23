@@ -1,21 +1,36 @@
-import {Component, Inject, inject, OnDestroy, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  Inject,
+  inject,
+  OnDestroy,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MaterialModule } from 'src/material.module';
-import {SignUpDialogData, UserState} from '../../../utils/interfaces';
-import { FirebaseAuthService } from 'src/app/shared/auth/service';
+import { SignUpDialogData, UserState } from '../../../utils/interfaces';
 import { WarningsEnum } from 'src/app/utils/resources';
 import { AuthState, MetaStores } from '../../../utils/interfaces';
-import {UserCredential } from 'firebase/auth';
+import { UserCredential } from 'firebase/auth';
 import { Router } from '@angular/router';
-import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import {isAuthError} from '../../../utils/resources';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
+import { isAuthError } from '../../../utils/resources';
 import { Store } from '@ngrx/store';
-import {registerEmail, signInEmail, updateUserBasics} from '../../../shared/store/actions';
+import { registerEmail, signInEmail } from '../../../shared/store/actions';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';
-import {AuthCredentialPipe} from 'src/app/utils/pipes/auth-credential.pipe';
+import { AuthCredentialPipe } from 'src/app/utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from 'src/app/utils/pipes/user-name.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
@@ -25,11 +40,11 @@ import { CookieService } from 'ngx-cookie-service';
   standalone: true,
   templateUrl: 'auth-dialog.component.html',
   imports: [
-    MaterialModule, 
-    CommonModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    AuthErrorPipe, 
+    MaterialModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AuthErrorPipe,
     AuthCredentialPipe,
     UserNamePipe,
   ],
@@ -48,23 +63,24 @@ export class AuthDialog implements OnDestroy {
     confPassword: this.fb.nonNullable.control<string>(''),
   });
 
-  userName: string|undefined;
-  userPassword: string|undefined;
-  userConfPassword: string|undefined;
-  displayName: string|undefined;
-  userEmail: string|undefined;
+  userName: string | undefined;
+  userPassword: string | undefined;
+  userConfPassword: string | undefined;
+  displayName: string | undefined;
+  userEmail: string | undefined;
 
-  userAuthError: WarningsEnum|undefined = undefined;
-  userCredential: UserCredential|undefined;
+  userAuthError: WarningsEnum | undefined = undefined;
+  userCredential: UserCredential | undefined;
 
   // whether this auth dialog is signing a user in or signing one up
-  signInMode = false;
-  readonly firebaseAuthService = new FirebaseAuthService();
+  signInMode = true;
 
-  userAuthState$: Observable<AuthState> = 
-    this.store.select('auth').pipe(takeUntil(this.destroyObs$));
-  displayName$: Observable<UserState> =
-    this.store.select('user').pipe(takeUntil(this.destroyObs$));
+  userAuthState$: Observable<AuthState> = this.store
+    .select('auth')
+    .pipe(takeUntil(this.destroyObs$));
+  displayName$: Observable<UserState> = this.store
+    .select('user')
+    .pipe(takeUntil(this.destroyObs$));
 
   isAuthenticated = false;
 
@@ -73,31 +89,38 @@ export class AuthDialog implements OnDestroy {
     public dialogRef: MatDialogRef<AuthDialog>,
     private store: Store<MetaStores>,
     private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData
   ) {
     this.userAuthError = undefined;
-    this.userAuthState$.pipe(takeUntil(this.destroyObs$)).subscribe((newAuthState) => {
-      if(newAuthState.userAuthError) {
-        this.isAuthenticated = false;
-        this.userAuthError = newAuthState.userAuthError.errorType;
-      } else if(newAuthState.userCredential) {
-        this.cookieService.set('userCredential', JSON.stringify(newAuthState.userCredential));
-        this.cookieService.set('displayName', `${this.userName}`);
-        this.store.dispatch(updateUserBasics({userCredential: newAuthState.userCredential, 
-                                    displayName: `${this.userName}`}));
-        this.onNoClick(); // close dialog
-        this.reloadPage(); // TODO: Smells a little bit, but is prob fine for now
-        console.log(`User successfully authenticated! Username: ${this.userName}, AuthState: ${newAuthState}`);
-      }
-    })
-    this.displayName$.pipe(takeUntil(this.destroyObs$)).subscribe((userState: UserState) => {
-            if(userState.displayName && !this.isAuthenticated) {
-              this.isAuthenticated = true;
-              this.userAuthError = undefined;
-              this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
-              this.snackBar.open('Welcome to the Moments app!', 'Very cool');
-            }
-        });
+    this.userAuthState$
+      .pipe(takeUntil(this.destroyObs$))
+      .subscribe((newAuthState) => {
+        if (newAuthState.userAuthError) {
+          this.isAuthenticated = false;
+          this.userAuthError = newAuthState.userAuthError.errorType;
+        } else if (newAuthState.userCredential) {
+          this.cookieService.set(
+            'userCredential',
+            JSON.stringify(newAuthState.userCredential)
+          );
+          this.cookieService.set('displayName', `${this.userName}`);
+          this.onNoClick(); // close dialog
+          this.reloadPage(); // TODO: Smells a little bit, but is prob fine for now
+          console.log(
+            `User successfully authenticated! Username: ${this.userName}, AuthState: ${newAuthState}`
+          );
+        }
+      });
+    this.displayName$
+      .pipe(takeUntil(this.destroyObs$))
+      .subscribe((userState: UserState) => {
+        if (userState.displayName && !this.isAuthenticated) {
+          this.isAuthenticated = true;
+          this.userAuthError = undefined;
+          this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
+          this.snackBar.open('Welcome to the Moments app!', 'Very cool');
+        }
+      });
   }
 
   setFormValues() {
@@ -110,23 +133,31 @@ export class AuthDialog implements OnDestroy {
   authenticate() {
     this.userAuthError = undefined;
     this.setFormValues();
-    if(this.signInMode) {
+    if (this.signInMode) {
       this.signInUserEmail(`${this.userEmail}`, `${this.userPassword}`);
-    } else if(this.userPassword === this.userConfPassword) {
-      console.log("Registration attempted, email:",this.userEmail,'password:',this.userPassword)
-      this.registerUserEmail(`${this.userEmail}`, `${this.userPassword}`);
+    } else if (this.userPassword === this.userConfPassword) {
+      console.log('Registration attempted...');
+      this.registerUserEmail(
+        `${this.userEmail}`,
+        `${this.userPassword}`,
+        `${this.displayName}`
+      );
     } else {
       this.userAuthError = WarningsEnum.PASSWORD_MATCH;
     }
   }
 
   // TODO: Abstract auth functions into a Record or object
-  registerUserEmail(email: string, password: string) {
-    this.store.dispatch(registerEmail({userEmail: email, userPassword: password}));
+  registerUserEmail(email: string, password: string, displayName: string) {
+    this.store.dispatch(
+      registerEmail({ userEmail: email, userPassword: password, displayName })
+    );
   }
 
   signInUserEmail(email: string, password: string) {
-    this.store.dispatch(signInEmail({userEmail: email, userPassword: password}))
+    this.store.dispatch(
+      signInEmail({ userEmail: email, userPassword: password })
+    );
   }
 
   updateFormType() {
