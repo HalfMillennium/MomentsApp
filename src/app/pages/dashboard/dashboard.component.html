@@ -3,6 +3,24 @@
   <div class="column">
     <h3 class="mat-headline-4"><b>{{currentMonthDay}}</b>, {{currentYear}}</h3>
     <h4 class="mat-headline-5">[ {{currentTimeOfDay}} ]</h4>
+    <span *ngIf="user" class="mat-h4">
+      <mat-icon>check</mat-icon>
+      User authenticated
+      <div>
+        <span class="display-name-label mat-h5">
+          Hi there, <b>{{ displayName }}</b>.
+        </span>
+      </div>
+    </span>
+    <span *ngIf="!user" class="mat-h4">
+      No user found
+      <mat-icon>person_search</mat-icon>
+      <div>
+        <span class="display-name-label mat-h5">
+          Who's there? <u (click)="openAuthDialog()">Sign in or register to continue.</u>
+        </span>
+      </div>
+    </span>
   </div>
   <div class="column align-right">
     <h3 class="mat-headline-4"><strong>{{headerText}}</strong></h3>

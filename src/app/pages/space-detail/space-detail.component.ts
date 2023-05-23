@@ -31,7 +31,6 @@ export class SpaceDetail implements OnDestroy {
       images: [TEST_API_RESPONSE['image']],
       alt: TEST_API_RESPONSE['alt']
     }
-    
   }
 
   async ngOnInit(): Promise<void> {

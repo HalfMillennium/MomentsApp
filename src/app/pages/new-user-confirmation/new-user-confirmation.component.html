@@ -1,0 +1,17 @@
+<div class="card-container">
+    <mat-card>
+        <mat-card-title class="mat-headline-3"><mat-icon icon-display>celebration</mat-icon><span class="title-text">Hey there!</span></mat-card-title>
+        <mat-card-subtitle class="mat-headline-5">Welcome to the future of news.</mat-card-subtitle>
+        <mat-card-content>
+            <p class="mat-h3">We're happy to have you here.</p>
+        </mat-card-content>
+        <mat-card-actions [align]="'end'">
+            <button mat-icon-button class="account-fab" [routerLink]="'/account'">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <button mat-flat-button color="primary" [routerLink]="'/'">
+                View Your Dashboard
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

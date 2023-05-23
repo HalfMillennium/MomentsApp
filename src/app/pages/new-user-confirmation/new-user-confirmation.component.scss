@@ -1,0 +1,35 @@
+.content-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    float: left;
+}
+
+.text-content {
+    float: right;
+}
+
+mat-card-title {
+    padding-bottom: 1rem;
+    margin: 1.5rem;
+}
+
+mat-card-subtitle {
+    margin: 1.5rem;
+}
+
+mat-card-content {
+    padding-top: 1rem;
+    margin: 1.5rem;
+}
+
+.title-text {
+    padding-left: 0.5rem;
+}
