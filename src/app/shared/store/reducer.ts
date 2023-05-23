@@ -6,11 +6,11 @@ import {
   registerEmailFailure,
   signInEmailFailure,
   signInEmailSuccess,
+  updateUserBasics,
 } from './actions';
 import { AppReducers } from '../../utils/resources';
-import { signOut } from 'firebase/auth';
 import { AuthState } from 'src/app/utils/interfaces';
-import { getAuth } from 'firebase/auth';
+import { FirebaseAuthService } from '../auth/service';
 
 export const metaReducers: MetaReducer<{}>[] = isDevMode() ? [] : [];
 
@@ -33,7 +33,12 @@ export const authReducer = createReducer(
   on(signInEmailFailure, (state: AuthState, { userAuthError }) => ({
     ...state,
     userAuthError,
-  }))
+  })),
+  on(updateUserBasics, (state: AuthState, { user, displayName }) => {
+    const firebaseAuthService = new FirebaseAuthService();
+    firebaseAuthService.updateUserBasics(user, displayName);
+    return state;
+  })
 );
 
 export const reducers: ActionReducerMap<AppReducers> = {

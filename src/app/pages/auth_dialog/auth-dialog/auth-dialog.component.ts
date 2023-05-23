@@ -34,6 +34,7 @@ import { AuthCredentialPipe } from 'src/app/utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from 'src/app/utils/pipes/user-name.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+import { FirebaseAuthService } from '../../../shared/auth/service';
 
 @Component({
   selector: 'auth-dialog',
@@ -89,6 +90,7 @@ export class AuthDialog implements OnDestroy {
     public dialogRef: MatDialogRef<AuthDialog>,
     private store: Store<MetaStores>,
     private snackBar: MatSnackBar,
+    private firebaseAuthService: FirebaseAuthService,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData
   ) {
     this.userAuthError = undefined;

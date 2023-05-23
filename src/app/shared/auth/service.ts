@@ -127,5 +127,6 @@ export class FirebaseAuthService {
       displayName,
       photoURL,
     });
+    getAuth().currentUser?.reload();
   }
 }
