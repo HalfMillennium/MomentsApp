@@ -55,9 +55,6 @@ export class Dashboard implements AfterViewInit {
     this.userAuthState$
       .pipe(takeUntil(this.destroyObs$))
       .subscribe((newAuthState: AuthState) => {
-        console.log(
-          `AuthState updated: ${newAuthState.userCredential?.user.displayName}`
-        );
         if (newAuthState.userCredential) {
           this.cookieService.set(
             'displayName',

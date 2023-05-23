@@ -19,10 +19,9 @@ import { AuthError, Credentials } from '../../utils/interfaces';
 import { FirebaseApp } from '@angular/fire/app';
 
 export class FirebaseAuthService {
-  constructor(private readonly app: FirebaseApp) {}
   userCredential: UserCredential | undefined | void = undefined;
   // Initialize Firebase
-  auth = getAuth();
+  auth = getAuth(initializeApp(FIREBASE_CONFIG));
 
   createWarning(
     login: boolean,

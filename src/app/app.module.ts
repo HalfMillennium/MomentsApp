@@ -22,6 +22,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from './utils/pipes/user-name.pipe';
 import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
+import { FirebaseAuthService } from './shared/auth/service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,5 +48,6 @@ import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
     EffectsModule.forRoot(APP_EFFECTS),
   ],
   bootstrap: [AppComponent],
+  providers: [FirebaseAuthService],
 })
 export class AppModule {}

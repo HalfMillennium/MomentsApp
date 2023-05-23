@@ -1,6 +1,6 @@
 import { ActionCreator, createAction } from '@ngrx/store';
 import { props } from '@ngrx/store';
-import { UserCredential } from 'firebase/auth';
+import { Auth, UserCredential } from 'firebase/auth';
 import { AuthError } from 'src/app/utils/interfaces';
 
 /** Action to register user from auth dialog */
@@ -37,5 +37,3 @@ export const signInEmailFailure = createAction(
   '[Auth] Register Email Failure',
   props<{ userAuthError: AuthError }>()
 );
-
-export const signOutAction = createAction('[AUTH] Sign Out Action');

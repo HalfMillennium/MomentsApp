@@ -13,7 +13,6 @@ import {
 } from '@angular/material/dialog';
 import { MaterialModule } from 'src/material.module';
 import { SignUpDialogData, UserState } from '../../../utils/interfaces';
-import { FirebaseAuthService } from 'src/app/shared/auth/service';
 import { WarningsEnum } from 'src/app/utils/resources';
 import { AuthState, MetaStores } from '../../../utils/interfaces';
 import { UserCredential } from 'firebase/auth';
@@ -56,7 +55,6 @@ export class AuthDialog implements OnDestroy {
   readonly isAuthError = isAuthError;
 
   private cookieService = inject(CookieService);
-  private firebaseAuthService = inject(FirebaseAuthService);
 
   userAuthForm: FormGroup = this.fb.group<SignUpDialogData>({
     userName: this.fb.nonNullable.control<string>(''),

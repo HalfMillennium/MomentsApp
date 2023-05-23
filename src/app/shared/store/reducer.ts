@@ -6,16 +6,11 @@ import {
   registerEmailFailure,
   signInEmailFailure,
   signInEmailSuccess,
-  signOutAction,
 } from './actions';
-import { AuthTypesEnum, isAuthError, AppReducers } from '../../utils/resources';
-import { FirebaseAuthService } from '../auth/service';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { Auth, UserCredential, signOut } from 'firebase/auth';
-import { AuthError, AuthState } from 'src/app/utils/interfaces';
-import { Credentials, UserState } from '../../utils/interfaces';
-import { Action } from '@ngrx/store';
+import { AppReducers } from '../../utils/resources';
+import { signOut } from 'firebase/auth';
+import { AuthState } from 'src/app/utils/interfaces';
+import { getAuth } from 'firebase/auth';
 
 export const metaReducers: MetaReducer<{}>[] = isDevMode() ? [] : [];
 
@@ -38,10 +33,7 @@ export const authReducer = createReducer(
   on(signInEmailFailure, (state: AuthState, { userAuthError }) => ({
     ...state,
     userAuthError,
-  })),
-  on(signOutAction, () => {
-    return {};
-  })
+  }))
 );
 
 export const reducers: ActionReducerMap<AppReducers> = {

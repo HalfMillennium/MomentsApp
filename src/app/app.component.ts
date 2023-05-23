@@ -11,10 +11,6 @@ import { AuthState, MenuItem, MetaStores } from './utils/interfaces';
 import { FirebaseAuthService } from './shared/auth/service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
-import { FirebaseApp } from '@angular/fire/app';
-import { initializeApp } from 'firebase/app';
-import { FIREBASE_CONFIG } from './shared/common/config/firebase';
-import { signOutAction } from './shared/store/actions';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +20,6 @@ import { signOutAction } from './shared/store/actions';
 export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
   readonly destroyObs$ = new ReplaySubject(1);
-  //readonly app: FirebaseApp = initializeApp(FIREBASE_CONFIG);
 
   userCredentialCookie = this.cookieService.get('userCredential');
 
@@ -41,7 +36,8 @@ export class AppComponent {
     private router: Router,
     private store: Store<MetaStores>,
     private snackBar: MatSnackBar,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private firebaseAuthService: FirebaseAuthService
   ) {}
 
   navigateTo(url: string) {
@@ -69,7 +65,10 @@ export class AppComponent {
   }
 
   signOut() {
-    this.store.dispatch(signOutAction());
+    this.firebaseAuthService.signOut();
+    this.clearAuthCookies();
+    reloadPage();
+    this.snackBar.open('User signed out successfully.');
   }
 
   clearAuthCookies() {
