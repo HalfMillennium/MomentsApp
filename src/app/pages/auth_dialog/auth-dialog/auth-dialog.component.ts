@@ -99,6 +99,7 @@ export class AuthDialog implements OnDestroy {
           this.isAuthenticated = false;
           this.userAuthError = newAuthState.userAuthError.errorType;
         } else if (newAuthState.userCredential) {
+          if (this.signInMode) this.snackBar.open('Welcome back!');
           this.cookieService.set(
             'userCredential',
             JSON.stringify(newAuthState.userCredential)
@@ -136,7 +137,6 @@ export class AuthDialog implements OnDestroy {
     if (this.signInMode) {
       this.signInUserEmail(`${this.userEmail}`, `${this.userPassword}`);
     } else if (this.userPassword === this.userConfPassword) {
-      console.log('Registration attempted...');
       this.registerUserEmail(
         `${this.userEmail}`,
         `${this.userPassword}`,
