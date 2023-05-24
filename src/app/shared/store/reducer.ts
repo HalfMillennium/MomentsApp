@@ -1,5 +1,9 @@
 import { isDevMode } from '@angular/core';
-import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  MetaReducer,
+  createReducerFactory,
+} from '@ngrx/store';
 import { createReducer, on } from '@ngrx/store';
 import {
   registerEmailSuccess,
@@ -9,12 +13,13 @@ import {
   updateUserBasics,
 } from './actions';
 import { AppReducers } from '../../utils/resources';
-import { AuthState } from 'src/app/utils/interfaces';
+import { AuthState, UserState } from 'src/app/utils/interfaces';
 import { FirebaseAuthService } from '../auth/service';
 
 export const metaReducers: MetaReducer<{}>[] = isDevMode() ? [] : [];
 
 const initialAuthState: AuthState = {};
+const initialUserState: UserState = {};
 
 export const authReducer = createReducer(
   initialAuthState,
@@ -33,14 +38,19 @@ export const authReducer = createReducer(
   on(signInEmailFailure, (state: AuthState, { userAuthError }) => ({
     ...state,
     userAuthError,
-  })),
-  on(updateUserBasics, (state: AuthState, { user, displayName }) => {
+  }))
+);
+
+export const userReducer = createReducer(
+  initialUserState,
+  on(updateUserBasics, (state: UserState, { user, displayName }) => {
     const firebaseAuthService = new FirebaseAuthService();
-    firebaseAuthService.updateUserBasics(user, displayName);
-    return state;
+    firebaseAuthService.updateUserBasics(displayName);
+    return { displayName };
   })
 );
 
 export const reducers: ActionReducerMap<AppReducers> = {
   authReducer,
+  userReducer,
 };

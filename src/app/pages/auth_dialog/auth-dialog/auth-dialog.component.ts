@@ -16,7 +16,7 @@ import { SignUpDialogData, UserState } from '../../../utils/interfaces';
 import { WarningsEnum } from 'src/app/utils/resources';
 import { AuthState, MetaStores } from '../../../utils/interfaces';
 import { UserCredential } from 'firebase/auth';
-import { Router } from '@angular/router';
+import { reloadPage } from 'src/app/utils/resources';
 import {
   FormBuilder,
   FormsModule,
@@ -79,7 +79,7 @@ export class AuthDialog implements OnDestroy {
   userAuthState$: Observable<AuthState> = this.store
     .select('auth')
     .pipe(takeUntil(this.destroyObs$));
-  displayName$: Observable<UserState> = this.store
+  userState$: Observable<UserState> = this.store
     .select('user')
     .pipe(takeUntil(this.destroyObs$));
 
@@ -108,16 +108,16 @@ export class AuthDialog implements OnDestroy {
           );
           this.cookieService.set('displayName', `${this.userName}`);
           this.onNoClick(); // close dialog
-          this.reloadPage(); // TODO: Smells a little bit, but is prob fine for now
+          reloadPage(); // TODO: Smells a little bit, but is prob fine for now
           console.log(
             `User successfully authenticated! Username: ${this.userName}, AuthState: ${newAuthState}`
           );
         }
       });
-    this.displayName$
+    this.userState$
       .pipe(takeUntil(this.destroyObs$))
       .subscribe((userState: UserState) => {
-        if (userState.displayName && !this.isAuthenticated) {
+        if (userState && userState.displayName && !this.isAuthenticated) {
           this.isAuthenticated = true;
           this.userAuthError = undefined;
           this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
@@ -168,10 +168,6 @@ export class AuthDialog implements OnDestroy {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  reloadPage() {
-    window.location.reload();
   }
 
   ngOnDestroy(): void {

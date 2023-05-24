@@ -70,7 +70,7 @@ export class FirebaseAuthService {
     )
       .then((credential) => {
         console.log('userBasicsUpdate, userName:', credentials['displayName']);
-        this.updateUserBasics(credential.user, credentials['displayName']);
+        this.updateUserBasics(credentials['displayName']);
         return observableOf(credential);
       })
       .catch((error) => {
@@ -122,11 +122,12 @@ export class FirebaseAuthService {
   }
 
   /** A "UserBasic" is defined here as being a user's basic attributes such as email and username */
-  async updateUserBasics(user: User, displayName?: string, photoURL?: string) {
-    updateProfile(user, {
+  async updateUserBasics(displayName?: string, photoURL?: string) {
+    const update = await updateProfile(getAuth().currentUser!, {
       displayName,
       photoURL,
     });
+    console.log('currentUser:');
     getAuth().currentUser?.reload();
   }
 }
