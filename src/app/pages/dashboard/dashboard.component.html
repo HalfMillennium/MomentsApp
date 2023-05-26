@@ -1,8 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
   <div class="column">
-    <h3 class="mat-headline-4"><b>{{currentMonthDay}}</b>, {{currentYear}}</h3>
-    <h4 class="mat-headline-5">[ {{currentTimeOfDay}} ]</h4>
     <span *ngIf="user" class="mat-h4">
       <mat-icon>check</mat-icon>
       User authenticated
@@ -23,7 +21,7 @@
     </span>
   </div>
   <div class="column align-right">
-    <h3 class="mat-headline-4"><strong>{{headerText}}</strong></h3>
+    <h3 class="mat-headline-4">the <strong>HotSpot</strong> app</h3>
     <h4 class="mat-headline-5">{{subHeaderText}}</h4>
   </div>
 </div>

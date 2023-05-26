@@ -30,8 +30,36 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "src/styles.scss" ],
-            "scripts": []
+              "src/styles.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/boxicons.min.css",
+              "node_modules/jquery-nice-select/scss/nice-select.scss",
+              "src/assets/css/flaticon.css",
+              "node_modules/magnific-popup/dist/magnific-popup.css",
+              "src/assets/css/meanmenu.css",
+              "src/styles.scss",
+              "src/responsive.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/owl.carousel/dist/owl.carousel.min.js",
+              "src/assets/js/meanmenu.js",
+              "node_modules/magnific-popup/dist/jquery.magnific-popup.min.js",
+              "node_modules/jquery-nice-select/js/jquery.nice-select.min.js",
+              "node_modules/wowjs/dist/wow.js",
+              "src/assets/js/custom.js"
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -92,11 +120,46 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/boxicons.min.css",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/boxicons.min.css",
+              "node_modules/jquery-nice-select/scss/nice-select.scss",
+              "src/assets/css/flaticon.css",
+              "node_modules/magnific-popup/dist/magnific-popup.css",
+              "src/assets/css/meanmenu.css",
+              "src/styles.scss",
+              "src/responsive.scss"
             ],
-            "scripts": ["../node_modules/google-trends-api/lib/google-trends-api.min.js"]
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/owl.carousel/dist/owl.carousel.min.js",
+              "src/assets/js/meanmenu.js",
+              "node_modules/magnific-popup/dist/jquery.magnific-popup.min.js",
+              "node_modules/jquery-nice-select/js/jquery.nice-select.min.js",
+              "node_modules/wowjs/dist/wow.js",
+              "src/assets/js/custom.js"
+            ]
+          }
+        },
+        "e2e": {
+        "builder": "@angular-devkit/build-angular:protractor",
+        "options": {
+          "protractorConfig": "e2e/protractor.conf.js",
+          "devServerTarget": "moments:serve"
+        },
+        "configurations": {
+          "production": {
+            "devServerTarget": "moments:serve:production"
           }
         }
+      }
       }
     }
   }

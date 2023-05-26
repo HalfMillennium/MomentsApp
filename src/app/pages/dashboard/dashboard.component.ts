@@ -26,7 +26,6 @@ export class Dashboard implements AfterViewInit {
 
   user: User | undefined;
 
-  headerText: string | undefined = undefined;
   subHeaderText: string | undefined = undefined;
 
   currentTimeOfDay: string | undefined = undefined;
@@ -45,8 +44,7 @@ export class Dashboard implements AfterViewInit {
     private dialog: MatDialog,
     private readonly cookieService: CookieService
   ) {
-    this.headerText = 'Welcome back.';
-    this.subHeaderText = 'New spaces below...';
+    this.subHeaderText = 'A place to find your place.';
     const currentUser = this.cookieService.get('userCredential');
     if (currentUser) {
       this.user = (JSON.parse(currentUser) as UserCredential).user;
