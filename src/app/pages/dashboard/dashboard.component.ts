@@ -1,7 +1,11 @@
 import { AfterViewInit, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
-import { MOCK_SPACES, MONTHS, parseUserAuthState } from '../../utils/resources';
+import {
+  MOCK_BUILDINGS,
+  MONTHS,
+  parseUserAuthState,
+} from '../../utils/resources';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject, takeUntil, map } from 'rxjs';
@@ -22,7 +26,7 @@ import { User } from 'firebase/auth';
 })
 export class Dashboard implements AfterViewInit {
   readonly destroyObs$ = new ReplaySubject(1);
-  readonly MOCK_SPACES = MOCK_SPACES;
+  readonly MOCK_BUILDINGS = MOCK_BUILDINGS;
 
   user: User | undefined;
 
@@ -36,30 +40,16 @@ export class Dashboard implements AfterViewInit {
     .select('auth')
     .pipe(takeUntil(this.destroyObs$));
 
-  displayName = this.cookieService.get('displayName');
-
   constructor(
     private router: Router,
     private store: Store<MetaStores>,
     private dialog: MatDialog,
     private readonly cookieService: CookieService
   ) {
-    this.subHeaderText = 'A place to find your place.';
     const currentUser = this.cookieService.get('userCredential');
     if (currentUser) {
       this.user = (JSON.parse(currentUser) as UserCredential).user;
     }
-
-    this.userAuthState$
-      .pipe(takeUntil(this.destroyObs$))
-      .subscribe((newAuthState: AuthState) => {
-        if (newAuthState.userCredential) {
-          this.cookieService.set(
-            'displayName',
-            `${newAuthState.userCredential.user.displayName}`
-          );
-        }
-      });
   }
 
   ngAfterViewInit() {

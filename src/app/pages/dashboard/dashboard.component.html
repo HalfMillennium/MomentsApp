@@ -1,45 +1,51 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div class="row">
-  <div class="column">
-    <span *ngIf="user" class="mat-h4">
-      <mat-icon>check</mat-icon>
-      User authenticated
-      <div>
-        <span class="display-name-label mat-h5">
-          Hi there, <b>{{ displayName }}</b>.
-        </span>
-      </div>
-    </span>
-    <span *ngIf="!user" class="mat-h4">
-      No user found
-      <mat-icon>person_search</mat-icon>
-      <div>
-        <span class="display-name-label mat-h5">
-          Who's there? <u (click)="openAuthDialog()">Sign in or register to continue.</u>
-        </span>
-      </div>
-    </span>
+<section>
+  <div class="row">
+    <div class="column">
+      <span *ngIf="user" class="mat-h4">
+        <mat-icon>check</mat-icon>
+        User authenticated
+        <div>
+          <span class="display-name-label mat-h5">
+            Hi there, user!
+          </span>
+        </div>
+      </span>
+      <span *ngIf="!user" class="mat-h4">
+        No user found
+        <mat-icon>person_search</mat-icon>
+        <div>
+          <span class="display-name-label mat-h5">
+            Who's there? <u (click)="openAuthDialog()">Sign in or register to continue.</u>
+          </span>
+        </div>
+      </span>
+    </div>
+    <div class="column align-right">
+      <h3 class="mat-headline-4">the <strong>HotSpot</strong> app</h3>
+      <h4 class="mat-headline-5">A place to find your.. <b>place</b>.</h4>
+    </div>
   </div>
-  <div class="column align-right">
-    <h3 class="mat-headline-4">the <strong>HotSpot</strong> app</h3>
-    <h4 class="mat-headline-5">{{subHeaderText}}</h4>
+</section>
+<section>
+  <h3 class="mat-headline-2">Saved buildings</h3>
+  <h4 class="mat-headline-4">Visiting buildings that you've saved.</h4>
+  <div class="flex-container space-above">
+    <mat-card class="max-card-width" *ngFor="let building of MOCK_BUILDINGS; let i = index">
+      <mat-card-header>
+        <mat-card-title>{{building.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="building.images[i].url" alt="{{building.images[i].alt}}">
+      <mat-card-content>
+        <p class="md-subhead">
+          {{building.desc}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [routerLink]="['/space', building.id]" mat-button>Enter Space</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-</div>
-<div class="flex-container space-above">
-    <mat-card class="max-card-width" *ngFor="let space of MOCK_SPACES">
-        <mat-card-header>
-          <mat-card-title>{{space.title}}</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image [src]="space.images" alt="{{space.alt}}">
-        <mat-card-content>
-          <p class="md-subhead">
-            {{space.desc}}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button [routerLink]="['/space', space.id]" mat-button>Enter Space</button>
-        </mat-card-actions>
-      </mat-card>
-</div>
+</section>
 
 <router-outlet></router-outlet>
