@@ -21,7 +21,7 @@ export interface BuildingInfo {
   alt?: string | null;
   available_units?: number;
   est?: Date;
-  amenities: BuildingAmenitySet;
+  amenities: BuildingAmenityTypeEnum[];
 }
 
 export interface CarouselSlides {
@@ -85,8 +85,6 @@ export declare interface MetaStores {
   // other stores to follow..
 }
 
-export declare type BuildingAmenitySet = BuildingAmenityTypeEnum[];
-
 export interface Image {
   url: string;
   alt: string;
@@ -94,10 +92,11 @@ export interface Image {
 
 export interface ApartmentBuilding {
   id: string;
-  title: string;
+  title?: string;
+  addr: string;
   subtitle?: string;
   desc: string;
-  amenities: BuildingAmenitySet;
+  amenities: BuildingAmenityTypeEnum[];
   floors: number;
   residents?: number;
   avg_rent?: number;

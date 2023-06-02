@@ -2,11 +2,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div *ngIf="currentSpace && viewLoaded">
+<div *ngIf="currentBuilding && viewLoaded">
     <div class="page-title">
-        <span class="mat-h5">Currently viewing temporary space #{{currentSpace.id}}</span>
+        <span class="mat-h5">Currently viewing temporary building #{{currentBuilding.id}}</span>
     </div>
-    <span class="mat-h3"><strong>Space subtitle: </strong><u>{{currentSpace.desc}}</u></span>
+    <span class="mat-h3">{{currentBuilding.desc}}</span>
     <div class="carousel-container">
         <mat-card>
             <c-carousel [interval]="slideIntervalMs">

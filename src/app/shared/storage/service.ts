@@ -5,8 +5,13 @@ import { FIREBASE_CONFIG } from '../common/config/firebase';
 
 export class FirebaseStorageService {
   storage = getStorage(initializeApp(FIREBASE_CONFIG));
-
   storageRef = ref(this.storage);
 
   constructor() {}
+
+  // initUserName --> Called when a user first registers to update them
+
+  addBuilding() {}
+
+  createUser() {}
 }
