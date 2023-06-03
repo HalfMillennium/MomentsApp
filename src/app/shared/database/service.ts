@@ -1,11 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref } from 'firebase/storage';
-
+import { getFirestore } from 'firebase/firestore';
+import { User, UserCredential } from 'firebase/auth';
 import { FIREBASE_CONFIG } from '../common/config/firebase';
 
 export class FirebaseStorageService {
-  storage = getStorage(initializeApp(FIREBASE_CONFIG));
-  storageRef = ref(this.storage);
+  private readonly app = initializeApp(FIREBASE_CONFIG);
+  private readonly db = getFirestore(this.app);
 
   constructor() {}
 
@@ -13,5 +13,5 @@ export class FirebaseStorageService {
 
   addBuilding() {}
 
-  createUser() {}
+  createUser(user: UserCredential, displayName: string) {}
 }

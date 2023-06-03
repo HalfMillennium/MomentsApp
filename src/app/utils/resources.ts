@@ -8,10 +8,12 @@ import {
   AuthState,
   Credentials,
   UserState,
+  DatabaseError,
+  UserDataState,
 } from './interfaces';
 import { OperationType } from 'firebase/auth';
-import { authReducer } from '../shared/store/reducer';
-import { AuthEffects } from '../shared/store/effects';
+import { authReducer, databaseReducer } from '../shared/store/reducer';
+import { AuthEffects } from '../shared/store/auth_effects';
 
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
@@ -199,6 +201,7 @@ export enum WarningsEnum {
   UNSUPPORTED_TYPE = 'unsupported_type',
   WEAK_PASSWORD = 'weak_password',
   EMAIL_PASSWORD_INCORRECT = 'email_password_incorrect',
+  FIRESTORE_DB_ERROR = 'firestore_db_error',
   OTHER = 'other',
   // others
 }
@@ -222,7 +225,7 @@ export function isAuthError(
 // Type container all currently supported reducers
 export type AppReducers = {
   authReducer: AuthState;
-  userReducer?: UserState;
+  databaseReducer: UserDataState;
 };
 
 export const UNKNOWN_EMAIL_AUTH_SERVER_ERROR = {
@@ -256,6 +259,7 @@ export const TEST_USER_CREDENTIAL = {
 
 export const APP_REDUCERS = {
   auth: authReducer,
+  db: databaseReducer,
 };
 
 export const APP_EFFECTS = [AuthEffects];
@@ -268,3 +272,15 @@ export function parseUserAuthState(rawAuthState: string | undefined) {
 export function reloadPage() {
   window.location.reload();
 }
+
+export function isDatabaseError(
+  obj: UserCredential | DatabaseError
+): obj is DatabaseError {
+  return (obj as DatabaseError).errorType === WarningsEnum.FIRESTORE_DB_ERROR;
+}
+
+export const DEFAULT_DATABASE_ERROR: DatabaseError = {
+  code: 500,
+  message: 'SERVER ERROR - Could not complete database operation.',
+  errorType: WarningsEnum.FIRESTORE_DB_ERROR,
+};

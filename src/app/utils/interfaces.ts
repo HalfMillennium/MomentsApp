@@ -3,6 +3,7 @@ import { AuthTypesEnum, WarningsEnum } from './resources';
 import { Action, ActionReducer } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import { BuildingAmenityTypeEnum } from './resources';
+import { Firestore } from 'firebase/firestore';
 
 /** Interface for menu items */
 export interface MenuItem {
@@ -101,4 +102,27 @@ export interface ApartmentBuilding {
   residents?: number;
   avg_rent?: number;
   images: Image[];
+}
+
+export interface DatabaseError {
+  code: number;
+  message: string;
+  db?: Firestore;
+  collection?: string;
+  errorType: WarningsEnum.FIRESTORE_DB_ERROR;
+}
+
+export interface HotSpotUser {
+  userCredential: UserCredential;
+  displayName?: string;
+  savedBuildings?: ApartmentBuilding[];
+}
+
+export interface DatabaseState {
+  user?: HotSpotUser;
+}
+
+export interface UserDataState extends DatabaseState {
+  // other user activity stuff would go here,
+  // e.g. Liked Buildings --> buildings a user has liked, but hasn't visited for an extended period of time
 }

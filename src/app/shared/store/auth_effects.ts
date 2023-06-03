@@ -8,7 +8,6 @@ import {
   registerEmail,
   registerEmailSuccess,
   registerEmailFailure,
-  updateUserBasics,
 } from './actions';
 import { catchError, mergeMap, map, switchMap, tap } from 'rxjs/operators';
 import { of as observableOf, Observable, take, from, EMPTY, merge } from 'rxjs';
@@ -75,21 +74,6 @@ export class AuthEffects {
           isAuthError(result)
             ? signInEmailFailure({ userAuthError: result })
             : signInEmailSuccess({ userCredential: result })
-        );
-      })
-    )
-  );
-
-  updateUserBasics$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(registerEmailSuccess),
-      mergeMap((action) => {
-        console.log('updateUserBasics effect reached');
-        return observableOf(
-          updateUserBasics({
-            user: action.userCredential.user,
-            displayName: action.displayName,
-          })
         );
       })
     )
