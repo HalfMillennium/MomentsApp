@@ -6,8 +6,9 @@ import {
   registerEmailFailure,
   signInEmailFailure,
   signInEmailSuccess,
-  createUserSuccess,
-} from './actions';
+} from './auth.actions';
+import { createUserSuccess } from './db.actions';
+
 import { AppReducers } from '../../utils/resources';
 import { AuthState, UserDataState } from 'src/app/utils/interfaces';
 import { FirebaseAuthService } from '../auth/service';

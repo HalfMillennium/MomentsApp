@@ -26,7 +26,7 @@ import {
 } from '@angular/forms';
 import { isAuthError } from '../../../utils/resources';
 import { Store } from '@ngrx/store';
-import { registerEmail, signInEmail } from '../../../shared/store/actions';
+import { registerEmail, signInEmail } from '../../../shared/store/auth.actions';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 import { AuthErrorPipe } from 'src/app/utils/pipes/auth-error.pipe';

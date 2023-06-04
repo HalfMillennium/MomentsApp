@@ -15,10 +15,7 @@ import {
 } from 'rxjs';
 import { MaterialModule } from 'src/material.module';
 import { ApartmentBuilding } from 'src/app/utils/interfaces';
-import {
-  TEST_API_RESPONSE,
-  MOCK_CAROUSEL_SLIDES,
-} from 'src/app/utils/resources';
+import { MOCK_CAROUSEL_SLIDES } from 'src/app/utils/resources';
 import { CarouselModule } from '@coreui/angular';
 import { RouterModule } from '@angular/router';
 
