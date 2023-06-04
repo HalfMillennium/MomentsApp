@@ -41,20 +41,3 @@ export const signInEmailFailure = createAction(
   '[Auth] Register Email Failure',
   props<{ userAuthError: AuthError }>()
 );
-
-/** Database Actions */
-
-export const createUser = createAction(
-  '[Firestore] Create User',
-  props<{ user: UserCredential; displayName: string }>()
-);
-
-export const createUserSuccess = createAction(
-  '[Firestore] Create User Success',
-  props<{ user: HotSpotUser }>()
-);
-
-export const createUserFailure = createAction(
-  '[Firestore] Create User Failure',
-  props<{ error: DatabaseError }>()
-);

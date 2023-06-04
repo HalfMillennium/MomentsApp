@@ -8,7 +8,7 @@ import {
   registerEmail,
   registerEmailSuccess,
   registerEmailFailure,
-} from './actions';
+} from './auth.actions';
 import { catchError, mergeMap, map, switchMap, tap } from 'rxjs/operators';
 import { of as observableOf, Observable, take, from, EMPTY, merge } from 'rxjs';
 import { AuthState, Credentials, AuthError } from 'src/app/utils/interfaces';
@@ -16,7 +16,6 @@ import {
   AuthTypesEnum,
   UNKNOWN_EMAIL_AUTH_SERVER_ERROR,
   isAuthError,
-  TEST_USER_CREDENTIAL,
 } from 'src/app/utils/resources';
 import { User, UserCredential } from 'firebase/auth';
 
