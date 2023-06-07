@@ -54,7 +54,7 @@ export interface Credentials {
 }
 
 export interface SignUpDialogData {
-  userName: FormControl<string>;
+  displayName: FormControl<string>;
   email: FormControl<string>;
   password: FormControl<string>;
   confPassword: FormControl<string>;
@@ -82,7 +82,7 @@ export interface UserState {
 
 export declare interface MetaStores {
   auth: AuthState;
-  user: UserState;
+  db: UserDataState;
   // other stores to follow..
 }
 
@@ -125,4 +125,5 @@ export interface DatabaseState {
 export interface UserDataState extends DatabaseState {
   // other user activity stuff would go here,
   // e.g. Liked Buildings --> buildings a user has liked, but hasn't visited for an extended period of time
+  shouldReloadUser?: boolean;
 }

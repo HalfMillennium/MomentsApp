@@ -1,11 +1,7 @@
 import { ActionCreator, createAction } from '@ngrx/store';
 import { props } from '@ngrx/store';
 import { User, UserCredential } from 'firebase/auth';
-import {
-  HotSpotUser,
-  AuthError,
-  DatabaseError,
-} from 'src/app/utils/interfaces';
+import { AuthError } from 'src/app/utils/interfaces';
 
 /** Action to register user from auth dialog */
 export const registerEmail = createAction(
@@ -40,4 +36,13 @@ export const signInEmailSuccess = createAction(
 export const signInEmailFailure = createAction(
   '[Auth] Register Email Failure',
   props<{ userAuthError: AuthError }>()
+);
+
+export const updateUserProfile = createAction(
+  '[Auth] Update User Profile',
+  props<{ user: User; displayName?: string; photoURL?: string }>()
+);
+
+export const updateUserProfileSuccess = createAction(
+  '[Auth] Update User Profile Success'
 );

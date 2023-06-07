@@ -8,17 +8,17 @@ import {
 import { DatabaseEffects } from './db.effects';
 import * as dbActions from './db.actions';
 import { Action } from '@ngrx/store';
-import { FirebaseStorageService } from '../database/service';
+import { FirestoreService } from '../database/service';
 import { UserCredential } from 'firebase/auth';
 import { Store } from '@ngrx/store';
 
 describe('Database Effects', () => {
   let effects: DatabaseEffects;
   let actions: ReplaySubject<Action>;
-  let firebaseStorageService: jasmine.SpyObj<FirebaseStorageService>;
+  let firestoreService: jasmine.SpyObj<FirestoreService>;
   let store: jasmine.SpyObj<Store>;
-  firebaseStorageService = jasmine.createSpyObj('FirebaseStorageService', [
-    'createHotSpotUserService',
+  firestoreService = jasmine.createSpyObj('FirestoreService', [
+    'addHotSpotUser',
   ]);
   store = jasmine.createSpyObj('Store', ['dispatch']);
 
@@ -27,9 +27,9 @@ describe('Database Effects', () => {
       imports: [],
       providers: [
         DatabaseEffects,
-        FirebaseStorageService,
+        FirestoreService,
         provideMockActions(() => actions),
-        { provide: FirebaseStorageService, useValue: firebaseStorageService },
+        { provide: FirestoreService, useValue: firestoreService },
         // other providers
       ],
     });
@@ -45,6 +45,6 @@ describe('Database Effects', () => {
         displayName: 'userName',
       })
     );
-    expect(firebaseStorageService.createHotSpotUser).toHaveBeenCalled();
+    expect(firestoreService.addHotSpotUser).toHaveBeenCalled();
   });
 });

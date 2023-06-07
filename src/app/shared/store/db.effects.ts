@@ -4,36 +4,30 @@ import { collection, addDoc, getFirestore } from 'firebase/firestore';
 import { createUser, createUserSuccess, createUserFailure } from './db.actions';
 import { catchError, mergeMap, map, switchMap, tap } from 'rxjs/operators';
 import { of as observableOf, Observable, take, from, EMPTY, merge } from 'rxjs';
-import { DatabaseError } from '../../utils/interfaces';
-import { FirebaseStorageService } from '../database/service';
+import { FirestoreService, CreateUserResponse } from '../database/service';
 import { initializeApp } from 'firebase/app';
 import { FIREBASE_CONFIG } from '../common/config/firebase';
 import { isDatabaseError } from 'src/app/utils/resources';
 import { UserCredential } from 'firebase/auth';
 
-interface CreateUserResponse {
-  response: UserCredential | DatabaseError;
-  displayName: string;
-}
-
 @Injectable()
 export class DatabaseEffects {
   constructor(
     private actions$: Actions,
-    private firebaseStorageService: FirebaseStorageService
+    private firestoreService: FirestoreService
   ) {}
 
   createHotSpotUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(createUser),
       switchMap(async ({ user, displayName }) => {
-        const result = await this.firebaseStorageService.createHotSpotUser(
+        const result = await this.firestoreService.addHotSpotUser(
           user,
           displayName
         );
         return result.pipe(
           map((response) => {
-            return observableOf({ response, displayName });
+            return observableOf(response);
           })
         );
       }),

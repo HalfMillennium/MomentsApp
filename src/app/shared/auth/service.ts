@@ -18,6 +18,11 @@ import {
 import { AuthError, Credentials } from '../../utils/interfaces';
 import { FirebaseApp } from '@angular/fire/app';
 
+export interface CreateUserEmailResponse {
+  response: UserCredential | AuthError;
+  displayName: string;
+}
+
 export class FirebaseAuthService {
   userCredential: UserCredential | undefined | void = undefined;
   // Initialize Firebase
@@ -69,8 +74,6 @@ export class FirebaseAuthService {
       credentials['userPassword']
     )
       .then((credential) => {
-        console.log('userBasicsUpdate, userName:', credentials['displayName']);
-        this.updateUserBasics(credential.user, credentials['displayName']);
         return observableOf(credential);
       })
       .catch((error) => {
@@ -121,12 +124,23 @@ export class FirebaseAuthService {
       });
   }
 
-  /** A "UserBasic" is defined here as being a user's basic attributes such as email and username */
-  async updateUserBasics(user: User, displayName?: string, photoURL?: string) {
-    updateProfile(user, {
+  async updateUserProfile(user: User, displayName?: string, photoURL?: string) {
+    console.log('here:', this.auth.currentUser?.toJSON(), displayName);
+    this.auth.currentUser?.reload();
+    await updateProfile(this.auth.currentUser ?? user, {
       displayName,
-      photoURL,
-    });
-    getAuth().currentUser?.reload();
+    })
+      .then(() => {
+        console.log('currentUser before:', this.auth.currentUser);
+        console.log('currentUser after', this.auth.currentUser);
+        console.log('profile should be updated, displayName:', displayName);
+      })
+      .catch((e) => {
+        console.log('Could not update user profile:', e);
+      });
+  }
+
+  reloadUser() {
+    this.auth.currentUser?.reload();
   }
 }

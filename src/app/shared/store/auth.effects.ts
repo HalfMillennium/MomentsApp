@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { FirebaseAuthService } from '../auth/service';
+import { CreateUserEmailResponse, FirebaseAuthService } from '../auth/service';
 import { Injectable } from '@angular/core';
 import {
   signInEmail,
@@ -8,6 +8,8 @@ import {
   registerEmail,
   registerEmailSuccess,
   registerEmailFailure,
+  updateUserProfile,
+  updateUserProfileSuccess,
 } from './auth.actions';
 import { catchError, mergeMap, map, switchMap, tap } from 'rxjs/operators';
 import { of as observableOf, Observable, take, from, EMPTY, merge } from 'rxjs';
@@ -31,20 +33,21 @@ export class AuthEffects {
           action.displayName
         );
         return result.pipe(
-          map((response: UserCredential | AuthError) => {
+          map((response: CreateUserEmailResponse) => {
             return response;
           })
         );
       }),
-      switchMap((response: Observable<UserCredential | AuthError>) => {
+      switchMap((response: Observable<CreateUserEmailResponse>) => {
         return response.pipe((result) => result);
       }),
-      mergeMap((result: UserCredential | AuthError) => {
+      mergeMap((result: CreateUserEmailResponse) => {
         return observableOf(
-          isAuthError(result)
-            ? registerEmailFailure({ userAuthError: result })
+          isAuthError(result.response)
+            ? registerEmailFailure({ userAuthError: result.response })
             : registerEmailSuccess({
-                userCredential: result,
+                userCredential: result.response,
+                displayName: result.displayName,
               })
         );
       })
@@ -69,11 +72,34 @@ export class AuthEffects {
         return response.pipe((result) => result);
       }),
       mergeMap((result: UserCredential | AuthError) => {
+        console.log(
+          'user:',
+          (result as UserCredential).user.displayName,
+          'provider data:',
+          (result as UserCredential).user.providerData
+        );
         return observableOf(
           isAuthError(result)
             ? signInEmailFailure({ userAuthError: result })
             : signInEmailSuccess({ userCredential: result })
         );
+      })
+    )
+  );
+
+  // Adds user's chosen displayName to user profile upon registration
+  initUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(registerEmailSuccess),
+      switchMap((action) =>
+        this.firebaseAuthService.updateUserProfile(
+          action.userCredential.user,
+          action.displayName
+        )
+      ),
+      mergeMap(() => {
+        console.log('success?');
+        return observableOf(updateUserProfileSuccess());
       })
     )
   );
@@ -87,7 +113,7 @@ export class AuthEffects {
     userEmail: string,
     userPassword: string,
     displayName: string
-  ): Promise<Observable<UserCredential | AuthError>> {
+  ): Promise<Observable<CreateUserEmailResponse>> {
     return await this.firebaseAuthService
       .createUser(AuthTypesEnum.EMAIL_PASS, {
         type: AuthTypesEnum.EMAIL_PASS,
@@ -96,7 +122,11 @@ export class AuthEffects {
         displayName,
       })
       .then((result) => {
-        return result;
+        return result.pipe(
+          map((response) => {
+            return { response, displayName };
+          })
+        );
       });
   }
 

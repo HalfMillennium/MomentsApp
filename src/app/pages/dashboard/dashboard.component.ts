@@ -8,14 +8,15 @@ import {
 } from '../../utils/resources';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, ReplaySubject, takeUntil, map } from 'rxjs';
-import { AuthState, MetaStores } from 'src/app/utils/interfaces';
+import { Observable, ReplaySubject, takeUntil, map, take } from 'rxjs';
+import { AuthState, MetaStores, UserDataState } from 'src/app/utils/interfaces';
 import { UserNamePipe } from '../../utils/pipes/user-name.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthDialog } from '../auth_dialog/auth-dialog/auth-dialog.component';
 import { UserCredential } from 'firebase/auth';
 import { User } from 'firebase/auth';
+import { FirebaseAuthService } from 'src/app/shared/auth/service';
 
 @Component({
   selector: 'dashboard',
@@ -40,9 +41,14 @@ export class Dashboard implements AfterViewInit {
     .select('auth')
     .pipe(takeUntil(this.destroyObs$));
 
+  userDataState$: Observable<UserDataState> = this.store
+    .select('db')
+    .pipe(takeUntil(this.destroyObs$));
+
   constructor(
     private router: Router,
     private store: Store<MetaStores>,
+    private firebaseAuthService: FirebaseAuthService,
     private dialog: MatDialog,
     private readonly cookieService: CookieService
   ) {
@@ -50,6 +56,11 @@ export class Dashboard implements AfterViewInit {
     if (currentUser) {
       this.user = (JSON.parse(currentUser) as UserCredential).user;
     }
+    this.userDataState$.subscribe(async (state: UserDataState) => {
+      if (state.shouldReloadUser) {
+        this.firebaseAuthService.reloadUser();
+      }
+    });
   }
 
   ngAfterViewInit() {

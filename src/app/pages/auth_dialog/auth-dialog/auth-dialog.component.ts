@@ -24,7 +24,7 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { isAuthError } from '../../../utils/resources';
+import { isAuthError, reloadPage } from '../../../utils/resources';
 import { Store } from '@ngrx/store';
 import { registerEmail, signInEmail } from '../../../shared/store/auth.actions';
 import { map, take, takeUntil } from 'rxjs/operators';
@@ -58,13 +58,12 @@ export class AuthDialog implements OnDestroy {
   private cookieService = inject(CookieService);
 
   userAuthForm: FormGroup = this.fb.group<SignUpDialogData>({
-    userName: this.fb.nonNullable.control<string>(''),
+    displayName: this.fb.nonNullable.control<string>(''),
     email: this.fb.nonNullable.control<string>(''),
     password: this.fb.nonNullable.control<string>(''),
     confPassword: this.fb.nonNullable.control<string>(''),
   });
 
-  userName: string | undefined;
   userPassword: string | undefined;
   userConfPassword: string | undefined;
   displayName: string | undefined;
@@ -79,9 +78,10 @@ export class AuthDialog implements OnDestroy {
   userAuthState$: Observable<AuthState> = this.store
     .select('auth')
     .pipe(takeUntil(this.destroyObs$));
+  /*
   displayName$: Observable<UserState> = this.store
     .select('user')
-    .pipe(takeUntil(this.destroyObs$));
+    .pipe(takeUntil(this.destroyObs$));*/
 
   isAuthenticated = false;
 
@@ -106,14 +106,15 @@ export class AuthDialog implements OnDestroy {
             'userCredential',
             JSON.stringify(newAuthState.userCredential)
           );
-          this.cookieService.set('displayName', `${this.userName}`);
-          this.onNoClick(); // close dialog
-          this.reloadPage(); // TODO: Smells a little bit, but is prob fine for now
+          this.cookieService.set('displayName', `${this.displayName}`);
+          this.onNoClick();
+          reloadPage(); // TODO: Smells a little bit, but is prob fine for now
           console.log(
-            `User successfully authenticated! Username: ${this.userName}, AuthState: ${newAuthState}`
+            `User successfully authenticated! Username: ${this.displayName}, AuthState: ${newAuthState}`
           );
         }
       });
+    /*
     this.displayName$
       .pipe(takeUntil(this.destroyObs$))
       .subscribe((userState: UserState) => {
@@ -123,14 +124,14 @@ export class AuthDialog implements OnDestroy {
           this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
           this.snackBar.open('Welcome to the Moments app!', 'Very cool');
         }
-      });
+      });*/
   }
 
   setFormValues() {
-    this.userName = this.userAuthForm.get('userName')?.value;
     this.userEmail = this.userAuthForm.get('email')?.value;
     this.userPassword = this.userAuthForm.get('password')?.value;
     this.userConfPassword = this.userAuthForm.get('confPassword')?.value;
+    this.displayName = this.userAuthForm.get('displayName')?.value;
   }
 
   authenticate() {
@@ -168,10 +169,6 @@ export class AuthDialog implements OnDestroy {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  reloadPage() {
-    window.location.reload();
   }
 
   ngOnDestroy(): void {
