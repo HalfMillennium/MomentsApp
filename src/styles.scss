@@ -1,2 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+$font-primary: 'Poppins', 'sans-serif';
+$font-title: 'Moirai One', 'sans-serif';
+
+.font-primary-heavy {
+    font-family: $font-primary;
+    font-weight: 800;
+}
+
+.font-primary-normal {
+    font-family: $font-primary;
+    font-weight: 400;
+}
+
+.font-primary-light {
+    font-family: $font-primary;
+    font-weight: 100;
+}
+
+.font-title {
+    font-family: $font-title;
+    font-size: 60px;
+}

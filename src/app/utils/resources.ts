@@ -25,9 +25,9 @@ export const MENU_ITEMS: MenuItem[] = [
     routerLink: '/',
   },
   {
-    name: 'saved_stories',
-    icon: 'save',
-    label: 'Saved Stories',
+    name: 'view_listings',
+    icon: 'map',
+    label: 'VIEW LISTINGS',
     routerLink: '',
   },
   {
@@ -39,14 +39,14 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'account',
     icon: 'account_circle',
-    label: 'Account',
+    label: 'ACCOUNT',
     routerLink: '/account',
     auth: true,
   },
   {
     name: 'sign_out',
     icon: 'logout',
-    label: 'Sign Out',
+    label: 'SIGN OUT',
     auth: true,
   },
 ];

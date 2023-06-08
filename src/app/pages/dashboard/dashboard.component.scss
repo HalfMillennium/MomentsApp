@@ -1,3 +1,5 @@
+@use 'src/styles';
+
 .flex-container {
     display: flex;
     gap: 20px;
@@ -37,4 +39,12 @@
 
 .display-name-label {
     padding-left: 3rem;
+}
+
+.space-right {
+    padding-right: 15rem;
+}
+
+.space-left {
+    padding-left: 15rem;
 }

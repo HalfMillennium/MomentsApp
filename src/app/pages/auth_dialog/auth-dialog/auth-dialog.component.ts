@@ -34,7 +34,7 @@ import { AuthCredentialPipe } from 'src/app/utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from 'src/app/utils/pipes/user-name.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
-import { FirebaseAuthService } from '../../../shared/auth/service';
+import { FirestoreService } from '../../../shared/database/service';
 
 @Component({
   selector: 'auth-dialog',
@@ -90,7 +90,7 @@ export class AuthDialog implements OnDestroy {
     public dialogRef: MatDialogRef<AuthDialog>,
     private store: Store<MetaStores>,
     private snackBar: MatSnackBar,
-    private firebaseAuthService: FirebaseAuthService,
+    private firestoreService: FirestoreService,
     @Inject(MAT_DIALOG_DATA) public data: SignUpDialogData
   ) {
     this.userAuthError = undefined;
@@ -112,6 +112,14 @@ export class AuthDialog implements OnDestroy {
           console.log(
             `User successfully authenticated! Username: ${this.displayName}, AuthState: ${newAuthState}`
           );
+          try {
+            this.firestoreService.addHotSpotUser(
+              newAuthState.userCredential,
+              this.displayName ?? ''
+            );
+          } catch (e) {
+            console.log('Could not add HotSpot user:', e);
+          }
         }
       });
     /*
