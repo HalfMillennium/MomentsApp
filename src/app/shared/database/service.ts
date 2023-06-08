@@ -4,7 +4,7 @@ import { UserCredential } from 'firebase/auth';
 import { FIREBASE_CONFIG } from '../common/config/firebase';
 import { Observable, of as observableOf } from 'rxjs';
 import { DatabaseError } from '../../utils/interfaces';
-import { addDoc, collection, getDoc } from 'firebase/firestore';
+import { doc, collection, setDoc } from 'firebase/firestore';
 import { DEFAULT_DATABASE_ERROR } from '../../utils/resources';
 
 export interface CreateUserResponse {
@@ -18,8 +18,6 @@ export class FirestoreService {
 
   constructor() {}
 
-  // initUserName --> Called when a user first registers to update them
-
   addBuilding() {}
 
   async addHotSpotUser(
@@ -27,11 +25,10 @@ export class FirestoreService {
     displayName: string
   ): Promise<Observable<CreateUserResponse>> {
     try {
-      const docRef = await addDoc(collection(this.db, 'users'), {
-        user,
+      await setDoc(doc(this.db, 'users', user.user.uid), {
         displayName,
       });
-      console.log('Document written with ID: ', docRef.id);
+      console.log('Document written with ID: ', user.user.uid);
       return observableOf({ response: user, displayName });
     } catch (exception) {
       console.error('Error adding document: ', exception);
