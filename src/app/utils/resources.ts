@@ -21,7 +21,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'dash_home',
     icon: 'dashboard',
-    label: 'DASHBOARD',
+    label: 'Dashboard',
     routerLink: '/',
   },
   {
@@ -33,7 +33,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'about',
     icon: 'info',
-    label: 'WHAT IS THIS?',
+    label: 'What Is This?',
     routerLink: '/info',
   },
   {

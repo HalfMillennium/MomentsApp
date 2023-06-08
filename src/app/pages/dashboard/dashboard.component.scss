@@ -1,3 +1,5 @@
+@use 'src/styles';
+
 .flex-container {
     display: flex;
     gap: 20px;
@@ -37,15 +39,6 @@
 
 .display-name-label {
     padding-left: 3rem;
-}
-
-.font-header {
-    font-family: 'Moirai One', sans-serif;
-    font-size: 60px;
-}
-
-.font-primary {
-    font-family: 'Space Grotesk', sans-serif;
 }
 
 .space-right {

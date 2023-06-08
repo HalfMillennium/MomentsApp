@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Moirai+One&family=Space+Grotesk:wght@300;500;700&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=Moirai+One&family=Poppins:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
   rel="stylesheet">
 
 <div>
@@ -27,13 +27,13 @@
       </span>
     </div>
     <div class="column align-right space-left">
-      <h3 class="font-header">HOTSPOT</h3>
-      <span subtitle class="font-primary">A place to find your place.</span>
+      <h3 class="font-title">HOTSPOT</h3>
+      <span subtitle class="font-primary-normal">A place to find... your <b>place.</b></span>
     </div>
   </div>
 </div>
 <div>
-  <span class="mat-headline-3 font-primary">Saved buildings</span>
+  <span class="mat-headline-3 font-primary-heavy">Saved buildings</span>
   <h5 class="mat-headline-6">Visited buildings that you've saved.</h5>
   <div *ngIf="user" class="flex-container space-above">
     <mat-card class="max-card-width" *ngFor="let building of MOCK_BUILDINGS; let i = index">
