@@ -19,6 +19,12 @@ import { DatabaseEffects } from '../shared/store/db.effects';
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
   {
+    name: 'about',
+    icon: 'info',
+    label: 'What Is This?',
+    routerLink: '/info',
+  },
+  {
     name: 'dash_home',
     icon: 'dashboard',
     label: 'Dashboard',
@@ -27,26 +33,20 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     name: 'view_listings',
     icon: 'map',
-    label: 'VIEW LISTINGS',
+    label: 'View Listings',
     routerLink: '',
-  },
-  {
-    name: 'about',
-    icon: 'info',
-    label: 'What Is This?',
-    routerLink: '/info',
   },
   {
     name: 'account',
     icon: 'account_circle',
-    label: 'ACCOUNT',
+    label: 'Account',
     routerLink: '/account',
     auth: true,
   },
   {
     name: 'sign_out',
     icon: 'logout',
-    label: 'SIGN OUT',
+    label: 'Sign Out',
     auth: true,
   },
 ];
@@ -67,7 +67,7 @@ export enum BuildingAmenityTypeEnum {
   REC_AREA = 'Recreational area(s)',
 }
 
-/** Mock spaces for example dashboard data */
+/** Mock buildings for example dashboard data */
 export const MOCK_BUILDINGS: ApartmentBuilding[] = [
   {
     id: '11',
@@ -96,7 +96,7 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
     ],
   },
   {
-    id: '11',
+    id: '12',
     title: 'The Landon',
     addr: '520 West 43rd St, New York, NY 10036',
     desc: 'Modern full-service building located near the Westside Highway and the historic Pier 76.',
@@ -123,6 +123,25 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
       BuildingAmenityTypeEnum.POOL_OUTDOOR,
       BuildingAmenityTypeEnum.ROOFTOP,
       BuildingAmenityTypeEnum.REC_AREA,
+    ],
+  },
+  {
+    id: '14',
+    title: '8 Spruce',
+    addr: '8 Spruce St. New York, NY',
+    desc: "This looks like it's a very nice building, with lots of very modern amenities.",
+    images: [
+      {
+        url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',
+        alt: 'View from inside apartment',
+      },
+    ],
+    floors: 45,
+    amenities: [
+      BuildingAmenityTypeEnum.ELEVATOR,
+      BuildingAmenityTypeEnum.FULL_TIME_DOORMAN,
+      BuildingAmenityTypeEnum.GYM,
+      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
     ],
   },
 ];

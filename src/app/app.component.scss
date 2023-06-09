@@ -1,3 +1,4 @@
+@use 'src/styles';
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 // All items auto-centered horizontally
@@ -5,6 +6,11 @@
     display: flex;
     justify-content: center;
     margin-bottom: 3rem;
+    background-color: salmon;
+}
+
+.page-body {
+    margin: 0 3rem 0 3rem;
 }
 
 .full-width-button {
@@ -13,10 +19,31 @@
 }
 
 .menu-padding {
-    margin: 0.5rem;
+    margin: 2rem;
 }
 
-.font-dm-sans {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 800;
+.info-link {
+    font-size: 1rem;
+}
+
+.toolbar-container {
+    justify-content: end;
+}
+
+.action-bar {
+    display: flex;
+}
+
+.action-bar-right {
+    flex: 1;
+}
+.app-title {
+    text-align: right;
+    margin: 1rem 2rem 2rem 0;
+}
+
+.action-bar-item {
+    justify-content: end;
+    text-align: right;
+    clear: left;
 }

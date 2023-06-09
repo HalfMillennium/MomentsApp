@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=Moirai+One&family=Poppins:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
   rel="stylesheet">
 
-<div>
+<div class="">
   <div class="row">
     <div class="column space-right">
       <span *ngIf="user" class="mat-h4">
@@ -26,13 +26,7 @@
         </div>
       </span>
     </div>
-    <div class="column align-right space-left">
-      <h3 class="font-title">HOTSPOT</h3>
-      <span subtitle class="font-primary-normal">A place to find... your <b>place.</b></span>
-    </div>
   </div>
-</div>
-<div>
   <span class="mat-headline-3 font-primary-heavy">Saved buildings</span>
   <h5 class="mat-headline-6">Visited buildings that you've saved.</h5>
   <div *ngIf="user" class="flex-container space-above">
@@ -40,7 +34,7 @@
       <mat-card-header>
         <mat-card-title>{{building.title}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image [src]="building.images[i].url" alt="{{building.images[i].alt}}">
+      <img mat-card-image [src]="MOCK_BUILDINGS[i].images[0].url" [alt]="MOCK_BUILDINGS[i].images[0].alt">
       <mat-card-content>
         <p class="md-subhead">
           {{building.desc}}

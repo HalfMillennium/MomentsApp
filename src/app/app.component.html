@@ -5,8 +5,10 @@
   rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<section class="header">
-  <button class="menu-padding" mat-stroked-button [matMenuTriggerFor]="menu">Menu</button>
+
+<div class="action-bar">
+  <div class="toolbar-container">
+    <button class="menu-padding" mat-stroked-button [matMenuTriggerFor]="menu"><span class="font-primary-normal">Menu</span></button>
     <mat-menu class="menu" #menu="matMenu">
       <div 
         *ngFor="let item of MENU_ITEMS">
@@ -16,11 +18,26 @@
         [disabled]="item.routerLink === ''"
         (click)="getOnClick(item)">
           <mat-icon>{{ (item.name === 'account') ?  (currentUserCredential ? 'account_circle' : 'login') : item.icon }}</mat-icon>
-          <span class="font-dm-sans">{{ (item.name === 'account') ? (currentUserCredential ? 'ACCOUNT' : 'SIGN IN / SIGN UP') : item.label }}</span>
+          <span class="font-primary-normal">{{ (item.name === 'account') ? (currentUserCredential ? 'Account' : 'Sign In / Sign Up') : item.label }}</span>
         </button>
       </div>
     </mat-menu>
-</section>
+    <span class="font-primary-light info-link">
+      Huh?
+    </span>
+  </div>
+  <div class="action-bar-right">
+    <div class="app-title">
+      <h3 class="font-title action-bar-content">HOTSPOT</h3>
+      <span subtitle class="font-primary-normal action-bar-content">A place to find... your <b>place.</b></span>
+    </div>
+  </div>
+</div>
 <section class="main">
-  <router-outlet></router-outlet>
+  <div>
+    <span>Something else would go here...</span>
+  </div>
 </section>
+<div class="page-body">
+  <router-outlet></router-outlet>
+</div>
