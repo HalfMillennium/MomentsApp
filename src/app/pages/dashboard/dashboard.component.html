@@ -30,9 +30,9 @@
   <span class="mat-headline-3 font-primary-heavy">Saved buildings</span>
   <h5 class="mat-headline-6">Visited buildings that you've saved.</h5>
   <div *ngIf="user" class="flex-container space-above">
-    <mat-card class="max-card-width" *ngFor="let building of MOCK_BUILDINGS; let i = index">
+    <mat-card class="max-card-width mat-elevation-z0 outline" *ngFor="let building of MOCK_BUILDINGS; let i = index">
       <mat-card-header>
-        <mat-card-title>{{building.title}}</mat-card-title>
+        <mat-card-title><span class="font-primary-normal">{{building.title}}</span></mat-card-title>
       </mat-card-header>
       <img mat-card-image [src]="MOCK_BUILDINGS[i].images[0].url" [alt]="MOCK_BUILDINGS[i].images[0].alt">
       <mat-card-content>
@@ -41,7 +41,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button [routerLink]="['/building', building.id]" mat-button>See More</button>
+        <button [routerLink]="['/building', building.id]" mat-button><span class="font-primary-normal">VIEW DETAILS</span></button>
       </mat-card-actions>
     </mat-card>
   </div>
