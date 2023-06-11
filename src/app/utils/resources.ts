@@ -51,125 +51,6 @@ export const MENU_ITEMS: MenuItem[] = [
   },
 ];
 
-export enum BuildingAmenityTypeEnum {
-  LAUNDRY_IN_UNIT = 'Laundry, In-Unit',
-  LAUNDRY_IN_BUILDING = 'Laundry, In-Building',
-  POOL_OUTDOOR = 'Outdoor Pool',
-  POOL_INDOOR = 'Indoor Pool',
-  POOL = 'Pool',
-  DOORMAN = 'Doorman',
-  FULL_TIME_DOORMAN = '24/7 Doorman',
-  ELEVATOR = 'Elevator',
-  ROOFTOP = 'Rooftop',
-  TERRACE = 'Terrace',
-  REFUSE_EACH_FLOOR = 'Refuse room, each floor',
-  GYM = 'Gym',
-  REC_AREA = 'Recreational area(s)',
-}
-
-/** Mock buildings for example dashboard data */
-export const MOCK_BUILDINGS: ApartmentBuilding[] = [
-  {
-    id: '11',
-    title: '360 West',
-    addr: '360 West 43rd St, New York, NY 10036',
-    desc: 'Classic brick building located near the heart of Times Square.',
-    images: [
-      {
-        url: 'https://brodsky.com/uploads/_styles/portfolio-slide/building/360-w-43-lobby3.jpg',
-        alt: 'Lobby of 360 West 43rd street',
-      },
-      {
-        url: 'https://s3-us-west-2.amazonaws.com/transparentcity/uploads/images/000/039/468/original/360_West_43rd_Street_Exterior3.jpg?1603465654',
-        alt: 'Exterior shot of 360 West 43rd street',
-      },
-    ],
-    floors: 24,
-    amenities: [
-      BuildingAmenityTypeEnum.DOORMAN,
-      BuildingAmenityTypeEnum.ELEVATOR,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
-      BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
-      BuildingAmenityTypeEnum.TERRACE,
-      BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.ROOFTOP,
-    ],
-  },
-  {
-    id: '12',
-    title: 'The Landon',
-    addr: '520 West 43rd St, New York, NY 10036',
-    desc: 'Modern full-service building located near the Westside Highway and the historic Pier 76.',
-    images: [
-      {
-        url: 'https://thelandonnyc.com/wp-content/uploads/sites/5/2022/03/The-Landon-Resident-Lounge-min-1-scaled.jpg',
-        alt: 'Rec room at The Landon NYC',
-      },
-      {
-        url: 'https://images1.apartments.com/i2/aV3LMN2FWbLpxizqLkUVNQopxHd84D7fafvBXup6pwo/111/the-landon-new-york-ny-primary-photo.jpg',
-        alt: 'Rooftop at The Landon NYC',
-      },
-    ],
-    floors: 24,
-    amenities: [
-      BuildingAmenityTypeEnum.DOORMAN,
-      BuildingAmenityTypeEnum.ELEVATOR,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
-      BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
-      BuildingAmenityTypeEnum.TERRACE,
-      BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
-      BuildingAmenityTypeEnum.POOL_INDOOR,
-      BuildingAmenityTypeEnum.POOL_OUTDOOR,
-      BuildingAmenityTypeEnum.ROOFTOP,
-      BuildingAmenityTypeEnum.REC_AREA,
-    ],
-  },
-  {
-    id: '14',
-    title: '8 Spruce',
-    addr: '8 Spruce St. New York, NY',
-    desc: "This looks like it's a very nice building, with lots of very modern amenities.",
-    images: [
-      {
-        url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',
-        alt: 'View from inside apartment',
-      },
-    ],
-    floors: 45,
-    amenities: [
-      BuildingAmenityTypeEnum.ELEVATOR,
-      BuildingAmenityTypeEnum.FULL_TIME_DOORMAN,
-      BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
-    ],
-  },
-];
-
-export const MOCK_CAROUSEL_SLIDES: CarouselSlides[] = [
-  {
-    id: '0',
-    src: 'https://kenyaholidays.travel/wp-content/uploads/2020/08/African-Wild-Dog-portrait.jpg',
-    title: 'Kenyorgi dogs',
-    subtitle: 'New dog breed discovered in Kenya',
-    routerLink: '',
-  },
-  {
-    id: '1',
-    src: 'https://i0.wp.com/mpala.org/wp-content/uploads/2020/01/Two-wild-dogs.jpg?fit=739%2C415&ssl=1',
-    title: 'Kenyorgi dogs',
-    subtitle: 'New dog breed discovered in Kenya',
-    routerLink: '',
-  },
-  {
-    id: '2',
-    src: 'https://optimise2.assets-servd.host/maniacal-finch/production/animals/painted-dog-01-01.jpg?w=1200&auto=compress%2Cformat&fit=crop&dm=1658934200&s=81da609829d4362aa959790573f32085',
-    title: 'Kenyorgi dogs',
-    subtitle: 'New dog breed discovered in Kenya',
-    routerLink: '',
-  },
-];
-
 /** -_- */
 export const MONTHS: Record<number, string> = {
   0: 'January',
@@ -261,7 +142,7 @@ export function parseUserAuthState(rawAuthState: string | undefined) {
 }
 
 export function reloadPage() {
-  window.location.reload();
+  //window.location.reload();
 }
 
 export function isDatabaseError(

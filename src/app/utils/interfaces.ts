@@ -2,7 +2,7 @@ import { UserCredential } from 'firebase/auth';
 import { AuthTypesEnum, WarningsEnum } from './resources';
 import { Action, ActionReducer } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
-import { BuildingAmenityTypeEnum } from './resources';
+import { BuildingAmenityTypeEnum } from './buildings/resources';
 import { Firestore } from 'firebase/firestore';
 
 /** Interface for menu items */

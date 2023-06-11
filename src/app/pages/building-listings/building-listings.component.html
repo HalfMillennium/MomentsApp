@@ -1,0 +1,32 @@
+<div>
+    <div>
+        <div class="gallery-view">
+            <c-carousel [interval]="slideIntervalMs" *ngIf="currentListing">
+                <c-carousel-inner>
+                    <c-carousel-item *ngFor="let image of currentListing?.images; let i = index">
+                        <img alt="Listing #{{i}}" class="d-block w-100" loading="lazy" src="{{image}}" />
+                        <c-carousel-caption class="d-none d-md-block">
+                            <p class="mat-h4">{{currentListing.unit}}</p>
+                        </c-carousel-caption>
+                    </c-carousel-item>
+                </c-carousel-inner>
+                <c-carousel-control direction="prev">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </c-carousel-control>
+                <c-carousel-control direction="next">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </c-carousel-control>
+            </c-carousel>
+        </div>
+        <div class="listing-info">
+            <ul>
+                <li *ngFor="let listing of selectedListingSet">
+                    <mat-card>
+                        <mat-card-title>{{listing.bed}}</mat-card-title>
+                    </mat-card>
+                </li>
+            </ul>
+        </div>
+        <!-- <building-detail> -->
+    </div>
+</div>

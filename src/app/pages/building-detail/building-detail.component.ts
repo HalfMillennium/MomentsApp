@@ -15,7 +15,7 @@ import {
 } from 'rxjs';
 import { MaterialModule } from 'src/material.module';
 import { ApartmentBuilding } from 'src/app/utils/interfaces';
-import { MOCK_CAROUSEL_SLIDES } from 'src/app/utils/resources';
+import { MOCK_8_SPRUCE_LISTINGS } from 'src/app/utils/buildings/resources';
 import { CarouselModule } from '@coreui/angular';
 import { RouterModule } from '@angular/router';
 
@@ -30,7 +30,6 @@ export class BuildingDetail implements OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   currentBuilding: ApartmentBuilding;
   viewLoaded = false;
-  readonly MOCK_CAROUSEL_SLIDES = MOCK_CAROUSEL_SLIDES;
   slideIntervalMs = 5000;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {

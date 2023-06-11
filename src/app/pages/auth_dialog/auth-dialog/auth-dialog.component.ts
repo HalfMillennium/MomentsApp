@@ -107,6 +107,14 @@ export class AuthDialog implements OnDestroy {
             JSON.stringify(newAuthState.userCredential)
           );
           this.cookieService.set('displayName', `${this.displayName}`);
+          this.firestoreService
+            .addHotSpotUser(newAuthState.userCredential, `${this.displayName}`)
+            .then(() => {
+              console.log('user added.');
+            })
+            .catch((e) => {
+              console.log('error adding hotspot user:', e);
+            });
           this.onNoClick();
           reloadPage(); // TODO: Smells a little bit, but is prob fine for now
           console.log(

@@ -4,7 +4,7 @@ import { UserCredential } from 'firebase/auth';
 import { FIREBASE_CONFIG } from '../common/config/firebase';
 import { Observable, of as observableOf } from 'rxjs';
 import { DatabaseError } from '../../utils/interfaces';
-import { doc, collection, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { DEFAULT_DATABASE_ERROR } from '../../utils/resources';
 
 export interface CreateUserResponse {
@@ -14,7 +14,7 @@ export interface CreateUserResponse {
 
 export class FirestoreService {
   private readonly app = initializeApp(FIREBASE_CONFIG);
-  private readonly db = getFirestore(this.app);
+  private readonly firestore = getFirestore(this.app);
 
   constructor() {}
 
@@ -25,9 +25,14 @@ export class FirestoreService {
     displayName: string
   ): Promise<Observable<CreateUserResponse>> {
     try {
-      await setDoc(doc(this.db, 'users', user.user.uid), {
-        displayName,
-      });
+      console.log('firestore info:', this.firestore.toJSON());
+      const userData = {
+        displayName: 'testName',
+      };
+      await setDoc(
+        doc(this.firestore, 'users', user.user.uid),
+        Object.assign({}, userData)
+      );
       console.log('Document written with ID: ', user.user.uid);
       return observableOf({ response: user, displayName });
     } catch (exception) {

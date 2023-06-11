@@ -1,11 +1,8 @@
 import { AfterViewInit, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
-import {
-  MOCK_BUILDINGS,
-  MONTHS,
-  parseUserAuthState,
-} from '../../utils/resources';
+import { MONTHS, parseUserAuthState } from '../../utils/resources';
+import { MOCK_BUILDINGS } from '../../utils/buildings/resources';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject, takeUntil, map, take } from 'rxjs';
