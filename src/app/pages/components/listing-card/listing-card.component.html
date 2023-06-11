@@ -1,0 +1,12 @@
+<mat-card style="background-image: url('{{ listing.images[1] }}'); background-size: 350px; height: 150px; margin: 0.5rem;" 
+    class="mat-elevation-z0"
+    (click)="selectListing()">
+    <mat-card-title class="card-title">
+        <span class="font-primary-heavy">{{listing.unit}}</span>
+    </mat-card-title>
+    <mat-card-subtitle class="card-subtitle">
+        <span class="font-primary-normal">{{ listing.bed }} bed, {{ listing.bath }} bath</span> <span class="font-primary-heavy">
+            , ${{listing.rent}}/month
+        </span>
+    </mat-card-subtitle>
+</mat-card>
