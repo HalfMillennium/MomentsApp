@@ -4,6 +4,7 @@ import { Action, ActionReducer } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import { BuildingAmenityTypeEnum } from './buildings/resources';
 import { Firestore } from 'firebase/firestore';
+import { ApartmentBuilding } from './buildings/interfaces';
 
 /** Interface for menu items */
 export interface MenuItem {
@@ -89,19 +90,6 @@ export declare interface MetaStores {
 export interface Image {
   url: string;
   alt: string;
-}
-
-export interface ApartmentBuilding {
-  id: string;
-  title?: string;
-  addr: string;
-  subtitle?: string;
-  desc: string;
-  amenities: BuildingAmenityTypeEnum[];
-  floors: number;
-  residents?: number;
-  avg_rent?: number;
-  images: Image[];
 }
 
 export interface DatabaseError {

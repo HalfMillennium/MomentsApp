@@ -1,31 +1,66 @@
 <div>
-    <div>
-        <div class="gallery-view">
-            <c-carousel [interval]="slideIntervalMs" *ngIf="currentListing">
+    <div class="container">
+        <div class="left-panel">
+            <c-carousel [dark]="true" [animate]="false" transition="crossfade">
+                <c-carousel-indicators></c-carousel-indicators>
                 <c-carousel-inner>
                     <c-carousel-item *ngFor="let image of currentListing?.images; let i = index">
                         <img alt="Listing #{{i}}" class="d-block w-100" loading="lazy" src="{{image}}" />
-                        <c-carousel-caption class="d-none d-md-block">
-                            <p class="mat-h4">{{currentListing.unit}}</p>
-                        </c-carousel-caption>
                     </c-carousel-item>
                 </c-carousel-inner>
-                <c-carousel-control direction="prev">
-                    <mat-icon>keyboard_arrow_left</mat-icon>
-                </c-carousel-control>
-                <c-carousel-control direction="next">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-                </c-carousel-control>
+                <c-carousel-control caption="Previous" direction="prev"></c-carousel-control>
+                <c-carousel-control aption="Next" direction="next"></c-carousel-control>
             </c-carousel>
         </div>
-        <div class="listing-info">
-            <ul>
-                <li *ngFor="let listing of selectedListingSet">
-                    <mat-card>
-                        <mat-card-title>{{listing.bed}}</mat-card-title>
-                    </mat-card>
-                </li>
-            </ul>
+        <div class="right-panel">
+            <div class="building-title-text">
+                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.addr }}</h3> <mat-chip
+                    *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">{{BUILDING_TYPE[currentBuilding.buildingType]}}</mat-chip>
+            </div>
+            <div class="building-tag-chips">
+                <mat-chip-listbox aria-label="Building tags">
+                    <button class="visit-site-button" *ngIf="currentBuilding.website" [routerLink]="currentBuilding.website" mat-button>
+                        <mat-icon>
+                            location_pin
+                        </mat-icon>
+                        {{ currentBuilding.neigh ?? 
+                            currentBuilding.lat_long?.lat + ',' + currentBuilding.lat_long?.long}}
+                    </button>
+                    <button 
+                        class="visit-site-button"
+                        *ngIf="currentBuilding.website"
+                            [routerLink]="currentBuilding.website" mat-button>
+                            <mat-icon>
+                                link
+                            </mat-icon>
+                            Visit Website
+                    </button>
+                </mat-chip-listbox>
+            </div>
+            <div>
+                <mat-tab-group class="tab-style">
+                    <mat-tab label="Active">
+                        <ul>
+                            <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
+                                <div class="card-item">
+                                    <listing-card [listing]="listing.value">
+                                    </listing-card>
+                                </div>
+                            </li>
+                        </ul>
+                    </mat-tab>
+                    <mat-tab label="Recent">
+                        <ul *ngIf="closedListings">
+                            <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
+                                <div class="card-item">
+                                    <listing-card [listing]="listing.value">
+                                    </listing-card>
+                                </div>
+                            </li>
+                        </ul>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
         </div>
         <!-- <building-detail> -->
     </div>

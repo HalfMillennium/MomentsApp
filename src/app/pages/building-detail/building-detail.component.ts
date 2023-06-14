@@ -14,8 +14,8 @@ import {
   of as observableOf,
 } from 'rxjs';
 import { MaterialModule } from 'src/material.module';
-import { ApartmentBuilding } from 'src/app/utils/interfaces';
-import { MOCK_8_SPRUCE_LISTINGS } from 'src/app/utils/buildings/resources';
+import { ApartmentBuilding } from 'src/app/utils/buildings/interfaces';
+import { MOCK_8_SPRUCE_LISTINGS_RECORD } from 'src/app/utils/buildings/resources';
 import { CarouselModule } from '@coreui/angular';
 import { RouterModule } from '@angular/router';
 

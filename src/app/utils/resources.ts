@@ -1,6 +1,6 @@
 import { UserCredential } from 'firebase/auth';
+import { ApartmentBuilding } from './buildings/interfaces';
 import {
-  ApartmentBuilding,
   CarouselSlides,
   User,
   MenuItem,
