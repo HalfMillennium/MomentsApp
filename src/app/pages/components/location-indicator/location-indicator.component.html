@@ -1,0 +1,7 @@
+<button class="visit-site-button" *ngIf="currentBuilding.website" [routerLink]="currentBuilding.website" mat-button>
+    <mat-icon>
+        location_pin
+    </mat-icon>
+    {{ currentBuilding.neigh ??
+    currentBuilding.lat_long?.lat + ',' + currentBuilding.lat_long?.long}}
+</button>
