@@ -45,8 +45,7 @@ export class BuildingListingsComponent implements OnChanges {
   closedListings: Observable<ApartmentListing[]> | undefined;
 
   showListing(id: string) {
-    this.currentListingId = id;
-    console.log('listing show attempted!', id);
+    this.currentListing = this.selectedListingSet[id];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
