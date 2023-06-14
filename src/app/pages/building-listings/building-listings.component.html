@@ -14,8 +14,12 @@
         </div>
         <div class="right-panel">
             <div class="building-title-text">
-                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.addr }}</h3> <mat-chip
-                    *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">{{BUILDING_TYPE[currentBuilding.buildingType]}}</mat-chip>
+                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.addr }}</h3> 
+                <mat-chip
+                    disabled="true"
+                    *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">
+                    {{BUILDING_TYPE[currentBuilding.buildingType].name}}
+                </mat-chip>
             </div>
             <div class="building-tag-chips">
                 <mat-chip-listbox aria-label="Building tags">
@@ -29,7 +33,7 @@
                     <button 
                         class="visit-site-button"
                         *ngIf="currentBuilding.website"
-                            [routerLink]="currentBuilding.website" mat-button>
+                            [routerLink]="currentBuilding.website" mat-stroked-button>
                             <mat-icon>
                                 link
                             </mat-icon>

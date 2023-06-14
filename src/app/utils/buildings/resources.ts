@@ -12,9 +12,20 @@ export enum BuildingTypeEnum {
   STANDARD = 'standard',
 }
 
-export const BUILDING_TYPE: Record<BuildingTypeEnum, string> = {
-  [BuildingTypeEnum.LUXURY]: 'Luxury Building',
-  [BuildingTypeEnum.STANDARD]: 'Standard Building',
+interface BuildingTypeEntity {
+  name: string;
+  icon: string;
+}
+
+export const BUILDING_TYPE: Record<BuildingTypeEnum, BuildingTypeEntity> = {
+  [BuildingTypeEnum.LUXURY]: {
+    name: 'Luxury Building',
+    icon: 'attach_money',
+  },
+  [BuildingTypeEnum.STANDARD]: {
+    name: 'Standard Building',
+    icon: 'corporate_fare',
+  },
 };
 
 export enum BuildingAmenityTypeEnum {
