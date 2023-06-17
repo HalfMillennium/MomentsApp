@@ -22,10 +22,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     ScrollingModule,
-    CarouselModule,
     MaterialModule,
     ListingCardComponent,
     RouterModule,
+    CarouselModule,
   ],
 })
 export class BuildingListingsComponent implements OnChanges {

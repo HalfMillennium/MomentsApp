@@ -142,7 +142,7 @@ export function parseUserAuthState(rawAuthState: string | undefined) {
 }
 
 export function reloadPage() {
-  //window.location.reload();
+  window.location.reload();
 }
 
 export function isDatabaseError(

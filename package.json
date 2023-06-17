@@ -26,6 +26,7 @@
     "@ngrx/effects": "^16.0.0",
     "@ngrx/store": "^16.0.0",
     "angular-favicon": "^1.0.9",
+    "angular-responsive-carousel": "^2.1.2",
     "bootstrap": "^5.2.3",
     "firebase": "^9.22.1",
     "google-trends-api": "^4.9.2",

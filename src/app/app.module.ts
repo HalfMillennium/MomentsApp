@@ -24,6 +24,7 @@ import { UserNamePipe } from './utils/pipes/user-name.pipe';
 import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
 import { FirebaseAuthService } from './shared/auth/service';
 import { FirestoreService } from './shared/database/service';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [AppComponent],
