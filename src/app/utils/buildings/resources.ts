@@ -69,6 +69,7 @@ export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
   ],
   website: 'https://live8spruce.com/',
   neigh: 'Financial District',
+  rentStabilized: true,
 };
 
 /** Mock buildings for example dashboard data */

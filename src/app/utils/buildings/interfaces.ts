@@ -29,6 +29,7 @@ export interface ApartmentBuilding {
     long: number;
   };
   neigh?: string;
+  rentStabilized?: boolean;
 }
 
 export interface ApartmentListing {
