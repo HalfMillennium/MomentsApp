@@ -1,25 +1,24 @@
 <div>
     <div class="container">
         <div class="left-panel">
-            <c-carousel [dark]="true" [animate]="false" transition="crossfade">
-                <c-carousel-indicators></c-carousel-indicators>
-                <c-carousel-inner>
-                    <c-carousel-item *ngFor="let image of currentListing?.images; let i = index">
-                        <img alt="Listing #{{i}}" class="d-block w-100" loading="lazy" src="{{image}}" />
-                    </c-carousel-item>
-                </c-carousel-inner>
-                <c-carousel-control caption="Previous" direction="prev"></c-carousel-control>
-                <c-carousel-control aption="Next" direction="next"></c-carousel-control>
-            </c-carousel>
+            <mdb-carousel [dark]="true" [controls]="true" [indicators]="true" [animation]="'slide'" #carousel>
+                <mdb-carousel-item *ngFor="let image of currentListing?.images; let i = index">
+                    <img alt="Listing #{{i}}" class="d-block w-100" loading="lazy" [src]="image" />
+                </mdb-carousel-item>
+            </mdb-carousel>
         </div>
         <div class="right-panel">
             <div class="building-title-text">
                 <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.addr }}</h3> 
                 <mat-chip
-                    disabled="true"
                     *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">
                     {{BUILDING_TYPE[currentBuilding.buildingType].name}}
                 </mat-chip>
+                <span class="icon-container">
+                    <mat-icon class="rent-stable-icon" *ngIf="currentBuilding.rentStabilized" matTooltip="Rent Stabilized">
+                        video_stable
+                    </mat-icon>
+                </span>
             </div>
             <div class="building-tag-chips">
                 <mat-chip-listbox aria-label="Building tags">

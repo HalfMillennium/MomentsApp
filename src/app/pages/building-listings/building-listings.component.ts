@@ -1,7 +1,16 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { CarouselModule } from '@coreui/angular';
+import {
+  MdbCarouselComponent,
+  MdbCarouselModule,
+} from 'mdb-angular-ui-kit/carousel';
 import { MaterialModule } from 'src/material.module';
 import {
   MOCK_8_SPRUCE_LISTINGS_RECORD,
@@ -25,7 +34,7 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     ListingCardComponent,
     RouterModule,
-    CarouselModule,
+    MdbCarouselModule,
   ],
 })
 export class BuildingListingsComponent implements OnChanges {
@@ -36,6 +45,8 @@ export class BuildingListingsComponent implements OnChanges {
   readonly BuildingTypeEnum = BuildingTypeEnum;
 
   @Input() currentListingId: string = '1';
+
+  @ViewChild('carousel') carousel!: MdbCarouselComponent;
 
   currentListing: ApartmentListing =
     this.selectedListingSet[this.currentListingId];
