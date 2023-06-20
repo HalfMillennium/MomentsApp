@@ -1,19 +1,6 @@
 @use 'src/styles';
 @import "~@coreui/coreui/dist/css/coreui.min.css";
 
-.container {
-    display: flex;
-    width: 100%;
-}
-
-.left-panel {
-    flex-basis: 65%;
-}
-
-.right-panel {
-    flex-basis: 35%;
-}
-
 // carousel stuff
 
 .page-title {

@@ -9,14 +9,14 @@
         </div>
         <div class="right-panel">
             <div class="building-title-text">
-                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.addr }}</h3> 
+                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.address }}</h3> 
                 <mat-chip
                     *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">
                     {{BUILDING_TYPE[currentBuilding.buildingType].name}}
                 </mat-chip>
                 <span class="icon-container">
                     <mat-icon class="rent-stable-icon" *ngIf="currentBuilding.rentStabilized" matTooltip="Rent Stabilized">
-                        video_stable
+                        money
                     </mat-icon>
                 </span>
             </div>
@@ -26,8 +26,8 @@
                         <mat-icon>
                             location_pin
                         </mat-icon>
-                        {{ currentBuilding.neigh ?? 
-                            currentBuilding.lat_long?.lat + ',' + currentBuilding.lat_long?.long}}
+                        {{ currentBuilding.neighborhood ?? 
+                            currentBuilding.latLong?.lat + ',' + currentBuilding.latLong?.long}}
                     </button>
                     <button 
                         class="visit-site-button"
@@ -65,6 +65,7 @@
                 </mat-tab-group>
             </div>
         </div>
-        <!-- <building-detail> -->
     </div>
+    <building-detail [currentBuilding]="currentBuilding">
+    </building-detail>
 </div>

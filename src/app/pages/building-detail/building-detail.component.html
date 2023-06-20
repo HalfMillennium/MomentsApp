@@ -1,0 +1,23 @@
+<div class="building-detail-container">
+    <div class="building-header">
+        <h4 class="mat-headline-4 font-primary-light">Welcome to</h4>
+        <span class="mat-headline-1 font-primary-normal">
+            {{currentBuilding.title ?? currentBuilding.address}}
+            <mat-icon>
+                attach_money
+            </mat-icon>
+        </span>
+    </div>
+    <div class="building-detail-content">
+        <div class="container">
+            <div class="left-panel">
+                <img class="building-image-promo-chunk" src="{{ currentBuilding.images[0].url }}">
+            </div>
+            <div class="right-panel building-text-promo-chunk">
+                <span>
+                    {{currentBuilding.intro}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

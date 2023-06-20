@@ -45,11 +45,20 @@ export enum BuildingAmenityTypeEnum {
 }
 
 export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
-  id: '14',
+  id: 34,
   title: '8 Spruce',
-  addr: '8 Spruce St. New York, NY',
+  address: '8 Spruce St. New York, NY',
   buildingType: BuildingTypeEnum.LUXURY,
-  desc: "This looks like it's a very nice building, with lots of very modern amenities.",
+  intro:
+    "This looks like it's a very nice building, with lots of very modern amenities.",
+  promoChunks: [
+    {
+      content:
+        "This looks like it's a very nice building, with lots of very modern amenities.",
+      isPlainText: true,
+      hasAmenityInfo: false,
+    },
+  ],
   images: [
     {
       url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',
@@ -68,18 +77,26 @@ export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
     BuildingAmenityTypeEnum.TERRACE,
   ],
   website: 'https://live8spruce.com/',
-  neigh: 'Financial District',
+  neighborhood: 'Financial District',
   rentStabilized: true,
 };
 
 /** Mock buildings for example dashboard data */
 export const MOCK_BUILDINGS: ApartmentBuilding[] = [
   {
-    id: '11',
+    id: 31,
     title: '360 West',
-    addr: '360 West 43rd St, New York, NY 10036',
+    address: '360 West 43rd St, New York, NY 10036',
     buildingType: BuildingTypeEnum.LUXURY,
-    desc: 'Classic brick building located near the heart of Times Square.',
+    intro: 'Classic brick building located near the heart of Times Square.',
+    promoChunks: [
+      {
+        content:
+          'Classic brick building located near the heart of Times Square.',
+        isPlainText: true,
+        hasAmenityInfo: false,
+      },
+    ],
     images: [
       {
         url: 'https://brodsky.com/uploads/_styles/portfolio-slide/building/360-w-43-lobby3.jpg',
@@ -102,11 +119,20 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
     ],
   },
   {
-    id: '12',
+    id: 32,
     title: 'The Landon',
-    addr: '520 West 43rd St, New York, NY 10036',
+    address: '520 West 43rd St, New York, NY 10036',
+    intro:
+      'Modern full-service building located near the Westside Highway and the historic Pier 76.',
+    promoChunks: [
+      {
+        content:
+          'Modern full-service building located near the Westside Highway and the historic Pier 76.',
+        isPlainText: true,
+        hasAmenityInfo: false,
+      },
+    ],
     buildingType: BuildingTypeEnum.LUXURY,
-    desc: 'Modern full-service building located near the Westside Highway and the historic Pier 76.',
     images: [
       {
         url: 'https://thelandonnyc.com/wp-content/uploads/sites/5/2022/03/The-Landon-Resident-Lounge-min-1-scaled.jpg',
@@ -133,11 +159,20 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
     ],
   },
   {
-    id: '14',
+    id: 34,
     title: '8 Spruce',
-    addr: '8 Spruce St. New York, NY',
+    address: '8 Spruce St. New York, NY',
     buildingType: BuildingTypeEnum.LUXURY,
-    desc: "This looks like it's a very nice building, with lots of very modern amenities.",
+    intro:
+      "This looks like it's a very nice building, with lots of very modern amenities.",
+    promoChunks: [
+      {
+        content:
+          "This looks like it's a very nice building, with lots of very modern amenities.",
+        isPlainText: true,
+        hasAmenityInfo: false,
+      },
+    ],
     images: [
       {
         url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',

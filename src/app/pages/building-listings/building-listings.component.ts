@@ -23,6 +23,8 @@ import { ListingCardComponent } from '../components/listing-card/listing-card.co
 import { Observable } from 'rxjs';
 import { ApartmentBuilding } from '../../utils/buildings/interfaces';
 import { RouterModule } from '@angular/router';
+import { BuildingDetail } from '../building-detail/building-detail.component';
+
 @Component({
   selector: 'app-building-listings',
   templateUrl: './building-listings.component.html',
@@ -35,6 +37,7 @@ import { RouterModule } from '@angular/router';
     ListingCardComponent,
     RouterModule,
     MdbCarouselModule,
+    BuildingDetail,
   ],
 })
 export class BuildingListingsComponent implements OnChanges {

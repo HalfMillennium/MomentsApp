@@ -11,24 +11,35 @@ export interface LeasingInfo {
   message: string;
 }
 
+// Chunk of promotional content sourced from an apartment buildings official website
+// currently supported types: string
+export interface PromoChunk {
+  content: string;
+  isPlainText: boolean;
+  // Whether or not this chunk of content contains practical info about building (as opposed to copy, which would just be fluff)
+  hasAmenityInfo: boolean;
+}
+
 export interface ApartmentBuilding {
-  id: string;
+  id: number;
   title?: string;
-  addr: string;
+  address: string;
   buildingType: BuildingTypeEnum;
   subtitle?: string;
-  desc: string;
+  intro: string;
+  llmOverview?: string;
+  promoChunks?: PromoChunk[];
   amenities: BuildingAmenityTypeEnum[];
   floors: number;
   residents?: number;
-  avg_rent?: number;
+  avgRent?: number;
   website?: string;
   images: Image[];
-  lat_long?: {
+  latLong?: {
     lat: number;
     long: number;
   };
-  neigh?: string;
+  neighborhood?: string;
   rentStabilized?: boolean;
 }
 

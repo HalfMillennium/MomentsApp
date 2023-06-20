@@ -37,7 +37,7 @@
       <img mat-card-image [src]="MOCK_BUILDINGS[i].images[0].url" [alt]="MOCK_BUILDINGS[i].images[0].alt">
       <mat-card-content>
         <p class="md-subhead">
-          {{building.desc}}
+          {{building?.promoChunks?.[0]?.content}}
         </p>
       </mat-card-content>
       <mat-card-actions [align]="'end'">

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
@@ -16,7 +16,9 @@ import { RouterModule } from '@angular/router';
 })
 export class BuildingDetail implements OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-  currentBuilding: ApartmentBuilding;
+
+  @Input() currentBuilding: ApartmentBuilding;
+
   viewLoaded = false;
   slideIntervalMs = 5000;
 
@@ -28,19 +30,22 @@ export class BuildingDetail implements OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    fetch(
-      `https://jsonplaceholder.typicode.com/todos/${
-        this.currentBuilding.id ?? 0
-      }`
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        console.log('API response:', json);
-        if (this.currentBuilding) {
-          this.currentBuilding.desc = json.title;
-        }
-      });
+    await this.fetchData(5);
     this.viewLoaded = true;
+  }
+
+  async fetchData(iterations: number = 1) {
+    for (let i = 1; i <= iterations; i++) {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${i}`)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log('API response:', json);
+          if (this.currentBuilding) {
+            this.currentBuilding.intro =
+              this.currentBuilding.intro + '\n\n' + json.body;
+          }
+        });
+    }
   }
 
   slideChange($event: any) {
