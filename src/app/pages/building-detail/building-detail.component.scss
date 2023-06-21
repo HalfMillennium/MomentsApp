@@ -72,3 +72,16 @@
 .green-icon {
   color: green;
 }
+
+.hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 75rem) {
+  .sidebar-wrapper {
+    display: none;
+  }
+  .alt-sidebar-wrapper {
+    display: visible;
+  }
+}
