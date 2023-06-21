@@ -30,7 +30,7 @@ export class BuildingDetail implements OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.fetchData(5);
+    await this.fetchData(2);
     this.viewLoaded = true;
   }
 
