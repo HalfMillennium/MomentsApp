@@ -19,20 +19,18 @@
     </ng-container>
     <ng-container *ngIf="direction === 'left-text'">
         <div class="left-panel text-panel">
-            <div *ngIf="title" class="mat-headline-4">
+            <span *ngIf="title" class="mat-headline-4">
                 {{ title }}
                 <span class="material-icons">
                     {{ googleIcon }}
                 </span>
-            </div>
+            </span>
             <div class="description-text">
                 {{ plainText }}
             </div>
         </div>
         <div class="right-panel">
-            <span class="description-text">
-                {{ plainText }}
-            </span>
+            <img class="image-container-normal" src="{{image?.url}}">
         </div>
     </ng-container>
 </div>
