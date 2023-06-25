@@ -1,59 +1,25 @@
 <div class="building-detail-container">
+    <h4 class="mat-headline-4 font-primary-light">Welcome to</h4>
     <div class="building-header">
-        <h4 class="mat-headline-4 font-primary-light">Welcome to</h4>
-        <span class="mat-headline-1 font-primary-normal">
-            {{currentBuilding.title ?? currentBuilding.address}}
-            <span class="icon-set">
+        <div class="mat-headline-1 font-primary-normal building-header">
+            <div class="building-title">
+                {{currentBuilding.title ?? currentBuilding.address}}
+            </div>
+            <div class="icon-set">
                 <mat-icon class="icon-display-large icon-margin" matTooltip="">
                     apartment
                 </mat-icon>
                 <mat-icon class="icon-display-medium icon-margin green-icon" matTooltip="HotSpot Supported Building">
                     verified
                 </mat-icon>
-            </span>
-        </span>
+            </div>
+        </div>
     </div>
     <div class="building-detail-content">
-        <div class="container">
-            <div class="left-panel">
-                <img class="building-image-promo-chunk" src="{{ currentBuilding.images[0].url }}">
-            </div>
-            <div class="right-panel building-text-promo-chunk sidebar-wrapper">
-                <span class="mat-headline-4">
-                    Overview
-                </span>
-                <mat-icon>
-                    announcement
-                </mat-icon>
-                <div class="description-text">
-                    <span>
-                    --- {{currentBuilding.intro}} ---
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="right-panel building-text-promo-chunk hidden alt-sidebar-wrapper">
-            <div class="info-section">
-                <span>
-                    --- {{currentBuilding.intro}} ---
-                </span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="left-panel building-text-promo-chunk sidebar-wrapper">
-                <span>
-                    ...{{currentBuilding.intro}}...
-                </span>
-            </div>
-            <div class="right-panel">
-                <img class="building-image-promo-chunk" src="{{ currentBuilding.images[0].url }}">
-            </div>
-        </div>
-        <div class="left-panel building-text-promo-chunk hidden alt-sidebar-wrapper">
-            <span>
-                ...{{currentBuilding.intro}}...
-            </span>
-        </div>
+        <two-panel-title-container 
+            *ngFor="let chunk of buildingDetailChunks"
+            [buildingDetailChunk]="chunk">
+        </two-panel-title-container>
     </div>
     <div class="fab-options-list">
         <button mat-fab disabled aria-label="Add building to watch list" matTooltip="Add building to favorites">

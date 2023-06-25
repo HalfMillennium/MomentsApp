@@ -19,16 +19,16 @@ import { DatabaseEffects } from '../shared/store/db.effects';
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
   {
+    name: 'dash_home',
+    icon: 'home',
+    label: 'Dashboard',
+    routerLink: '/',
+  },
+  {
     name: 'about',
     icon: 'info',
     label: 'What Is This?',
     routerLink: '/info',
-  },
-  {
-    name: 'dash_home',
-    icon: 'dashboard',
-    label: 'Dashboard',
-    routerLink: '/',
   },
   {
     name: 'view_listings',

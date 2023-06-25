@@ -48,11 +48,6 @@
   padding: 5rem 10rem 0rem 10rem;
 }
 
-.building-image-promo-chunk {
-  max-width: 45rem;
-  padding: 3rem;
-}
-
 .building-text-promo-chunk {
   margin-top: 3rem;
 }
@@ -73,19 +68,16 @@
   color: green;
 }
 
-.hidden {
-  display: none;
+.building-header {
+  display: flex;
+  width: 50rem;
 }
 
-@media only screen and (max-width: 75rem) {
-  .sidebar-wrapper {
-    display: none;
-  }
-  .alt-sidebar-wrapper {
-    display: visible;
-  }
+.icon-set {
+  flex-basis: 35%;
 }
 
-.description-text {
-  padding-top: 1rem;
+.building-title {
+  flex-basis: 65%;
+  margin-right: -5rem;
 }

@@ -14,11 +14,6 @@
                     *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">
                     {{BUILDING_TYPE[currentBuilding.buildingType].name}}
                 </mat-chip>
-                <span class="icon-container">
-                    <mat-icon class="rent-stable-icon" *ngIf="currentBuilding.rentStabilized" matTooltip="Rent Stabilized">
-                        money
-                    </mat-icon>
-                </span>
             </div>
             <div class="building-tag-chips">
                 <mat-chip-listbox aria-label="Building tags">

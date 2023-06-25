@@ -6,11 +6,20 @@ import { MaterialModule } from 'src/material.module';
 import { ApartmentBuilding } from 'src/app/utils/buildings/interfaces';
 import { CarouselModule } from '@coreui/angular';
 import { RouterModule } from '@angular/router';
+import { TwoPanelContainerComponent } from '../components/two-panel-container/two-panel-container.component';
+import { BuildingDetailChunk } from 'src/app/utils/interfaces';
+import { MOCK_8_SPRUCE_DETAIL_CHUNKS } from '../../utils/buildings/resources';
 
 @Component({
   selector: 'building-detail',
   standalone: true,
-  imports: [CommonModule, MaterialModule, CarouselModule, RouterModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    CarouselModule,
+    RouterModule,
+    TwoPanelContainerComponent,
+  ],
   templateUrl: './building-detail.component.html',
   styleUrls: ['./building-detail.component.scss'],
 })
@@ -18,6 +27,8 @@ export class BuildingDetail implements OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   @Input() currentBuilding: ApartmentBuilding;
+
+  buildingDetailChunks: BuildingDetailChunk[] = MOCK_8_SPRUCE_DETAIL_CHUNKS;
 
   viewLoaded = false;
   slideIntervalMs = 5000;
@@ -46,10 +57,6 @@ export class BuildingDetail implements OnDestroy {
           }
         });
     }
-  }
-
-  slideChange($event: any) {
-    console.log('Slide changed.');
   }
 
   ngOnDestroy() {

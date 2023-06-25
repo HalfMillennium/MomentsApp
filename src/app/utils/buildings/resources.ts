@@ -1,3 +1,4 @@
+import { BuildingDetailChunk } from '../interfaces';
 import { ApartmentBuilding } from './interfaces';
 import { ApartmentListing } from './interfaces';
 
@@ -258,3 +259,22 @@ export const MOCK_8_SPRUCE_LISTINGS_RECORD: Record<string, ApartmentListing> = {
     rent: 2800,
   },
 };
+/*
+export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [
+  {
+    plainText: '',
+    image: {
+      url: '',
+      alt: '',
+    },
+    title: '',
+    direction: "'right-text'",
+  },
+  {
+    plainText: '',
+    image: '',
+    title: '',
+    direction: "'left-text'",
+  },
+];*/
+export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [];

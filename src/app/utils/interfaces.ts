@@ -115,3 +115,13 @@ export interface UserDataState extends DatabaseState {
   // e.g. Liked Buildings --> buildings a user has liked, but hasn't visited for an extended period of time
   shouldReloadUser?: boolean;
 }
+
+export interface BuildingDetailChunk {
+  plainText: string;
+  image: Image;
+  title: string;
+  direction: string;
+  googleIcon?: string;
+  angularMatIcon?: string;
+  amenities: BuildingAmenityTypeEnum[];
+}
