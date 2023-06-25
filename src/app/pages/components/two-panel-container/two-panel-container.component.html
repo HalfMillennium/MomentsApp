@@ -1,0 +1,45 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="container">
+    <ng-container *ngIf="direction === 'right-text'">
+        <div class="left-panel">
+            <img class="image-container-normal" src="{{image?.url}}">
+        </div>
+        <div class="right-panel text-panel">
+            <span *ngIf="title" class="mat-headline-4">
+                {{ title }}
+                <span class="material-icons">
+                    {{ googleIcon }}
+                </span>
+            </span>
+            <div class="description-text">
+                {{ plainText }}
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="direction === 'left-text'">
+        <div class="left-panel text-panel">
+            <div *ngIf="title" class="mat-headline-4">
+                {{ title }}
+                <span class="material-icons">
+                    {{ googleIcon }}
+                </span>
+            </div>
+            <div class="description-text">
+                {{ plainText }}
+            </div>
+        </div>
+        <div class="right-panel">
+            <span class="description-text">
+                {{ plainText }}
+            </span>
+        </div>
+    </ng-container>
+</div>
+<div class="hidden alt-sidebar-wrapper">
+    <div class="info-section">
+        <span>
+            {{ plainText }}
+        </span>
+    </div>
+</div>
