@@ -1,9 +1,9 @@
 <div>
     <div class="container">
-        <div class="left-panel">
-            <mdb-carousel [dark]="true" [controls]="true" [indicators]="true" [animation]="'slide'" #carousel>
+        <div class="left-panel rounded-image">
+            <mdb-carousel [dark]="true" [controls]="true" [animation]="'slide'" #carousel>
                 <mdb-carousel-item *ngFor="let image of currentListing?.images; let i = index">
-                    <img alt="Listing #{{i}}" class="d-block w-100" loading="lazy" [src]="image" />
+                    <img alt="Listing #{{i}}" class="d-block w-100 rounded-image" loading="lazy" [src]="image" />
                 </mdb-carousel-item>
             </mdb-carousel>
         </div>
