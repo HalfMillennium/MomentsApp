@@ -8,7 +8,9 @@
 
 <div class="action-bar">
   <div class="toolbar-container">
-    <button class="menu-padding" mat-stroked-button [matMenuTriggerFor]="menu"><span class="font-primary-normal">Menu</span></button>
+    <button class="menu-padding" mat-stroked-button [matMenuTriggerFor]="menu">
+      <span class="font-primary-normal">Menu</span>
+    </button>
     <mat-menu class="menu" #menu="matMenu">
       <div 
         *ngFor="let item of MENU_ITEMS">

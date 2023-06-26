@@ -287,3 +287,11 @@ export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [
     amenityList: true,
   },
 ];
+
+// Indicates how a user has interacted with a particular listing (e.g. Favorite, Watched, etc)
+export enum UserInteractionTypeEnum {
+  FAVORITED = 'favorited',
+  WATCHING = 'watching',
+  VISITED = 'visited',
+  LIVED_IN = 'lived_in',
+}

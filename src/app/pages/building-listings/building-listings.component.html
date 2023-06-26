@@ -1,6 +1,6 @@
 <div>
     <div class="container">
-        <div class="left-panel rounded-image">
+        <div class="left-panel rounded-image carousel-container">
             <mdb-carousel [dark]="true" [controls]="true" [animation]="'slide'" #carousel>
                 <mdb-carousel-item *ngFor="let image of currentListing?.images; let i = index">
                     <img alt="Listing #{{i}}" class="d-block w-100 rounded-image" loading="lazy" [src]="image" />
