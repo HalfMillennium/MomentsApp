@@ -30,20 +30,26 @@ export const BUILDING_TYPE: Record<BuildingTypeEnum, BuildingTypeEntity> = {
 };
 
 export enum BuildingAmenityTypeEnum {
-  LAUNDRY_IN_UNIT = 'Laundry, In-Unit',
   LAUNDRY_IN_BUILDING = 'Laundry, In-Building',
-  POOL_OUTDOOR = 'Outdoor Pool',
-  POOL_INDOOR = 'Indoor Pool',
   POOL = 'Pool',
   DOORMAN = 'Doorman',
-  FULL_TIME_DOORMAN = '24/7 Doorman',
   ELEVATOR = 'Elevator',
-  ROOFTOP = 'Rooftop',
   TERRACE = 'Terrace',
   REFUSE_EACH_FLOOR = 'Refuse room, each floor',
   GYM = 'Gym',
   REC_AREA = 'Recreational area(s)',
 }
+
+export const BUILDING_AMENITY_ICONS: Record<BuildingAmenityTypeEnum, string> = {
+  [BuildingAmenityTypeEnum.DOORMAN]: 'man',
+  [BuildingAmenityTypeEnum.ELEVATOR]: 'elevator',
+  [BuildingAmenityTypeEnum.GYM]: 'fitness_center',
+  [BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING]: 'local_laundry_service',
+  [BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR]: 'delete',
+  [BuildingAmenityTypeEnum.REC_AREA]: 'sports_basketball',
+  [BuildingAmenityTypeEnum.TERRACE]: 'deck',
+  [BuildingAmenityTypeEnum.POOL]: 'pool',
+};
 
 export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
   id: 34,
@@ -69,12 +75,10 @@ export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
   floors: 76,
   amenities: [
     BuildingAmenityTypeEnum.ELEVATOR,
-    BuildingAmenityTypeEnum.FULL_TIME_DOORMAN,
     BuildingAmenityTypeEnum.GYM,
-    BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
+    BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
     BuildingAmenityTypeEnum.REC_AREA,
     BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
-    BuildingAmenityTypeEnum.ROOFTOP,
     BuildingAmenityTypeEnum.TERRACE,
   ],
   website: 'https://live8spruce.com/',
@@ -116,7 +120,7 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
       BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
       BuildingAmenityTypeEnum.TERRACE,
       BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.ROOFTOP,
+      BuildingAmenityTypeEnum.TERRACE,
     ],
   },
   {
@@ -152,10 +156,8 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
       BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
       BuildingAmenityTypeEnum.TERRACE,
       BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
-      BuildingAmenityTypeEnum.POOL_INDOOR,
-      BuildingAmenityTypeEnum.POOL_OUTDOOR,
-      BuildingAmenityTypeEnum.ROOFTOP,
+      BuildingAmenityTypeEnum.POOL,
+      BuildingAmenityTypeEnum.TERRACE,
       BuildingAmenityTypeEnum.REC_AREA,
     ],
   },
@@ -183,9 +185,8 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
     floors: 45,
     amenities: [
       BuildingAmenityTypeEnum.ELEVATOR,
-      BuildingAmenityTypeEnum.FULL_TIME_DOORMAN,
       BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
+      BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
     ],
   },
 ];
@@ -259,22 +260,30 @@ export const MOCK_8_SPRUCE_LISTINGS_RECORD: Record<string, ApartmentListing> = {
     rent: 2800,
   },
 };
-/*
+
 export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [
   {
-    plainText: '',
+    plainText:
+      'This is example of first plainText. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi porta lorem mollis aliquam. Urna molestie at elementum eu facilisis. Interdum varius sit amet mattis vulputate enim nulla aliquet. Dictum fusce ut placerat orci nulla pellentesque dignissim enim sit. Ut tellus elementum sagittis vitae et leo duis. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Sapien pellentesque habitant morbi tristique. Cras fermentum odio eu feugiat pretium nibh ipsum. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus. Molestie ac feugiat sed lectus vestibulum mattis.',
     image: {
-      url: '',
-      alt: '',
+      url: 'https://imgs.6sqft.com/wp-content/uploads/2017/10/03122815/8-Spruce-Street-PH-N-8.jpg',
+      alt: 'This is an example of first alt text',
     },
-    title: '',
-    direction: "'right-text'",
+    title: 'Overview',
+    direction: 'right-text',
+    googleIcon: 'auto_awesome',
   },
   {
-    plainText: '',
-    image: '',
-    title: '',
-    direction: "'left-text'",
+    plainText:
+      'This is a second example plainText. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Arcu felis bibendum ut tristique. Molestie at elementum eu facilisis sed odio. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra. In eu mi bibendum neque. Id leo in vitae turpis massa sed elementum tempus egestas. Pellentesque adipiscing commodo elit at imperdiet dui. Vitae suscipit tellus mauris a diam. Arcu non odio euismod lacinia at quis risus. Facilisis volutpat est velit egestas dui id ornare arcu. Ornare massa eget egestas purus viverra accumsan in.',
+    image: {
+      url: 'https://www.live8spruce.com/media/povbcomt/8-spruce-amenity-1-1000_750.jpg?width=1380&height=760&rnd=133257616512070000',
+      alt: 'This is an example of second alt text',
+    },
+    title: 'Amenities',
+    googleIcon: 'local_bar',
+    direction: 'left-text',
+    amenities: Object.values(BuildingAmenityTypeEnum),
+    amenityList: true,
   },
-];*/
-export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [];
+];

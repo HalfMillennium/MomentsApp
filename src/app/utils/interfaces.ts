@@ -123,5 +123,6 @@ export interface BuildingDetailChunk {
   direction: string;
   googleIcon?: string;
   angularMatIcon?: string;
-  amenities: BuildingAmenityTypeEnum[];
+  amenities?: BuildingAmenityTypeEnum[];
+  amenityList?: boolean;
 }

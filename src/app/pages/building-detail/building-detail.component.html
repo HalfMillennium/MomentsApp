@@ -18,7 +18,8 @@
     <div class="building-detail-content">
         <two-panel-title-container 
             *ngFor="let chunk of buildingDetailChunks"
-            [buildingDetailChunk]="chunk">
+            [buildingDetailChunk]="chunk"
+            [amenityList]="chunk.amenityList ?? false">
         </two-panel-title-container>
     </div>
     <div class="fab-options-list">
