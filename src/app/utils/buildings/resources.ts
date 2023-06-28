@@ -1,5 +1,5 @@
 import { BuildingDetailChunk } from '../interfaces';
-import { ApartmentBuilding } from './interfaces';
+import { ApartmentBuilding, TenantComment } from './interfaces';
 import { ApartmentListing } from './interfaces';
 
 export enum BuildingSupportStatusEnum {
@@ -285,6 +285,30 @@ export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [
     direction: 'left-text',
     amenities: Object.values(BuildingAmenityTypeEnum),
     amenityList: true,
+  },
+];
+
+export const MOCK_8_SPRUCE_TENANT_COMMENTS: TenantComment[] = [
+  {
+    id: '0',
+    authorUserName: 'MrShock17',
+    postDate: 'June 23rd, 2023',
+    content:
+      'Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Arcu felis bibendum ut tristique. Molestie at elementum eu facilisis sed odio. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 156,
+  },
+  {
+    id: '0',
+    authorUserName: 'MrShock17',
+    postDate: 'April 12th, 2022',
+    content:
+      'Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 156,
+    currentTenant: true,
   },
 ];
 

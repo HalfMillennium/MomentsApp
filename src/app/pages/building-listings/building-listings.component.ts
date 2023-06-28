@@ -15,15 +15,18 @@ import { MaterialModule } from 'src/material.module';
 import {
   MOCK_8_SPRUCE_LISTINGS_RECORD,
   MOCK_8_SPRUCE_BUILDING,
+  MOCK_8_SPRUCE_TENANT_COMMENTS,
   BUILDING_TYPE,
   BuildingTypeEnum,
 } from '../../utils/buildings/resources';
 import { ApartmentListing } from '../../utils/buildings/interfaces';
 import { ListingCardComponent } from '../components/listing-card/listing-card.component';
-import { Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { ApartmentBuilding } from '../../utils/buildings/interfaces';
 import { RouterModule } from '@angular/router';
 import { BuildingDetail } from '../building-detail/building-detail.component';
+import { TenantCommentPartial } from '../components/tenant-comment-partial/tenant-comment-partial.component';
+import { TenantComment } from '../../utils/buildings/interfaces';
 
 @Component({
   selector: 'app-building-listings',
@@ -38,6 +41,7 @@ import { BuildingDetail } from '../building-detail/building-detail.component';
     RouterModule,
     MdbCarouselModule,
     BuildingDetail,
+    TenantCommentPartial,
   ],
 })
 export class BuildingListingsComponent implements OnChanges {
@@ -55,6 +59,10 @@ export class BuildingListingsComponent implements OnChanges {
     this.selectedListingSet[this.currentListingId];
 
   slideIntervalMs = 0;
+
+  tenantComments: Observable<TenantComment[]> = observableOf(
+    MOCK_8_SPRUCE_TENANT_COMMENTS
+  );
 
   closedListings: Observable<ApartmentListing[]> | undefined;
 

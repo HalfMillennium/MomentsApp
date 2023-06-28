@@ -56,3 +56,13 @@ export interface ApartmentListing {
   images: string[];
   rent: number;
 }
+
+export interface TenantComment {
+  id: string;
+  authorUserName: string;
+  postDate: string;
+  content: string;
+  avatarUrl: string;
+  claps: number;
+  currentTenant?: boolean;
+}

@@ -37,7 +37,7 @@
             </div>
             <div>
                 <mat-tab-group class="tab-style">
-                    <mat-tab label="Active">
+                    <mat-tab label="Active Listings ({{(selectedListingSet | keyvalue).length }})">
                         <ul>
                             <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
                                 <div class="card-item">
@@ -47,14 +47,14 @@
                             </li>
                         </ul>
                     </mat-tab>
-                    <mat-tab label="Recent">
-                        <ul *ngIf="closedListings">
-                            <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
-                                <div class="card-item">
-                                    <listing-card [listing]="listing.value">
-                                    </listing-card>
-                                </div>
-                            </li>
+                    <mat-tab 
+                        class="tab-style"
+                        label="Tenant Comments ({{tenantComments.length}})"
+                        *ngIf="tenantComments | async as tenantComments">
+                        <ul>
+                            <tenant-comment-partial class="tenant-comment" *ngFor="let comment of tenantComments"
+                                [tenantComment]="comment">
+                            </tenant-comment-partial>
                         </ul>
                     </mat-tab>
                 </mat-tab-group>
