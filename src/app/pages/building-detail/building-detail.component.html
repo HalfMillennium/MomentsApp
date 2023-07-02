@@ -1,0 +1,40 @@
+<div class="building-detail-container" *ngIf="currentBuilding">
+    <h4 class="mat-headline-4 font-primary-light">Welcome to</h4>
+    <div>
+        <div class="mat-headline-1 font-primary-normal building-header">
+            <div class="building-title">
+                {{currentBuilding.title ?? currentBuilding.address}}
+                <span class="icon-set">
+                    <mat-icon class="icon-display-large icon-margin" matTooltip="Standard-lease building">
+                        apartment
+                    </mat-icon>
+                    <mat-icon class="icon-display-medium icon-margin green-icon" matTooltip="HotSpot Supported Building">
+                        verified
+                    </mat-icon>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="building-detail-content">
+        <two-panel-title-container 
+            *ngFor="let chunk of buildingDetailChunks"
+            [buildingDetailChunk]="chunk"
+            [amenityList]="chunk.amenityList ?? false">
+        </two-panel-title-container>
+    </div>
+    <div class="fab-options-list">
+        <button mat-fab aria-label="Add building to watch list" matTooltip="Add building to favorites">
+            <mat-icon *ngIf="userInteractions | async as userInteractions">
+                <ng-container *ngIf="userInteractions.includes(UserInteractionTypeEnum.FAVORITED)">
+                    favorite
+                </ng-container>
+                <ng-container #favoriteOutline>
+                    favorite_border
+                </ng-container>
+            </mat-icon>
+        </button>
+    </div>
+</div>
+<div *ngIf="!currentBuilding">
+    <span>[ Error - No Building Specified ]</span>
+</div>

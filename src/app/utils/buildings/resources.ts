@@ -1,4 +1,5 @@
-import { ApartmentBuilding } from './interfaces';
+import { BuildingDetailChunk } from '../interfaces';
+import { ApartmentBuilding, TenantComment } from './interfaces';
 import { ApartmentListing } from './interfaces';
 
 export enum BuildingSupportStatusEnum {
@@ -29,27 +30,42 @@ export const BUILDING_TYPE: Record<BuildingTypeEnum, BuildingTypeEntity> = {
 };
 
 export enum BuildingAmenityTypeEnum {
-  LAUNDRY_IN_UNIT = 'Laundry, In-Unit',
   LAUNDRY_IN_BUILDING = 'Laundry, In-Building',
-  POOL_OUTDOOR = 'Outdoor Pool',
-  POOL_INDOOR = 'Indoor Pool',
   POOL = 'Pool',
   DOORMAN = 'Doorman',
-  FULL_TIME_DOORMAN = '24/7 Doorman',
   ELEVATOR = 'Elevator',
-  ROOFTOP = 'Rooftop',
   TERRACE = 'Terrace',
   REFUSE_EACH_FLOOR = 'Refuse room, each floor',
   GYM = 'Gym',
   REC_AREA = 'Recreational area(s)',
 }
 
+export const BUILDING_AMENITY_ICONS: Record<BuildingAmenityTypeEnum, string> = {
+  [BuildingAmenityTypeEnum.DOORMAN]: 'man',
+  [BuildingAmenityTypeEnum.ELEVATOR]: 'elevator',
+  [BuildingAmenityTypeEnum.GYM]: 'fitness_center',
+  [BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING]: 'local_laundry_service',
+  [BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR]: 'delete',
+  [BuildingAmenityTypeEnum.REC_AREA]: 'sports_basketball',
+  [BuildingAmenityTypeEnum.TERRACE]: 'deck',
+  [BuildingAmenityTypeEnum.POOL]: 'pool',
+};
+
 export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
-  id: '14',
+  id: '32',
   title: '8 Spruce',
-  addr: '8 Spruce St. New York, NY',
+  address: '8 Spruce St. New York, NY',
   buildingType: BuildingTypeEnum.LUXURY,
-  desc: "This looks like it's a very nice building, with lots of very modern amenities.",
+  intro:
+    "This looks like it's a very nice building, with lots of very modern amenities.",
+  promoChunks: [
+    {
+      content:
+        "This looks like it's a very nice building, with lots of very modern amenities.",
+      isPlainText: true,
+      hasAmenityInfo: false,
+    },
+  ],
   images: [
     {
       url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',
@@ -59,27 +75,68 @@ export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
   floors: 76,
   amenities: [
     BuildingAmenityTypeEnum.ELEVATOR,
-    BuildingAmenityTypeEnum.FULL_TIME_DOORMAN,
     BuildingAmenityTypeEnum.GYM,
-    BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
+    BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
     BuildingAmenityTypeEnum.REC_AREA,
     BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
-    BuildingAmenityTypeEnum.ROOFTOP,
     BuildingAmenityTypeEnum.TERRACE,
   ],
   website: 'https://live8spruce.com/',
-  neigh: 'Financial District',
+  neighborhood: 'Financial District',
   rentStabilized: true,
+};
+
+export const MOCK_15_CLIFF_BUILDING: ApartmentBuilding = {
+  id: '33',
+  title: '15 Cliff',
+  address: '15 Cliff St. New York, NY',
+  buildingType: BuildingTypeEnum.LUXURY,
+  intro:
+    "This looks like it's a very nice building, with lots of very modern amenities.",
+  promoChunks: [
+    {
+      content:
+        "This looks like it's a very nice building, with lots of very modern amenities.",
+      isPlainText: true,
+      hasAmenityInfo: false,
+    },
+  ],
+  images: [
+    {
+      url: 'https://images1.apartments.com/i2/u1Vzx8mmEC2C3LMSt3izCWQvUkAsRO56tKx961xhXA4/111/15-cliff-st-unit-fl8-id486-new-york-ny-primary-photo.jpg',
+      alt: 'View from inside apartment',
+    },
+  ],
+  floors: 30,
+  amenities: [
+    BuildingAmenityTypeEnum.ELEVATOR,
+    BuildingAmenityTypeEnum.GYM,
+    BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
+    BuildingAmenityTypeEnum.REC_AREA,
+    BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
+    BuildingAmenityTypeEnum.TERRACE,
+  ],
+  website: 'https://rent.brookfieldproperties.com/',
+  neighborhood: 'Financial District',
+  rentStabilized: false,
 };
 
 /** Mock buildings for example dashboard data */
 export const MOCK_BUILDINGS: ApartmentBuilding[] = [
   {
-    id: '11',
+    id: '31',
     title: '360 West',
-    addr: '360 West 43rd St, New York, NY 10036',
+    address: '360 West 43rd St, New York, NY 10036',
     buildingType: BuildingTypeEnum.LUXURY,
-    desc: 'Classic brick building located near the heart of Times Square.',
+    intro: 'Classic brick building located near the heart of Times Square.',
+    promoChunks: [
+      {
+        content:
+          'Classic brick building located near the heart of Times Square.',
+        isPlainText: true,
+        hasAmenityInfo: false,
+      },
+    ],
     images: [
       {
         url: 'https://brodsky.com/uploads/_styles/portfolio-slide/building/360-w-43-lobby3.jpg',
@@ -98,15 +155,53 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
       BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
       BuildingAmenityTypeEnum.TERRACE,
       BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.ROOFTOP,
+      BuildingAmenityTypeEnum.TERRACE,
     ],
   },
   {
-    id: '12',
-    title: 'The Landon',
-    addr: '520 West 43rd St, New York, NY 10036',
+    id: '32',
+    title: '8 Spruce',
+    address: '8 Spruce St. New York, NY',
     buildingType: BuildingTypeEnum.LUXURY,
-    desc: 'Modern full-service building located near the Westside Highway and the historic Pier 76.',
+    intro:
+      "This looks like it's a very nice building, with lots of very modern amenities.",
+    promoChunks: [
+      {
+        content:
+          "This looks like it's a very nice building, with lots of very modern amenities.",
+        isPlainText: true,
+        hasAmenityInfo: false,
+      },
+    ],
+    images: [
+      {
+        url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',
+        alt: 'View from inside apartment',
+      },
+    ],
+    floors: 45,
+    amenities: [
+      BuildingAmenityTypeEnum.ELEVATOR,
+      BuildingAmenityTypeEnum.GYM,
+      BuildingAmenityTypeEnum.LAUNDRY_IN_BUILDING,
+    ],
+  },
+  MOCK_15_CLIFF_BUILDING,
+  {
+    id: '34',
+    title: 'The Landon',
+    address: '520 West 43rd St, New York, NY 10036',
+    intro:
+      'Modern full-service building located near the Westside Highway and the historic Pier 76.',
+    promoChunks: [
+      {
+        content:
+          'Modern full-service building located near the Westside Highway and the historic Pier 76.',
+        isPlainText: true,
+        hasAmenityInfo: false,
+      },
+    ],
+    buildingType: BuildingTypeEnum.LUXURY,
     images: [
       {
         url: 'https://thelandonnyc.com/wp-content/uploads/sites/5/2022/03/The-Landon-Resident-Lounge-min-1-scaled.jpg',
@@ -125,31 +220,9 @@ export const MOCK_BUILDINGS: ApartmentBuilding[] = [
       BuildingAmenityTypeEnum.REFUSE_EACH_FLOOR,
       BuildingAmenityTypeEnum.TERRACE,
       BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
-      BuildingAmenityTypeEnum.POOL_INDOOR,
-      BuildingAmenityTypeEnum.POOL_OUTDOOR,
-      BuildingAmenityTypeEnum.ROOFTOP,
+      BuildingAmenityTypeEnum.POOL,
+      BuildingAmenityTypeEnum.TERRACE,
       BuildingAmenityTypeEnum.REC_AREA,
-    ],
-  },
-  {
-    id: '14',
-    title: '8 Spruce',
-    addr: '8 Spruce St. New York, NY',
-    buildingType: BuildingTypeEnum.LUXURY,
-    desc: "This looks like it's a very nice building, with lots of very modern amenities.",
-    images: [
-      {
-        url: 'https://images1.apartments.com/i2/z39DCbthQ4Zi7UBPImhsnKop55hqSs_C6EmQEgpnf5A/111/8-spruce-new-york-ny-primary-photo.jpg',
-        alt: 'View from inside apartment',
-      },
-    ],
-    floors: 45,
-    amenities: [
-      BuildingAmenityTypeEnum.ELEVATOR,
-      BuildingAmenityTypeEnum.FULL_TIME_DOORMAN,
-      BuildingAmenityTypeEnum.GYM,
-      BuildingAmenityTypeEnum.LAUNDRY_IN_UNIT,
     ],
   },
 ];
@@ -223,3 +296,135 @@ export const MOCK_8_SPRUCE_LISTINGS_RECORD: Record<string, ApartmentListing> = {
     rent: 2800,
   },
 };
+
+export const MOCK_15_CLIFF_LISTINGS_RECORD = MOCK_8_SPRUCE_LISTINGS_RECORD;
+
+export const MOCK_8_SPRUCE_DETAIL_CHUNKS: BuildingDetailChunk[] = [
+  {
+    plainText:
+      'This is example of first plainText. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi porta lorem mollis aliquam. Urna molestie at elementum eu facilisis. Interdum varius sit amet mattis vulputate enim nulla aliquet. Dictum fusce ut placerat orci nulla pellentesque dignissim enim sit. Ut tellus elementum sagittis vitae et leo duis. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Sapien pellentesque habitant morbi tristique. Cras fermentum odio eu feugiat pretium nibh ipsum. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus. Molestie ac feugiat sed lectus vestibulum mattis.',
+    image: {
+      url: 'https://imgs.6sqft.com/wp-content/uploads/2017/10/03122815/8-Spruce-Street-PH-N-8.jpg',
+      alt: 'This is an example of first alt text',
+    },
+    title: 'Overview',
+    direction: 'right-text',
+    googleIcon: 'auto_awesome',
+  },
+  {
+    plainText:
+      'This is a second example plainText. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Arcu felis bibendum ut tristique. Molestie at elementum eu facilisis sed odio. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra. In eu mi bibendum neque. Id leo in vitae turpis massa sed elementum tempus egestas. Pellentesque adipiscing commodo elit at imperdiet dui. Vitae suscipit tellus mauris a diam. Arcu non odio euismod lacinia at quis risus. Facilisis volutpat est velit egestas dui id ornare arcu. Ornare massa eget egestas purus viverra accumsan in.',
+    image: {
+      url: 'https://www.live8spruce.com/media/povbcomt/8-spruce-amenity-1-1000_750.jpg?width=1380&height=760&rnd=133257616512070000',
+      alt: 'This is an example of second alt text',
+    },
+    title: 'Amenities',
+    googleIcon: 'local_bar',
+    direction: 'left-text',
+    amenities: Object.values(BuildingAmenityTypeEnum),
+    amenityList: true,
+  },
+];
+
+export const MOCK_15_CLIFF_DETAIL_CHUNKS: BuildingDetailChunk[] = [
+  {
+    plainText:
+      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    image: {
+      url: 'https://res.cloudinary.com/dtujpcplo/image/fetch/c_fill,g_auto,h_608,w_1080/q_auto/https://rent.brookfieldproperties.com/content/dam/portfolio/properties/15-cliff/Gallery%2013%20-%20exterior.jpg',
+      alt: '15 Cliff entrance',
+    },
+    title: 'Overview',
+    googleIcon: 'auto_awesome',
+    direction: 'right-text',
+  },
+  {
+    plainText:
+      'At elementum eu facilisis sed odio morbi quis. Senectus et netus et malesuada fames ac. Sodales ut etiam sit amet. Ut tortor pretium viverra suspendisse potenti. Libero enim sed faucibus turpis in eu. Placerat duis ultricies lacus sed. Placerat duis ultricies lacus sed. ',
+    image: {
+      url: 'https://www.nynesting.com/sites/default/files/15_cliff_street_8.jpg',
+      alt: '15 Cliff rooftop view',
+    },
+    title: 'More Details',
+    googleIcon: 'feed',
+    direction: 'left-text',
+  },
+];
+
+export const MOCK_8_SPRUCE_TENANT_COMMENTS: TenantComment[] = [
+  {
+    id: '0',
+    authorUserName: 'MrShock11',
+    postDate: 'June 23rd, 2023',
+    content:
+      'Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Arcu felis bibendum ut tristique. Molestie at elementum eu facilisis sed odio. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 156,
+  },
+  {
+    id: '1',
+    authorUserName: 'MrShock12',
+    postDate: 'April 12th, 2022',
+    content:
+      'Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 67,
+    currentTenant: true,
+  },
+
+  {
+    id: '2',
+    authorUserName: 'MrShock15',
+    postDate: 'August 12th, 2021',
+    content:
+      'Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 12,
+    currentTenant: false,
+  },
+];
+
+export const MOCK_15_CLIFF_TENANT_COMMENTS: TenantComment[] = [
+  {
+    id: '0',
+    authorUserName: 'Roasted7',
+    postDate: 'June 23rd, 2023',
+    content:
+      'Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Arcu felis bibendum ut tristique. Molestie at elementum eu facilisis sed odio. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 156,
+  },
+  {
+    id: '1',
+    authorUserName: 'Early21',
+    postDate: 'July 1st, 2023',
+    content:
+      'Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 67,
+    currentTenant: true,
+  },
+  {
+    id: '2',
+    authorUserName: 'Food19',
+    postDate: 'August 12th, 2021',
+    content:
+      'Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Cras tincidunt lobortis feugiat vivamus at. Magna sit amet purus gravida quis. Etiam non quam lacus suspendisse faucibus interdum. Malesuada nunc vel risus commodo viverra.',
+    avatarUrl:
+      'https://brobible.com/wp-content/uploads/2019/09/dennis-reynolds.jpg',
+    claps: 12,
+  },
+];
+
+// Indicates how a user has interacted with a particular listing (e.g. Favorite, Watched, etc)
+export enum UserInteractionTypeEnum {
+  FAVORITED = 'favorited',
+  WATCHING = 'watching',
+  VISITED = 'visited',
+  LIVED_IN = 'lived_in',
+}

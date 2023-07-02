@@ -3,8 +3,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=Moirai+One&family=Poppins:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
   rel="stylesheet">
-
-<div class="">
+<div class="page-head">
   <div class="row">
     <div class="column space-right">
       <span *ngIf="user" class="mat-h4">
@@ -27,23 +26,30 @@
       </span>
     </div>
   </div>
-  <span class="mat-headline-3 font-primary-heavy">Saved buildings</span>
-  <h5 class="mat-headline-6">Visited buildings that you've saved.</h5>
+  <div class="page-title">
+    <span class="mat-headline-3 font-primary-heavy">Saved buildings</span>
+    <h5 class="mat-headline-6">Visited buildings that you've saved.</h5>
+  </div>
+</div>
+<div class="page-body">
   <div *ngIf="user" class="flex-container space-above">
-    <mat-card class="max-card-width mat-elevation-z0 outline" *ngFor="let building of MOCK_BUILDINGS; let i = index">
-      <mat-card-header>
-        <mat-card-title><span class="font-primary-normal">{{building.title}}</span></mat-card-title>
-      </mat-card-header>
-      <img mat-card-image [src]="MOCK_BUILDINGS[i].images[0].url" [alt]="MOCK_BUILDINGS[i].images[0].alt">
-      <mat-card-content>
-        <p class="md-subhead">
-          {{building.desc}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions [align]="'end'">
-        <button [routerLink]="['/building', building.id]" mat-button><span class="font-primary-normal">VIEW LISTINGS</span></button>
-      </mat-card-actions>
-    </mat-card>
+    <div class="gpt-card" *ngFor="let building of MOCK_BUILDINGS; let i = index">
+      <img
+        [src]="MOCK_BUILDINGS[i].images[0].url"
+        [alt]="MOCK_BUILDINGS[i].images[0].alt"
+        class="gpt-card-image">
+      <div class="gpt-card-title-group">
+        <h3 class="gpt-card-title font-primary-heavy">{{building.title ?? building.address}}</h3>
+        <p class="gpt-card-subtitle font-primary-light">{{building?.promoChunks?.[0]?.content}}</p>
+        <div class="action-button-container">
+          <button [routerLink]="['/building', building.id]" mat-stroked-button>
+            <span class="font-primary-normal">
+              VIEW LISTINGS
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <span *ngIf="!user" class="mat-h4">
     No user found

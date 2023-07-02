@@ -42,4 +42,40 @@
    }
    .c-carousel-control {
    z-index:4;
-   }
+}
+
+.building-detail-container {
+  padding: 5rem 10rem 0rem 10rem;
+}
+
+.building-text-promo-chunk {
+  margin-top: 3rem;
+}
+
+.icon-display-large {
+  transform: scale(5);
+}
+
+.icon-display-medium {
+  transform: scale(2);
+}
+
+.icon-margin {
+  margin: 0rem 2rem 2rem 3rem;
+}
+
+.green-icon {
+  color: green;
+}
+
+.building-header {
+  display: flex;
+}
+
+.icon-set {
+  flex-basis: 45%;
+}
+
+.building-title {
+  flex-basis: 55%;
+}

@@ -1,0 +1,34 @@
+<!-- Basic structure from CGPT -->
+<div class="card">
+    <div class="card-header">
+        <div>
+            <span class="font-primary-heavy comment-date">
+                {{tenantComment.postDate}}
+            </span>
+        </div>
+        <div *ngIf="getTenantStatus() as status">
+            <mat-icon [class.active-tenant]="status === 'person'" [matTooltip]="getIconTooltip()">
+                {{ status }}
+            </mat-icon>
+        </div>
+    </div>
+    <div class="card-rating">
+        <span class="font-primary-light">
+            {{tenantComment.claps}} claps
+        </span>
+    </div>
+    <div class="card-description">
+        <span class="font-primary-light comment-content">
+            {{tenantComment.content | commentDisplay}}
+        </span>
+    </div>
+    <div class="card-footer">
+        <div>
+            <button mat-stroked-button class="show-more-btn">Show More</button>
+        </div>
+        <div>
+            <img class="card-avatar" src="https://via.placeholder.com/30" alt="User Avatar">
+            <span class="font-primary-normal author-name">John Doe</span>
+        </div>
+    </div>
+</div>

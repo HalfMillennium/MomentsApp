@@ -1,15 +1,15 @@
 <div>
-    <div class="container">
-        <div class="left-panel">
-            <mdb-carousel [dark]="true" [controls]="true" [indicators]="true" [animation]="'slide'" #carousel>
+  <div *ngIf="currentBuilding" class="container">
+        <div class="left-panel rounded-image carousel-container">
+            <mdb-carousel [dark]="true" [controls]="true" [animation]="'slide'" #carousel>
                 <mdb-carousel-item *ngFor="let image of currentListing?.images; let i = index">
-                    <img alt="Listing #{{i}}" class="d-block w-100" loading="lazy" [src]="image" />
+                    <img alt="Listing #{{i}}" class="mat-elevation-z3 d-block w-100 rounded-image" loading="lazy" [src]="image" />
                 </mdb-carousel-item>
             </mdb-carousel>
         </div>
         <div class="right-panel">
             <div class="building-title-text">
-                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.addr }}</h3> 
+                <h3 class="font-primary-heavy">{{ currentBuilding.title ?? currentBuilding.address }}</h3> 
                 <mat-chip
                     *ngIf="currentBuilding.buildingType === BuildingTypeEnum.LUXURY">
                     {{BUILDING_TYPE[currentBuilding.buildingType].name}}
@@ -26,8 +26,8 @@
                         <mat-icon>
                             location_pin
                         </mat-icon>
-                        {{ currentBuilding.neigh ?? 
-                            currentBuilding.lat_long?.lat + ',' + currentBuilding.lat_long?.long}}
+                        {{ currentBuilding.neighborhood ?? 
+                            currentBuilding.latLong?.lat + ',' + currentBuilding.latLong?.long}}
                     </button>
                     <button 
                         class="visit-site-button"
@@ -42,7 +42,7 @@
             </div>
             <div>
                 <mat-tab-group class="tab-style">
-                    <mat-tab label="Active">
+                    <mat-tab label="Active Listings ({{(selectedListingSet | keyvalue).length }})">
                         <ul>
                             <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
                                 <div class="card-item">
@@ -52,19 +52,25 @@
                             </li>
                         </ul>
                     </mat-tab>
-                    <mat-tab label="Recent">
-                        <ul *ngIf="closedListings">
-                            <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
-                                <div class="card-item">
-                                    <listing-card [listing]="listing.value">
-                                    </listing-card>
-                                </div>
-                            </li>
+                    <mat-tab 
+                        *ngIf="tenantCommentsObs | async as tenantComments"
+                        class="tab-style"
+                        label="Tenant Comments ({{ tenantComments.length }})">
+                        <ul>
+                            <tenant-comment-partial class="tenant-comment" *ngFor="let comment of tenantComments"
+                                [tenantComment]="comment">
+                            </tenant-comment-partial>
                         </ul>
                     </mat-tab>
                 </mat-tab-group>
             </div>
         </div>
-        <!-- <building-detail> -->
     </div>
+    <div *ngIf="!currentBuilding">
+        <span class="mat-headline-4">
+            [ Error - No Building Selected ]
+        </span>
+    </div>
+    <building-detail [currentBuilding]="currentBuilding">
+    </building-detail>
 </div>

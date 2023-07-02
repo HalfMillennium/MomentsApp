@@ -19,16 +19,16 @@ import { DatabaseEffects } from '../shared/store/db.effects';
 /** Menu items */
 export const MENU_ITEMS: MenuItem[] = [
   {
+    name: 'dash_home',
+    icon: 'home',
+    label: 'Dashboard',
+    routerLink: '/',
+  },
+  {
     name: 'about',
     icon: 'info',
     label: 'What Is This?',
     routerLink: '/info',
-  },
-  {
-    name: 'dash_home',
-    icon: 'dashboard',
-    label: 'Dashboard',
-    routerLink: '/',
   },
   {
     name: 'view_listings',
@@ -100,7 +100,7 @@ export enum Features {
 
 // Favicon URL
 export const FAVICON_URL =
-  'https://img.icons8.com/ios/50/f9f9f9/apple-news.png';
+  'https://img.icons8.com/material/50/f9f9f9/fire-element--v1.png';
 
 // Returns whether or not auth API response was error or UserCredential
 export function isAuthError(
