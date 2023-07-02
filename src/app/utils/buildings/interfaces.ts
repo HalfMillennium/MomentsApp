@@ -21,7 +21,7 @@ export interface PromoChunk {
 }
 
 export interface ApartmentBuilding {
-  id: number;
+  id: string;
   title?: string;
   address: string;
   buildingType: BuildingTypeEnum;

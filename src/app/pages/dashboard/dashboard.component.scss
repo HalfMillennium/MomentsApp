@@ -8,7 +8,8 @@
 }
 
 .max-card-width {
-    max-width: 400px;
+    max-height: fit-content;
+    max-width: 350px;
 }
 
 .nameTag {
@@ -57,5 +58,45 @@
     border-color: #c3c3c3;
     border-radius: 1rem;
     border-style: solid;
-    border-width: 1px;
+    border-width: 0.5px;
+}
+
+.page-head {
+    margin: 0rem 15rem 0rem 15rem;
+}
+
+.gpt-card {
+    max-width: 25rem;
+    height: fit-content;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gpt-card-image {
+    width: 100%;
+    height: 65%;
+    object-fit: cover;
+}
+
+.gpt-card-title-group {
+    padding: 20px;
+    background-color: #f7f7f7;
+    height: 35%;
+}
+
+.gpt-card-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.gpt-card-subtitle {
+    font-size: 16px;
+    margin: 5px 0 0;
+}
+
+.action-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: end;
 }

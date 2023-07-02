@@ -100,7 +100,7 @@ export enum Features {
 
 // Favicon URL
 export const FAVICON_URL =
-  'https://img.icons8.com/ios/50/f9f9f9/apple-news.png';
+  'https://img.icons8.com/material/50/f9f9f9/fire-element--v1.png';
 
 // Returns whether or not auth API response was error or UserCredential
 export function isAuthError(

@@ -1,17 +1,17 @@
-<div class="building-detail-container">
+<div class="building-detail-container" *ngIf="currentBuilding">
     <h4 class="mat-headline-4 font-primary-light">Welcome to</h4>
-    <div class="building-header">
+    <div>
         <div class="mat-headline-1 font-primary-normal building-header">
             <div class="building-title">
                 {{currentBuilding.title ?? currentBuilding.address}}
-            </div>
-            <div class="icon-set">
-                <mat-icon class="icon-display-large icon-margin" matTooltip="">
-                    apartment
-                </mat-icon>
-                <mat-icon class="icon-display-medium icon-margin green-icon" matTooltip="HotSpot Supported Building">
-                    verified
-                </mat-icon>
+                <span class="icon-set">
+                    <mat-icon class="icon-display-large icon-margin" matTooltip="Standard-lease building">
+                        apartment
+                    </mat-icon>
+                    <mat-icon class="icon-display-medium icon-margin green-icon" matTooltip="HotSpot Supported Building">
+                        verified
+                    </mat-icon>
+                </span>
             </div>
         </div>
     </div>
@@ -34,4 +34,7 @@
             </mat-icon>
         </button>
     </div>
+</div>
+<div *ngIf="!currentBuilding">
+    <span>[ Error - No Building Specified ]</span>
 </div>

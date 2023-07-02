@@ -31,7 +31,7 @@ export class BuildingDetail implements OnDestroy {
 
   readonly UserInteractionTypeEnum = UserInteractionTypeEnum;
 
-  @Input() currentBuilding: ApartmentBuilding;
+  @Input() currentBuilding?: ApartmentBuilding;
 
   buildingDetailChunks: BuildingDetailChunk[] = MOCK_8_SPRUCE_DETAIL_CHUNKS;
 
@@ -42,13 +42,6 @@ export class BuildingDetail implements OnDestroy {
 
   viewLoaded = false;
   slideIntervalMs = 5000;
-
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
-    const params = this.activatedRoute.snapshot.paramMap;
-    this.currentBuilding = JSON.parse(
-      `${params.get('building')}`
-    ) as ApartmentBuilding;
-  }
 
   async ngOnInit(): Promise<void> {
     await this.fetchData(2);

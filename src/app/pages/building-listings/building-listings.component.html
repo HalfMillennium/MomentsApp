@@ -1,9 +1,9 @@
 <div>
-    <div class="container">
+    <div *ngIf="currentBuilding" class="container">
         <div class="left-panel rounded-image carousel-container">
             <mdb-carousel [dark]="true" [controls]="true" [animation]="'slide'" #carousel>
                 <mdb-carousel-item *ngFor="let image of currentListing?.images; let i = index">
-                    <img alt="Listing #{{i}}" class="d-block w-100 rounded-image" loading="lazy" [src]="image" />
+                    <img alt="Listing #{{i}}" class="mat-elevation-z3 d-block w-100 rounded-image" loading="lazy" [src]="image" />
                 </mdb-carousel-item>
             </mdb-carousel>
         </div>
@@ -48,9 +48,9 @@
                         </ul>
                     </mat-tab>
                     <mat-tab 
+                        *ngIf="tenantCommentsObs | async as tenantComments"
                         class="tab-style"
-                        label="Tenant Comments ({{tenantComments.length}})"
-                        *ngIf="tenantComments | async as tenantComments">
+                        label="Tenant Comments ({{ tenantComments.length }})">
                         <ul>
                             <tenant-comment-partial class="tenant-comment" *ngFor="let comment of tenantComments"
                                 [tenantComment]="comment">
@@ -60,6 +60,11 @@
                 </mat-tab-group>
             </div>
         </div>
+    </div>
+    <div *ngIf="!currentBuilding">
+        <span class="mat-headline-4">
+            [ Error - No Building Selected ]
+        </span>
     </div>
     <building-detail [currentBuilding]="currentBuilding">
     </building-detail>
