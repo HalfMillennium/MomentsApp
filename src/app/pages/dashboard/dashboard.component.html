@@ -6,15 +6,6 @@
 <div class="page-head">
   <div class="row">
     <div class="column space-right">
-      <span *ngIf="user" class="mat-h4">
-        <mat-icon>check</mat-icon>
-        User authenticated
-        <div>
-          <span class="display-name-label mat-h5">
-            Hi there, user!
-          </span>
-        </div>
-      </span>
       <span *ngIf="!user" class="mat-h4">
         No user found
         <mat-icon>person_search</mat-icon>
@@ -36,8 +27,10 @@
         <li class="dash-tab-menu-item">
           <button 
           mat-stroked-button 
-          class="dash-menu-button font-primary-heavy"
+          class="dash-menu-button font-primary-heavy margin-left"
           [class.selected]="currentDashboardTabId === 'recently-visited'"
+          [class.dash-menu-unclicked]="currentDashboardTabId === 'recently-visited'"
+          [class.mat-elevation-z2]="currentDashboardTabId !== 'recently-visited'"
           [disabled]="currentDashboardTabId === 'recently-visited'"
           (click)="selectTab('recently-visited')">
             Recently Visited
@@ -48,6 +41,8 @@
             mat-stroked-button
             class="dash-menu-button font-primary-heavy"
             [class.selected]="currentDashboardTabId === 'favorited'"
+            [class.dash-menu-unclicked]="currentDashboardTabId === 'favorited'"
+            [class.mat-elevation-z2]="currentDashboardTabId !== 'favorited'"
             [disabled]="currentDashboardTabId === 'favorited'"
             (click)="selectTab('favorited')">
             Favorited Buildings
@@ -56,13 +51,14 @@
         <li class="dash-tab-menu-item">
           <button 
             mat-stroked-button
-            class="dash-menu-button font-primary-heavy salmon-color"
+            class="dash-menu-button font-primary-heavy white-color salmon-background"
             [class.selected]="currentDashboardTabId === 'popular'"
+            [class.mat-elevation-z2]="currentDashboardTabId !== 'popular'"
             [disabled]="currentDashboardTabId === 'popular'"
             (click)="selectTab('popular')">
             Popular
             <mat-icon>
-              star_outline
+              {{ (currentDashboardTabId === 'popular') ? 'star' : 'star_outline'}}
             </mat-icon>
           </button>
         </li>
@@ -71,7 +67,7 @@
   </div>
 </div>
 <div class="page-body">
-  <div *ngIf="user" class="flex-container space-above">
+  <div *ngIf="user && dashboardTabs[currentDashboardTabId].active" class="flex-container space-above">
     <div class="gpt-card" *ngFor="let building of MOCK_BUILDINGS; let i = index">
       <img
         [src]="MOCK_BUILDINGS[i].images[0].url"
@@ -90,15 +86,9 @@
       </div>
     </div>
   </div>
-  <span *ngIf="!user" class="mat-h4">
-    No user found
-    <mat-icon>person_search</mat-icon>
-    <div>
-      <span class="display-name-label mat-h5">
-        Who's there? <u (click)="openAuthDialog()">Sign in or register to continue.</u>
-      </span>
-    </div>
-  </span>
+  <div *ngIf="!user || !dashboardTabs[currentDashboardTabId].active" class="empty-dashboard-tab">
+    <span class="font-primary-light" disabled="true">[ Hm... nothing to see here. ]</span>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

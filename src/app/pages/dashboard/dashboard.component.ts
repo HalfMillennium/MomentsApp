@@ -34,19 +34,23 @@ export class Dashboard {
     {
       tabTitle: string;
       tabSubTitle: string;
+      active: boolean;
     }
   > = {
     'recently-visited': {
       tabTitle: 'Recently visited',
       tabSubTitle: "Buildings you've marked as visited on the HotSpot app.",
+      active: true,
     },
     favorited: {
       tabTitle: 'Favorited buildings',
       tabSubTitle: "Visited buildings that you've favorited.",
+      active: false,
     },
     popular: {
       tabTitle: 'Popular',
       tabSubTitle: 'Buildings that are popular with other HotSpot users.',
+      active: false,
     },
   };
 

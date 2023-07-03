@@ -115,6 +115,7 @@
 
 .dash-tab-menu-item {
     float: left;
+    height: fit-content;
 }
 
 .dash-tab-menu-item a {
@@ -127,14 +128,40 @@
 
 .dash-menu-button {
     border-radius: 2rem;
-    margin-right: 1rem;
+    margin: 1rem 1rem 1rem 0rem;
+    border-color: transparent;
 }
 
 .salmon-color {
     color: salmon;
-    outline-color: salmon;
+}
+
+.salmon-background {
+    background-color: salmon;
+}
+
+.white-color {
+    color: white;
 }
 
 .selected {
     background-color: rgb(164, 164, 164);
 }
+
+.margin-left {
+    margin-left: 1rem;
+}
+
+.empty-dashboard-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+}
+
+.empty-dashboard-tab span {
+    text-align: center;
+    font-size: 24px;
+}
+
