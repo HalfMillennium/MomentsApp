@@ -26,7 +26,7 @@
       </span>
     </div>
   </div>
-  <div class="dashboard-tab-header">
+  <div class="dashboard-tab-header" *ngIf="dashboardTabs[currentDashboardTabId] as currentDashboardTab">
     <div>
       <span class="mat-headline-3 font-primary-heavy">{{currentDashboardTab.tabTitle}}</span>
       <h5 class="mat-headline-6 font-primary-normal">{{currentDashboardTab.tabSubTitle}}</h5>
@@ -35,16 +35,35 @@
       <ul class="dash-tab-menu">
         <li class="dash-tab-menu-item">
           <button 
+          mat-stroked-button 
+          class="dash-menu-button font-primary-heavy"
+          [class.selected]="currentDashboardTabId === 'recently-visited'"
+          [disabled]="currentDashboardTabId === 'recently-visited'"
+          (click)="selectTab('recently-visited')">
+            Recently Visited
+          </button>
+        </li>
+        <li class="dash-tab-menu-item">
+          <button 
             mat-stroked-button
-            class="dash-menu-button font-primary-heavy">
+            class="dash-menu-button font-primary-heavy"
+            [class.selected]="currentDashboardTabId === 'favorited'"
+            [disabled]="currentDashboardTabId === 'favorited'"
+            (click)="selectTab('favorited')">
             Favorited Buildings
           </button>
         </li>
         <li class="dash-tab-menu-item">
           <button 
             mat-stroked-button
-            class="dash-menu-button font-primary-heavy salmon-color">
+            class="dash-menu-button font-primary-heavy salmon-color"
+            [class.selected]="currentDashboardTabId === 'popular'"
+            [disabled]="currentDashboardTabId === 'popular'"
+            (click)="selectTab('popular')">
             Popular
+            <mat-icon>
+              star_outline
+            </mat-icon>
           </button>
         </li>
       </ul>

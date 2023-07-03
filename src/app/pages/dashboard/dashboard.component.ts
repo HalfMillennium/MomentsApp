@@ -29,24 +29,28 @@ export class Dashboard {
 
   subHeaderText: string | undefined = undefined;
 
-  dashboardTabs: Array<{
-    tabTitle: string;
-    tabSubTitle: string;
-    tabId: string;
-  }> = [
+  dashboardTabs: Record<
+    string,
     {
+      tabTitle: string;
+      tabSubTitle: string;
+    }
+  > = {
+    'recently-visited': {
       tabTitle: 'Recently visited',
       tabSubTitle: "Buildings you've marked as visited on the HotSpot app.",
-      tabId: 'recently-visited',
     },
-    {
+    favorited: {
       tabTitle: 'Favorited buildings',
       tabSubTitle: "Visited buildings that you've favorited.",
-      tabId: 'saved',
     },
-  ];
+    popular: {
+      tabTitle: 'Popular',
+      tabSubTitle: 'Buildings that are popular with other HotSpot users.',
+    },
+  };
 
-  currentDashboardTab = this.dashboardTabs[0];
+  currentDashboardTabId = 'recently-visited';
 
   userAuthState$: Observable<AuthState> = this.store
     .select('auth')
@@ -84,5 +88,9 @@ export class Dashboard {
   fetchUserName(username: any) {
     console.log('username:', username);
     return username;
+  }
+
+  selectTab(tabId: string) {
+    this.currentDashboardTabId = tabId;
   }
 }
