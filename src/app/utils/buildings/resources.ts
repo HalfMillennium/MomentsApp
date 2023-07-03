@@ -336,7 +336,7 @@ export const MOCK_15_CLIFF_DETAIL_CHUNKS: BuildingDetailChunk[] = [
     },
     title: 'Overview',
     googleIcon: 'auto_awesome',
-    direction: 'right-text',
+    direction: 'left-text',
   },
   {
     plainText:
@@ -347,7 +347,7 @@ export const MOCK_15_CLIFF_DETAIL_CHUNKS: BuildingDetailChunk[] = [
     },
     title: 'More Details',
     googleIcon: 'feed',
-    direction: 'left-text',
+    direction: 'right-text',
   },
 ];
 

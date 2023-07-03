@@ -26,9 +26,29 @@
       </span>
     </div>
   </div>
-  <div class="page-title">
-    <span class="mat-headline-3 font-primary-heavy">Saved buildings</span>
-    <h5 class="mat-headline-6">Visited buildings that you've saved.</h5>
+  <div class="dashboard-tab-header">
+    <div>
+      <span class="mat-headline-3 font-primary-heavy">{{currentDashboardTab.tabTitle}}</span>
+      <h5 class="mat-headline-6 font-primary-normal">{{currentDashboardTab.tabSubTitle}}</h5>
+    </div>
+    <div>
+      <ul class="dash-tab-menu">
+        <li class="dash-tab-menu-item">
+          <button 
+            mat-stroked-button
+            class="dash-menu-button font-primary-heavy">
+            Favorited Buildings
+          </button>
+        </li>
+        <li class="dash-tab-menu-item">
+          <button 
+            mat-stroked-button
+            class="dash-menu-button font-primary-heavy salmon-color">
+            Popular
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 <div class="page-body">

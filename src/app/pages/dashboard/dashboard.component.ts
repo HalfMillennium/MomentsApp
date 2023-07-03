@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
-import { MONTHS, parseUserAuthState } from '../../utils/resources';
 import { MOCK_BUILDINGS } from '../../utils/buildings/resources';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -22,7 +21,7 @@ import { FirebaseAuthService } from 'src/app/shared/auth/service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class Dashboard implements AfterViewInit {
+export class Dashboard {
   readonly destroyObs$ = new ReplaySubject(1);
   readonly MOCK_BUILDINGS = MOCK_BUILDINGS;
 
@@ -30,9 +29,24 @@ export class Dashboard implements AfterViewInit {
 
   subHeaderText: string | undefined = undefined;
 
-  currentTimeOfDay: string | undefined = undefined;
-  currentMonthDay: string | undefined = undefined;
-  currentYear: string | undefined = undefined;
+  dashboardTabs: Array<{
+    tabTitle: string;
+    tabSubTitle: string;
+    tabId: string;
+  }> = [
+    {
+      tabTitle: 'Recently visited',
+      tabSubTitle: "Buildings you've marked as visited on the HotSpot app.",
+      tabId: 'recently-visited',
+    },
+    {
+      tabTitle: 'Favorited buildings',
+      tabSubTitle: "Visited buildings that you've favorited.",
+      tabId: 'saved',
+    },
+  ];
+
+  currentDashboardTab = this.dashboardTabs[0];
 
   userAuthState$: Observable<AuthState> = this.store
     .select('auth')
@@ -58,13 +72,6 @@ export class Dashboard implements AfterViewInit {
         this.firebaseAuthService.reloadUser();
       }
     });
-  }
-
-  ngAfterViewInit() {
-    const d = new Date();
-    this.currentMonthDay = `${MONTHS[d.getMonth()]} ${d.getDate()}`;
-    this.currentYear = `${d.getFullYear()}`;
-    this.currentTimeOfDay = `${d.getHours()}h:${d.getMinutes()}m:${d.getSeconds()}s`;
   }
 
   openAuthDialog() {

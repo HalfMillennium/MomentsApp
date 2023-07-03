@@ -100,3 +100,37 @@
     width: 100%;
     justify-content: end;
 }
+
+.dashboard-tab-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dash-tab-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.dash-tab-menu-item {
+    float: left;
+}
+
+.dash-tab-menu-item a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dash-menu-button {
+    border-radius: 2rem;
+    margin-right: 1rem;
+}
+
+.salmon-color {
+    color: salmon;
+    outline-color: salmon;
+}
