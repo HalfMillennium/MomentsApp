@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TenantComment } from 'src/app/utils/buildings/interfaces';
 import { CommentDisplayPipe } from 'src/app/utils/pipes/comment-display.pipe';
 import { MaterialModule } from 'src/material.module';
+import { Observable, of as observableOf } from 'rxjs';
+import { UserInteractionTypeEnum } from 'src/app/utils/buildings/resources';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tenant-comment-partial',
@@ -13,6 +16,12 @@ import { MaterialModule } from 'src/material.module';
 })
 export class TenantCommentPartial {
   @Input() tenantComment!: TenantComment;
+  @Input() userInteractionObs: Observable<UserInteractionTypeEnum> =
+    observableOf(UserInteractionTypeEnum.NONE);
+
+  constructor(private snackBar: MatSnackBar) {}
+
+  readonly UserInteractionTypeEnum = UserInteractionTypeEnum;
 
   getTenantStatus(): string {
     let icon = '';
@@ -42,5 +51,33 @@ export class TenantCommentPartial {
         tooltip = 'Unidentified user';
     }
     return tooltip;
+  }
+
+  getClapIconAttributes(userInteraction: UserInteractionTypeEnum | null) {
+    let baseAttr = ['clap-icon'];
+    if (
+      userInteraction &&
+      userInteraction === UserInteractionTypeEnum.FAVORITED
+    ) {
+      return baseAttr.concat('material-icons');
+    }
+    return baseAttr.concat('material-icons-outlined');
+  }
+
+  toggleClap(userInteraction: UserInteractionTypeEnum | null) {
+    if (
+      !userInteraction ||
+      userInteraction === UserInteractionTypeEnum.FAVORITED
+    ) {
+      this.userInteractionObs = observableOf(UserInteractionTypeEnum.NONE);
+      this.snackBar.open('Comment un-clapped.', 'Close', {
+        duration: 2000,
+      });
+    } else {
+      this.userInteractionObs = observableOf(UserInteractionTypeEnum.FAVORITED);
+      this.snackBar.open('Comment clapped. Nice.', 'Close', {
+        duration: 2000,
+      });
+    }
   }
 }

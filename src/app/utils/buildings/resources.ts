@@ -421,10 +421,11 @@ export const MOCK_15_CLIFF_TENANT_COMMENTS: TenantComment[] = [
   },
 ];
 
-// Indicates how a user has interacted with a particular listing (e.g. Favorite, Watched, etc)
+// Indicates how a user has interacted with a particular resource (listing, comment, etc.)
 export enum UserInteractionTypeEnum {
   FAVORITED = 'favorited',
   WATCHING = 'watching',
   VISITED = 'visited',
   LIVED_IN = 'lived_in',
+  NONE = 'none',
 }

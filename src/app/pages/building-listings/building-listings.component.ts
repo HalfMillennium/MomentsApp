@@ -24,14 +24,17 @@ import {
   MOCK_15_CLIFF_LISTINGS_RECORD,
   MOCK_15_CLIFF_DETAIL_CHUNKS,
 } from '../../utils/buildings/resources';
-import { ApartmentListing } from '../../utils/buildings/interfaces';
 import { ListingCardComponent } from '../components/listing-card/listing-card.component';
 import { Observable, of as observableOf } from 'rxjs';
-import { ApartmentBuilding } from '../../utils/buildings/interfaces';
+import {
+  ApartmentBuilding,
+  ApartmentListing,
+} from '../../utils/buildings/interfaces';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { BuildingDetail } from '../building-detail/building-detail.component';
 import { TenantCommentPartial } from '../components/tenant-comment-partial/tenant-comment-partial.component';
 import { TenantComment } from '../../utils/buildings/interfaces';
+import { BuildingDetailChunk } from 'src/app/utils/interfaces';
+import { BuildingDetail } from '../building-detail/building-detail.component';
 
 @Component({
   selector: 'app-building-listings',
@@ -45,14 +48,15 @@ import { TenantComment } from '../../utils/buildings/interfaces';
     ListingCardComponent,
     RouterModule,
     MdbCarouselModule,
-    BuildingDetail,
     TenantCommentPartial,
+    BuildingDetail,
   ],
 })
 export class BuildingListingsComponent implements OnChanges {
-  @Input() readonly selectedListingSet = MOCK_8_SPRUCE_LISTINGS_RECORD;
+  @Input() readonly selectedListingSet?: Record<string, ApartmentListing>;
   @Input() readonly currentBuilding?: ApartmentBuilding;
-  @Input() readonly tenantComments?: TenantComment[];
+
+  tenantCommentsObs?: Observable<TenantComment[]>;
 
   // TODO: Create type for building info set
   MOCK_BUILDING_DATA: Record<string, any> = {
@@ -72,6 +76,10 @@ export class BuildingListingsComponent implements OnChanges {
 
   currentBuildingId: string | undefined;
 
+  currentListing?: ApartmentListing;
+
+  currentDetailChunks?: BuildingDetailChunk[];
+
   readonly BUILDING_TYPE = BUILDING_TYPE;
   readonly BuildingTypeEnum = BuildingTypeEnum;
 
@@ -81,23 +89,26 @@ export class BuildingListingsComponent implements OnChanges {
 
   constructor(private activatedRoute: ActivatedRoute) {
     const params = this.activatedRoute.snapshot.paramMap;
+    this.currentBuildingId = params.get('id') ?? '';
     this.currentBuilding =
-      this.MOCK_BUILDING_DATA[params.get('id') ?? ''].building;
+      this.MOCK_BUILDING_DATA[this.currentBuildingId].building;
+    this.tenantCommentsObs = observableOf(
+      this.MOCK_BUILDING_DATA[this.currentBuildingId].tenantComments ?? []
+    );
+    this.selectedListingSet =
+      this.MOCK_BUILDING_DATA[this.currentBuildingId ?? ''].listings;
+    this.currentListing = this.selectedListingSet?.[this.currentListingId];
+    this.currentDetailChunks =
+      this.MOCK_BUILDING_DATA[this.currentBuildingId].detailChunks;
   }
 
-  currentListing: ApartmentListing =
-    this.selectedListingSet[this.currentListingId];
-
   slideIntervalMs = 0;
-
-  tenantCommentsObs: Observable<TenantComment[]> = observableOf(
-    MOCK_8_SPRUCE_TENANT_COMMENTS
-  );
 
   closedListings: Observable<ApartmentListing[]> | undefined;
 
   showListing(id: string) {
-    this.currentListing = this.selectedListingSet[id];
+    this.currentListing =
+      this.MOCK_BUILDING_DATA[this.currentBuildingId ?? ''].listings[id];
   }
 
   ngOnChanges(changes: SimpleChanges): void {

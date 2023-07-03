@@ -16,6 +16,12 @@
         <span class="font-primary-light">
             {{tenantComment.claps}} claps
         </span>
+        <span *ngIf="userInteractionObs | async as userInteraction"
+            class="clap-icon" 
+            [class]="getClapIconAttributes(userInteraction)"
+            (click)="toggleClap(userInteraction)">
+            sign_language
+        </span>
     </div>
     <div class="card-description">
         <span class="font-primary-light comment-content">

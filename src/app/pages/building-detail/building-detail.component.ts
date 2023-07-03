@@ -33,7 +33,7 @@ export class BuildingDetail implements OnDestroy {
 
   @Input() currentBuilding?: ApartmentBuilding;
 
-  buildingDetailChunks: BuildingDetailChunk[] = MOCK_8_SPRUCE_DETAIL_CHUNKS;
+  @Input() buildingDetailChunks?: BuildingDetailChunk[];
 
   // Set of user interactions currently applicable to this building
   userInteractions: Observable<UserInteractionTypeEnum[]> = observableOf([

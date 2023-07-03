@@ -42,7 +42,7 @@
             </div>
             <div>
                 <mat-tab-group class="tab-style">
-                    <mat-tab label="Active Listings ({{(selectedListingSet | keyvalue).length }})">
+                    <mat-tab *ngIf="selectedListingSet" label="Active Listings ({{ (selectedListingSet | keyvalue).length }})">
                         <ul>
                             <li *ngFor="let listing of selectedListingSet | keyvalue" (click)="showListing(listing.value.id)">
                                 <div class="card-item">
@@ -71,6 +71,8 @@
             [ Error - No Building Selected ]
         </span>
     </div>
-    <building-detail [currentBuilding]="currentBuilding">
+    <building-detail 
+        [currentBuilding]="currentBuilding"
+        [buildingDetailChunks]="currentDetailChunks">
     </building-detail>
 </div>
