@@ -104,6 +104,10 @@ export interface HotSpotUser {
   userCredential: UserCredential;
   displayName?: string;
   savedBuildings?: ApartmentBuilding[];
+  email?: string;
+  dateOfBirth?: string;
+  phone?: string;
+  address?: string;
 }
 
 export interface DatabaseState {
@@ -125,4 +129,11 @@ export interface BuildingDetailChunk {
   angularMatIcon?: string;
   amenities?: BuildingAmenityTypeEnum[];
   amenityList?: boolean;
+}
+
+// For use on the Account details page
+export interface UserAttributeDisplay {
+  label: string;
+  data: string;
+  editable: boolean;
 }

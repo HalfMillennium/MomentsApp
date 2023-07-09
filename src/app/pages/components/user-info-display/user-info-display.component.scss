@@ -1,0 +1,83 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.user-data {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.user-data h2 {
+    margin-bottom: 10px;
+}
+
+.user-data p {
+    margin-bottom: 5px;
+}
+
+.user-data strong {
+    font-weight: bold;
+}
+
+.container {
+    height: 400px;
+    width: 400px;
+    position: relative;
+}
+
+.top-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    padding: 1rem;
+}
+
+.bottom-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    padding: 1rem;
+}
+
+.user-info-details {
+    border-radius: 1rem;
+    border: 1rem;
+}
+
+.edit-button {
+    width: fit-content;
+    margin-bottom: 0.1rem;
+    cursor: default;
+}
+
+.edit-icon:hover {
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

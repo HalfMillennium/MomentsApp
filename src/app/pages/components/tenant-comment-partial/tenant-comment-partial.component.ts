@@ -4,7 +4,7 @@ import { TenantComment } from 'src/app/utils/buildings/interfaces';
 import { CommentDisplayPipe } from 'src/app/utils/pipes/comment-display.pipe';
 import { MaterialModule } from 'src/material.module';
 import { Observable, of as observableOf } from 'rxjs';
-import { UserInteractionTypeEnum } from 'src/app/utils/buildings/resources';
+import { UserInteractionTypeEnum } from 'src/app/utils/resources';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

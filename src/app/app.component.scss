@@ -22,22 +22,10 @@
     margin: 2rem;
 }
 
-.gradient-button {
-    display: inline-block;
-    background: linear-gradient(to right, #333333, #CCCCCC);
-    color: #FFFFFF;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0px 2px 4px rgba(172, 172, 172, 0.3);
-}
-
 .info-link {
-    font-size: 1rem;
     border-color: transparent;
-    background-color: lightgray;
+    font-size: 1rem;
+    background-color: salmon;
 }
 
 .action-bar {
@@ -80,4 +68,12 @@
     width: 100%;
     height: 50%;
     padding-left: 2rem;
+}
+
+.dark-gray-color {
+    color: rgb(90, 90, 90)
+}
+
+.less-space-right {
+    padding-right: -0.5rem;
 }

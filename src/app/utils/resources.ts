@@ -10,6 +10,7 @@ import {
   UserState,
   DatabaseError,
   UserDataState,
+  HotSpotUser,
 } from './interfaces';
 import { OperationType } from 'firebase/auth';
 import { authReducer, databaseReducer } from '../shared/store/reducer';
@@ -155,4 +156,23 @@ export const DEFAULT_DATABASE_ERROR: DatabaseError = {
   code: 500,
   message: 'SERVER ERROR - Could not complete database operation.',
   errorType: WarningsEnum.FIRESTORE_DB_ERROR,
+};
+
+// Indicates how a user has interacted with a particular resource (listing, comment, etc.)
+export enum UserInteractionTypeEnum {
+  FAVORITED = 'favorited',
+  WATCHING = 'watching',
+  VISITED = 'visited',
+  LIVED_IN = 'lived_in',
+  NONE = 'none',
+}
+
+export const MOCK_HOTSPOT_USER: HotSpotUser = {
+  userCredential: {} as UserCredential,
+  displayName: 'BootyHunter12',
+  savedBuildings: [],
+  email: 'glc2266@gmail.com',
+  dateOfBirth: 'March 10, 2000',
+  phone: '732-740-8380',
+  address: '99 MacDougal Street',
 };
