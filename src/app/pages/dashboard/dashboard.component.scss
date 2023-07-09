@@ -1,5 +1,9 @@
 @use 'src/styles';
 
+mat-icon {
+    vertical-align: middle;
+}
+
 .flex-container {
     display: flex;
     gap: 20px;
@@ -98,7 +102,8 @@
 .action-button-container {
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dashboard-tab-header {
@@ -167,5 +172,9 @@
 
 .no-content-message {
     color: gray;
+}
+
+.favorite-button {
+    display: flex;
 }
 

@@ -43,8 +43,8 @@ form input[type="submit"] {
 }
 
 .container {
-    height: 400px;
-    width: 400px;
+    height: 40rem;
+    width: 40rem;
     position: relative;
 }
 
@@ -53,7 +53,7 @@ form input[type="submit"] {
     top: 0;
     left: 0;
     width: 100%;
-    height: 40%;
+    height: 25%;
     padding: 1rem;
 }
 
@@ -62,7 +62,7 @@ form input[type="submit"] {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60%;
+    height: 75%;
     padding: 1rem;
 }
 
@@ -80,4 +80,13 @@ form input[type="submit"] {
 .edit-icon:hover {
     border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.disabled-color {
+    color: lightgray;
+}
+
+.disabled-color:hover {
+    color: lightgray;
+    box-shadow: none;
 }

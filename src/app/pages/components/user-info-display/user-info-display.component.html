@@ -7,7 +7,16 @@
         </div>
     </div>
     <div class="user-data bottom-div">
-        <h2 class="font-primary-normal">User Details:</h2>
+        <h2 class="font-primary-normal">User Details</h2>
+        <p>
+            <span class="font-primary-heavy">Email,</span>
+            <span id="user-email">
+                {{this.userData.email }}
+            </span>
+            <mat-icon class="edit-icon disabled-color">
+                edit_off
+            </mat-icon>
+        </p>
         <p>
             <span class="font-primary-heavy">Display Name,</span>
             <span class="user-display-name">
@@ -15,15 +24,6 @@
             </span>
             <mat-icon 
                 class="edit-icon">
-                edit
-            </mat-icon>
-        </p>
-        <p>
-            <span class="font-primary-heavy">Email,</span>
-            <span id="user-email">
-                {{this.userData.email }}
-            </span>
-            <mat-icon class="edit-icon">
                 edit
             </mat-icon>
         </p>
