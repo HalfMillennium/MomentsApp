@@ -29,6 +29,8 @@ export class Dashboard {
 
   subHeaderText: string | undefined = undefined;
 
+  pageDataLoaded = false;
+
   dashboardTabs: Record<
     string,
     {

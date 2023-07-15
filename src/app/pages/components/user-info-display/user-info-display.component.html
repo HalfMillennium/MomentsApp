@@ -8,40 +8,41 @@
     </div>
     <div class="user-data bottom-div">
         <h2 class="font-primary-normal">User Details</h2>
-        <p>
+        <div>
             <span class="font-primary-heavy">Email,</span>
-            <span id="user-email">
+            <span class="font-primary-normal user-data-field">
                 {{this.userData.email }}
             </span>
             <mat-icon class="edit-icon disabled-color">
                 edit_off
             </mat-icon>
-        </p>
-        <p>
+        </div>
+        <div>
             <span class="font-primary-heavy">Display Name,</span>
-            <span class="user-display-name">
+            <span class="font-primary-normal user-data-field">
                 {{ this.userData.displayName }}
             </span>
             <mat-icon 
                 class="edit-icon">
                 edit
             </mat-icon>
-        </p>
-        <p>
+        </div>
+        <div>
             <span class="font-primary-heavy">Phone,</span>
-            <span id="user-phone">
+            <span class="font-primary-normal user-data-field">
             {{this.userData.phone }}
             </span>
             <mat-icon class="edit-icon">
                 edit
             </mat-icon>
-        </p>
-        <p><span class="font-primary-heavy">Address,</span><span id="user-address">
+        </div>
+        <div><span class="font-primary-heavy">Address,</span>
+            <span class="font-primary-normal user-data-field">
             {{this.userData.address }}
             <mat-icon class="edit-icon">
                 edit
             </mat-icon>
         </span>
-        </p>
+        </div>
     </div>
 </div>

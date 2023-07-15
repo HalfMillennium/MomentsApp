@@ -42,6 +42,10 @@ form input[type="submit"] {
     font-weight: bold;
 }
 
+.user-data-field {
+    margin-left: 1rem;
+}
+
 .container {
     height: 40rem;
     width: 40rem;
@@ -77,6 +81,10 @@ form input[type="submit"] {
     cursor: default;
 }
 
+.edit-icon {
+    margin: 0rem 0rem 0.25rem 0.5rem;
+}
+
 .edit-icon:hover {
     border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -89,4 +97,12 @@ form input[type="submit"] {
 .disabled-color:hover {
     color: lightgray;
     box-shadow: none;
+}
+
+mat-icon {
+    vertical-align: middle;
+}
+
+.edit-button {
+    display: flex;
 }
