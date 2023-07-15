@@ -77,6 +77,11 @@
         <h3 class="gpt-card-title font-primary-heavy">{{building.title ?? building.address}}</h3>
         <p class="gpt-card-subtitle font-primary-light">{{building?.promoChunks?.[0]?.content}}</p>
         <div class="action-button-container">
+          <button [routerLink]="['/building', building.id]" mat-icon-button class="favorite-button">
+            <mat-icon>
+              favorite_border
+            </mat-icon>
+          </button>
           <button [routerLink]="['/building', building.id]" mat-stroked-button>
             <span class="font-primary-normal">
               VIEW LISTINGS
@@ -87,7 +92,7 @@
     </div>
   </div>
   <div *ngIf="!user || !dashboardTabs[currentDashboardTabId].active" class="empty-dashboard-tab">
-    <span class="font-primary-light" disabled="true">[ Hm... nothing to see here. ]</span>
+    <span class="font-primary-light no-content-message">[ Hm... nothing to see here. ]</span>
   </div>
 </div>
 

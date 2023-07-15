@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="top-div">
+        <div class="user-info-details">
+            <div class="user-info-title">
+                <h1 class="font-primary-heavy">Account Info</h1>
+            </div>
+        </div>
+    </div>
+    <div class="user-data bottom-div">
+        <h2 class="font-primary-normal">User Details</h2>
+        <div>
+            <span class="font-primary-heavy">Email,</span>
+            <span class="font-primary-normal user-data-field">
+                {{this.userData.email }}
+            </span>
+            <mat-icon class="edit-icon disabled-color">
+                edit_off
+            </mat-icon>
+        </div>
+        <div>
+            <span class="font-primary-heavy">Display Name,</span>
+            <span class="font-primary-normal user-data-field">
+                {{ this.userData.displayName }}
+            </span>
+            <mat-icon 
+                class="edit-icon">
+                edit
+            </mat-icon>
+        </div>
+        <div>
+            <span class="font-primary-heavy">Phone,</span>
+            <span class="font-primary-normal user-data-field">
+            {{this.userData.phone }}
+            </span>
+            <mat-icon class="edit-icon">
+                edit
+            </mat-icon>
+        </div>
+        <div><span class="font-primary-heavy">Address,</span>
+            <span class="font-primary-normal user-data-field">
+            {{this.userData.address }}
+            <mat-icon class="edit-icon">
+                edit
+            </mat-icon>
+        </span>
+        </div>
+    </div>
+</div>

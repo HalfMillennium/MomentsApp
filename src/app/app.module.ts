@@ -24,10 +24,9 @@ import { UserNamePipe } from './utils/pipes/user-name.pipe';
 import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
 import { FirebaseAuthService } from './shared/auth/service';
 import { FirestoreService } from './shared/database/service';
-import { CardButtonOverlayComponent } from './pages/components/card-button-overlay/card-button-overlay.component';
 
 @NgModule({
-  declarations: [AppComponent, CardButtonOverlayComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     MatMenuModule,

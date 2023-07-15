@@ -8,10 +8,8 @@ import { CarouselModule } from '@coreui/angular';
 import { RouterModule } from '@angular/router';
 import { TwoPanelContainerComponent } from '../components/two-panel-container/two-panel-container.component';
 import { BuildingDetailChunk } from 'src/app/utils/interfaces';
-import {
-  MOCK_8_SPRUCE_DETAIL_CHUNKS,
-  UserInteractionTypeEnum,
-} from '../../utils/buildings/resources';
+import { UserInteractionTypeEnum } from '../../utils/resources';
+import { MOCK_8_SPRUCE_DETAIL_CHUNKS } from '../../utils/buildings/resources';
 
 @Component({
   selector: 'building-detail',
