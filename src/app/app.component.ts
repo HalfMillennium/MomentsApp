@@ -57,7 +57,9 @@ export class AppComponent {
         this.signOut();
         break;
       case 'account':
-        this.openAuthDialog();
+        if (!this.currentUserCredential) {
+          this.openAuthDialog();
+        }
         break;
       default:
         this.navigateTo(item.routerLink!);
