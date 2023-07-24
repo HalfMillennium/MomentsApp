@@ -28,8 +28,8 @@ export const signInEmail = createAction(
   props<{ userEmail: string; userPassword: string }>()
 );
 
-export const signInEmailSuccess = createAction(
-  '[Auth] Register Email Success',
+export const signInSuccess = createAction(
+  '[Auth] Sign In Success',
   props<{ userCredential: UserCredential }>()
 );
 
@@ -45,4 +45,8 @@ export const updateUserProfile = createAction(
 
 export const updateUserProfileSuccess = createAction(
   '[Auth] Update User Profile Success'
+);
+
+export const updateUserCredentialWithCookie = createAction(
+  '[Auth] Update User Credential w/ Cookie'
 );

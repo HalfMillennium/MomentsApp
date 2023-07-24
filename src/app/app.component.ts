@@ -11,6 +11,8 @@ import { AuthState, MenuItem, MetaStores } from './utils/interfaces';
 import { FirebaseAuthService } from './shared/auth/service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+import { userCredentialSelector } from './shared/store/selectors';
+import { UserCredential } from 'firebase/auth';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +23,10 @@ export class AppComponent {
   readonly MENU_ITEMS = MENU_ITEMS;
   readonly destroyObs$ = new ReplaySubject(1);
 
-  userCredentialCookie = this.cookieService.get('userCredential');
+  userCredential = this.cookieService.get('userCredential');
 
-  // Simple, non-nullable UserCredential
-  currentUserCredential = parseUserAuthState(this.userCredentialCookie);
-
-  userAuthState$: Observable<AuthState> = this.store
-    .select('auth')
+  userCredential$: Observable<UserCredential | undefined> = this.store
+    .select(userCredentialSelector)
     .pipe(takeUntil(this.destroyObs$));
 
   constructor(
@@ -52,18 +51,20 @@ export class AppComponent {
   }
 
   getOnClick(item: MenuItem) {
-    switch (item.name) {
-      case 'sign_out':
-        this.signOut();
-        break;
-      case 'account':
-        if (!this.currentUserCredential) {
-          this.openAuthDialog();
-        }
-        break;
-      default:
-        this.navigateTo(item.routerLink!);
-    }
+    this.userCredential$.subscribe((credential) => {
+      switch (item.name) {
+        case 'sign_out':
+          this.signOut();
+          break;
+        case 'account':
+          if (!credential) {
+            this.openAuthDialog();
+          }
+          break;
+        default:
+          this.navigateTo(item.routerLink!);
+      }
+    });
   }
 
   signOut() {

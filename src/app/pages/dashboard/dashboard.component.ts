@@ -13,6 +13,8 @@ import { AuthDialog } from '../auth_dialog/auth-dialog/auth-dialog.component';
 import { UserCredential } from 'firebase/auth';
 import { User } from 'firebase/auth';
 import { FirebaseAuthService } from 'src/app/shared/auth/service';
+import { userCredentialSelector } from 'src/app/shared/store/selectors';
+import { signInSuccess } from 'src/app/shared/store/auth.actions';
 
 @Component({
   selector: 'dashboard',
@@ -58,10 +60,11 @@ export class Dashboard {
 
   currentDashboardTabId = 'recently-visited';
 
-  userAuthState$: Observable<AuthState> = this.store
-    .select('auth')
+  userCredential$: Observable<UserCredential | undefined> = this.store
+    .select(userCredentialSelector)
     .pipe(takeUntil(this.destroyObs$));
 
+  // TODO: Make selectors for DB functions
   userDataState$: Observable<UserDataState> = this.store
     .select('db')
     .pipe(takeUntil(this.destroyObs$));
@@ -73,9 +76,17 @@ export class Dashboard {
     private dialog: MatDialog,
     private readonly cookieService: CookieService
   ) {
-    const currentUser = this.cookieService.get('userCredential');
-    if (currentUser) {
-      this.user = (JSON.parse(currentUser) as UserCredential).user;
+    this.userCredential$.subscribe((credential) => {
+      this.user = credential?.user;
+    });
+    const userCredential = this.cookieService.get('userCredential');
+    if (userCredential) {
+      //this.user = (JSON.parse(userCredential) as UserCredential).user;
+      this.store.dispatch(
+        signInSuccess({
+          userCredential: JSON.parse(userCredential) as UserCredential,
+        })
+      );
     }
     this.userDataState$.subscribe(async (state: UserDataState) => {
       if (state.shouldReloadUser) {

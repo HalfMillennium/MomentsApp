@@ -1,5 +1,6 @@
 import { UserCredential } from 'firebase/auth';
 import { ApartmentBuilding } from './buildings/interfaces';
+import { MetaStores } from '../utils/interfaces';
 import {
   CarouselSlides,
   User,
@@ -13,7 +14,7 @@ import {
   HotSpotUser,
 } from './interfaces';
 import { OperationType } from 'firebase/auth';
-import { authReducer, databaseReducer } from '../shared/store/reducer';
+import { appReducers } from '../shared/store/reducer';
 import { AuthEffects } from '../shared/store/auth.effects';
 import { DatabaseEffects } from '../shared/store/db.effects';
 
@@ -112,8 +113,7 @@ export function isAuthError(
 
 // Type container all currently supported reducers
 export type AppReducers = {
-  authReducer: AuthState;
-  databaseReducer: UserDataState;
+  appReducers: MetaStores;
 };
 
 export const UNKNOWN_EMAIL_AUTH_SERVER_ERROR = {
@@ -129,11 +129,6 @@ export const EMPTY_CREDENTIAL: Credentials = {
 
 export const FIREBASE_AUTH_ERROR_EMAIL_IN_USE =
   'Firebase: Error (auth/email-already-in-use).';
-
-export const APP_REDUCERS = {
-  auth: authReducer,
-  db: databaseReducer,
-};
 
 export const APP_EFFECTS = [AuthEffects, DatabaseEffects];
 

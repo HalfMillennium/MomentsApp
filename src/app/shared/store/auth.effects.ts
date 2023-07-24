@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import {
   signInEmail,
   signInEmailFailure,
-  signInEmailSuccess,
+  signInSuccess,
   registerEmail,
   registerEmailSuccess,
   registerEmailFailure,
@@ -81,7 +81,7 @@ export class AuthEffects {
         return observableOf(
           isAuthError(result)
             ? signInEmailFailure({ userAuthError: result })
-            : signInEmailSuccess({ userCredential: result })
+            : signInSuccess({ userCredential: result })
         );
       })
     )

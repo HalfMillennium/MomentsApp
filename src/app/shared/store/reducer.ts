@@ -5,49 +5,50 @@ import {
   registerEmailSuccess,
   registerEmailFailure,
   signInEmailFailure,
-  signInEmailSuccess,
+  signInSuccess,
   updateUserProfileSuccess,
 } from './auth.actions';
 import { createUserSuccess } from './db.actions';
 
 import { AppReducers } from '../../utils/resources';
-import { AuthState, UserDataState } from 'src/app/utils/interfaces';
+import { MetaStores } from 'src/app/utils/interfaces';
 import { FirebaseAuthService } from '../auth/service';
 
 export const metaReducers: MetaReducer<{}>[] = isDevMode() ? [] : [];
 
-const initialAuthState: AuthState = {};
-const initialUserDataState: UserDataState = {};
+const initialState: MetaStores = {
+  auth: {},
+  db: {},
+};
 
-export const authReducer = createReducer(
-  initialAuthState,
-  on(registerEmailSuccess, (state: AuthState, { userCredential }) => ({
+export const appReducers = createReducer(
+  initialState,
+  on(registerEmailSuccess, (state: MetaStores, { userCredential }) => ({
     ...state,
-    userCredential,
+    auth: {
+      userCredential,
+    },
   })),
-  on(registerEmailFailure, (state: AuthState, { userAuthError }) => ({
+  on(registerEmailFailure, (state: MetaStores, { userAuthError }) => ({
     ...state,
-    userAuthError,
+    auth: {
+      userAuthError,
+    },
   })),
-  on(signInEmailSuccess, (state: AuthState, { userCredential }) => ({
+  on(signInSuccess, (state: MetaStores, { userCredential }) => ({
     ...state,
-    userCredential,
+    auth: {
+      userCredential,
+    },
   })),
-  on(signInEmailFailure, (state: AuthState, { userAuthError }) => ({
+  on(signInEmailFailure, (state: MetaStores, { userAuthError }) => ({
     ...state,
-    userAuthError,
-  }))
-);
-
-export const databaseReducer = createReducer(
-  initialUserDataState,
-  on(updateUserProfileSuccess, (state) => ({
-    ...state,
-    shouldReloadUser: true,
+    auth: {
+      userAuthError,
+    },
   }))
 );
 
 export const reducers: ActionReducerMap<AppReducers> = {
-  authReducer,
-  databaseReducer,
+  appReducers,
 };

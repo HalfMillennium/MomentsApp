@@ -21,7 +21,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
 import { UserNamePipe } from './utils/pipes/user-name.pipe';
-import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
+import { APP_EFFECTS } from './utils/resources';
+import { reducers } from './shared/store/reducer';
 import { FirebaseAuthService } from './shared/auth/service';
 import { FirestoreService } from './shared/database/service';
 
@@ -45,7 +46,7 @@ import { FirestoreService } from './shared/database/service';
     AngularFireDatabaseModule,
     AuthCredentialPipe,
     UserNamePipe,
-    StoreModule.forRoot(APP_REDUCERS),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot(APP_EFFECTS),
   ],
   bootstrap: [AppComponent],

@@ -78,10 +78,6 @@ export class AuthDialog implements OnDestroy {
   userAuthState$: Observable<AuthState> = this.store
     .select('auth')
     .pipe(takeUntil(this.destroyObs$));
-  /*
-  displayName$: Observable<UserState> = this.store
-    .select('user')
-    .pipe(takeUntil(this.destroyObs$));*/
 
   isAuthenticated = false;
 
@@ -130,17 +126,6 @@ export class AuthDialog implements OnDestroy {
           }
         }
       });
-    /*
-    this.displayName$
-      .pipe(takeUntil(this.destroyObs$))
-      .subscribe((userState: UserState) => {
-        if (userState.displayName && !this.isAuthenticated) {
-          this.isAuthenticated = true;
-          this.userAuthError = undefined;
-          this.onNoClick(); // close dialog when user is authenticated through dialog (and after UserBasics have been updated)
-          this.snackBar.open('Welcome to the Moments app!', 'Very cool');
-        }
-      });*/
   }
 
   setFormValues() {
