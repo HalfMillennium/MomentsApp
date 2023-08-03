@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400&family=Moirai+One&family=Poppins:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
+    rel="stylesheet">
+
+<div class="page">
+    <div class="page-body">
+        <div class="page-header">
+            <div class="places-title">
+                <div class="font-primary-heavy extra-large space-below">
+                    <div>
+                        Places
+                        <span class="material-symbols-outlined extra-large icon-padding">
+                            home_pin
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="left-div"></div>
+            <div class="right-div padding-small">
+                <places-search-bar 
+                    [currentPathType]="selectedPathType">
+                </places-search-bar>
+            </div>
+        </div>
+    </div>
+</div>

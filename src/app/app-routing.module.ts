@@ -6,6 +6,7 @@ import { AuthCredentialPipe } from './utils/pipes/auth-credential.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { BuildingListingsComponent } from './pages/building-listings/building-listings.component';
 import { AccountInfoComponent } from './pages/account-info/account-info.component';
+import { ViewPlacesComponent } from './pages/view-places/view-places.component';
 
 const routes: Routes = [
   { path: '', component: Dashboard },
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountInfoComponent,
+  },
+  {
+    path: 'places',
+    component: ViewPlacesComponent,
   },
 ];
 // configures NgModule imports and exports

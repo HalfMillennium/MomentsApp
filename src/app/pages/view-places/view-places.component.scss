@@ -1,0 +1,76 @@
+@use 'src/styles';
+
+.page {
+    justify-content: space-evenly;
+    width: 100%;
+    border-color: #EAEAEA;
+    border-radius: 15px;
+}
+
+.container {
+    width: 75rem;
+    height: 50rem;
+    display: flex;
+}
+
+.left-div {
+    width: 25%;
+    border: 0.1rem solid #e5e5e5;
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
+
+.right-div {
+    width: 75%;
+    border: 0.1rem solid #e5e5e5;
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
+
+.extra-large {
+    font-size: 3rem;
+}
+
+.page-header {
+    margin-left: 10rem;
+}
+
+.space-below {
+    margin-bottom: 1rem;
+}
+
+.padding-small {
+    padding: 1rem;
+}
+
+.select-container {
+    display: flex;
+    width: 20rem;
+    height: 5rem;
+}
+
+.select-left-div {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-right-div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-component {
+    width: 70%;
+}
+
+.plus-icon {
+    font-size: 2rem;
+}
+
+select {
+    border: none;
+}

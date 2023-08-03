@@ -26,10 +26,10 @@ export const MENU_ITEMS: MenuItem[] = [
     routerLink: '/',
   },
   {
-    name: 'about',
-    icon: 'info',
-    label: 'What Is This?',
-    routerLink: '/info',
+    name: 'view_places',
+    icon: 'place',
+    label: 'View Places',
+    routerLink: '/places',
   },
   {
     name: 'view_listings',
