@@ -30,7 +30,12 @@
     </div>
     <div class="card-footer">
         <div>
-            <button mat-stroked-button class="show-more-btn">Show More</button>
+            <button mat-stroked-button 
+                class="show-more-btn font-primary-light"
+                (click)="openFullComment(tenantComment.id)"
+                >
+                Show More
+            </button>
         </div>
         <div>
             <img class="card-avatar" src="https://via.placeholder.com/30" alt="User Avatar">

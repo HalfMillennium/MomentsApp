@@ -6,6 +6,8 @@ import { MaterialModule } from 'src/material.module';
 import { Observable, of as observableOf } from 'rxjs';
 import { UserInteractionTypeEnum } from 'src/app/utils/resources';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { TenantCommentFull } from '../tenant-comment-full/tenant-comment-full.component';
 
 @Component({
   selector: 'tenant-comment-partial',
@@ -19,7 +21,7 @@ export class TenantCommentPartial {
   @Input() userInteractionObs: Observable<UserInteractionTypeEnum> =
     observableOf(UserInteractionTypeEnum.NONE);
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {}
 
   readonly UserInteractionTypeEnum = UserInteractionTypeEnum;
 
@@ -79,5 +81,11 @@ export class TenantCommentPartial {
         duration: 2000,
       });
     }
+  }
+
+  openFullComment(commentId: string) {
+    this.dialog.open(TenantCommentFull, {
+      width: '35rem',
+    });
   }
 }
