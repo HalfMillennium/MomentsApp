@@ -1,7 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/material.module';
-import { HotSpotUser, UserAttributeDisplay } from 'src/app/utils/interfaces';
+import {
+  HotSpotUser,
+  MetaStores,
+  UserAttributeDisplay,
+} from 'src/app/utils/interfaces';
+import { Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { AuthState } from 'src/app/utils/interfaces';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'user-info-display',
@@ -11,12 +18,25 @@ import { HotSpotUser, UserAttributeDisplay } from 'src/app/utils/interfaces';
   imports: [CommonModule, MaterialModule],
 })
 export class UserInfoDisplayComponent {
+  // TODO: Deprecated
   @Input({ required: true }) userData!: HotSpotUser;
   visibleDetails?: UserAttributeDisplay[];
+  protected readonly destroyObs$ = new ReplaySubject(1);
+
+  userAuthState$: Observable<AuthState> = this.store
+    .select('auth')
+    .pipe(takeUntil(this.destroyObs$));
 
   hoverStyles: string[] = [];
 
-  constructor() {}
+  constructor(private store: Store<MetaStores>) {
+    this.visibleDetails = this.userAuthState$
+      .pipe(takeUntil(this.destroyObs$))
+      .subscribe((state) => {
+        if (state.userCredential?.user) {
+        }
+      });
+  }
 
   addElevation() {
     this.hoverStyles = this.hoverStyles.concat(['mat-elevation-z3']);

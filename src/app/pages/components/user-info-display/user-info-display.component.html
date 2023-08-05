@@ -17,14 +17,14 @@
                 edit_off
             </mat-icon>
         </div>
-        <div>
+        <div *ngFor="let detail of visibleDetails">
             <span class="font-primary-heavy">Display Name,</span>
             <span class="font-primary-normal user-data-field">
                 {{ this.userData.displayName }}
             </span>
             <mat-icon 
                 class="edit-icon">
-                edit
+                {{field.icon}}
             </mat-icon>
         </div>
         <div>
@@ -36,7 +36,8 @@
                 edit
             </mat-icon>
         </div>
-        <div><span class="font-primary-heavy">Address,</span>
+        <div>
+            <span class="font-primary-heavy">Address,</span>
             <span class="font-primary-normal user-data-field">
             {{this.userData.address }}
             <mat-icon class="edit-icon">
