@@ -42,5 +42,10 @@ export class LocationActivityDisplay {
       dateTime: 'August 17th, 2023, 2:13PM EST',
       location: 'Fort Greene',
     },
+    {
+      type: MobileEventType.DISCOVER_BUILDING,
+      dateTime: 'September 1st, 2023, 1:45PM EST',
+      location: 'Times Square',
+    },
   ];
 }
