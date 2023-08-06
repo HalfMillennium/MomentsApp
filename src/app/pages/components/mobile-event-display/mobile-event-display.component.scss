@@ -1,0 +1,35 @@
+.container {
+    background-color: #f8f0e3;
+    font-family: Arial, sans-serif;
+}
+
+.pole {
+    width: 2px;
+    height: 50px;
+    margin: auto;
+    background: repeating-linear-gradient(to bottom, #d3d3d3, #d3d3d3 5px, transparent 5px, transparent 10px);
+}
+
+.card {
+    width: 300px;
+    /* cards are wider */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #d3d3d3;
+    /* light gray */
+    color: #FF9999;
+    /* light salmon */
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #FA8072;
+    /* salmon */
+}
+
+.description {
+    font-size: 14px;
+}
