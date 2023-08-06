@@ -34,6 +34,8 @@
 
 .action-bar-right {
     flex: 1;
+    justify-content: space-between;
+    display: flex;
 }
 
 .app-title {
@@ -76,4 +78,17 @@
 
 .less-space-right {
     padding-right: -0.5rem;
+}
+
+.mobile-icon {
+    margin: 2rem 2rem 2rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.large-icon {
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 1rem;
 }
