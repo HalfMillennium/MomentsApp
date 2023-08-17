@@ -1,0 +1,17 @@
+type HotSpotUser {
+    id: String!
+    firstName: String!
+    lastName: String!
+    favoritedBuildings: [ApartmentBuilding]
+    pastBuildings: [ApartmentBuilding]
+}
+
+extend type Query {
+    hotSpotUsers: [HotSpotUser]
+    hotSpotUserById(id: String!) : HotSpotUser
+}
+
+extend type Mutation {
+    newHotSpotUser(firstName: String!, lastName: String!, displayName: String!) : HotSpotUser!
+    deleteHotSpotUser(id: String!) : Boolean
+}

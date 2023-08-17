@@ -1,0 +1,17 @@
+type ApartmentBuilding {
+    id: String!
+    name: String!
+    address: String!
+    zipCode: String!
+    isLuxury: Boolean!
+}
+
+type Query {
+    apartmentBuildings: [ApartmentBuilding]
+    apartmentBuildingById(id: String!) : ApartmentBuilding
+}
+
+type Mutation {
+    newApartmentBuilding(name: String!, address: String!, zipCode: String!, isLuxury: Boolean!) : ApartmentBuilding!
+    deleteApartmentBuilding(id: String!) : Boolean
+}

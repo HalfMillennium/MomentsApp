@@ -1,0 +1,16 @@
+type TenantComment {
+    id: String!
+    displayName: String!
+    datePosted: String!
+    content: String!
+}
+
+extend type Query {
+    tenantComments: [TenantComment]
+    tenantCommentById(id: String!) : TenantComment
+}
+
+extend type Mutation {
+    newTenantComment(hotSpotUserId: String!, apartmentBuildingId: String!, displayName: String!, datePosted: String!, content: String!) : TenantComment!
+    deleteTenantComment(id: String!) : Boolean
+}
