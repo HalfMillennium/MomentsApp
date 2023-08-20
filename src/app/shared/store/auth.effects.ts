@@ -87,8 +87,8 @@ export class AuthEffects {
     )
   );
 
-  // Adds user's chosen displayName to user profile upon registration
-  initUserProfile$ = createEffect(() =>
+  // Adds basic user info (including )
+  createHotSpotUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(registerEmailSuccess),
       switchMap((action) =>

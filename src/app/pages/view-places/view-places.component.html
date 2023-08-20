@@ -20,10 +20,15 @@
             </div>
         </div>
         <div class="container">
-            <div class="left-div"></div>
+            <span class="font-primary-heavy large-title">
+                My Places
+            </span>
+            <div class="left-div" *ngIf="currentBuildingSetObs | async as currentBuildingSet">
+                <building-place-list-item *ngFor="let building of currentBuildingSet" [apartmentBuilding]="building">
+                </building-place-list-item>
+            </div>
             <div class="right-div padding-small">
-                <places-search-bar 
-                    [currentPathType]="selectedPathType">
+                <places-search-bar [currentPathType]="selectedPathType">
                 </places-search-bar>
             </div>
         </div>

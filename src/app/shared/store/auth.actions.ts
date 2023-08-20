@@ -13,7 +13,6 @@ export const registerEmailSuccess = createAction(
   props<{
     userCredential: UserCredential;
     displayName?: string;
-    photoURL?: string;
   }>()
 );
 

@@ -23,7 +23,6 @@ export class AppComponent {
 
   userCredentialCookie = this.cookieService.get('userCredential');
 
-  // Simple, non-nullable UserCredential
   currentUserCredential = parseUserAuthState(this.userCredentialCookie);
 
   userAuthState$: Observable<AuthState> = this.store

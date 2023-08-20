@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: white;
+    width: fit-content;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin: 1rem;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 20px;
+    position: relative;
+}
+
+.text-section {
+    z-index: 1;
+}
+
+.card h1 {
+    margin: 0;
+    font-size: 1.8em;
+    /* Increased font size */
+}
+
+.card h2 {
+    margin: 0;
+    color: gray;
+    font-size: 0.9em;
+    /* Made font size smaller */
+}
+
+.availability-btn {
+    background-color: orange;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1em;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: -15px;
+    /* makes the button overlap the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.availability-btn:hover {
+    transform: translateY(-3px);
+    /* slight elevation on hover */
+}

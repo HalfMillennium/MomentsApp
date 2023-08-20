@@ -54,6 +54,7 @@ export const BUILDING_AMENITY_ICONS: Record<BuildingAmenityTypeEnum, string> = {
 export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
   id: '32',
   title: '8 Spruce',
+  subtitle: 'Clean air and clean windows - our only guarantees.',
   address: '8 Spruce St. New York, NY',
   buildingType: BuildingTypeEnum.LUXURY,
   intro:
@@ -89,6 +90,7 @@ export const MOCK_8_SPRUCE_BUILDING: ApartmentBuilding = {
 export const MOCK_15_CLIFF_BUILDING: ApartmentBuilding = {
   id: '33',
   title: '15 Cliff',
+  subtitle: 'Modern living, at a modern cost.',
   address: '15 Cliff St. New York, NY',
   buildingType: BuildingTypeEnum.LUXURY,
   intro:
