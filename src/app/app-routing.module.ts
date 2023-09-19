@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { BuildingListingsComponent } from './pages/building-listings/building-listings.component';
 import { AccountInfoComponent } from './pages/account-info/account-info.component';
 import { ViewPlacesComponent } from './pages/view-places/view-places.component';
+import { GptMapActivity } from './pages/gpt-map-activity/gpt-map-activity.component';
 
 const routes: Routes = [
   { path: '', component: Dashboard },
@@ -24,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'places',
-    component: ViewPlacesComponent,
+    component: GptMapActivity,
   },
 ];
 // configures NgModule imports and exports

@@ -1,0 +1,70 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="page-body">
+    <div class="map bg">
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.smoothradio.com%2Ffeatures%2Fthe-real-thing-today-where-are-they-now%2F&psig=AOvVaw0ctxNFygKgEfppHnj7tNBE&ust=1695167062031000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCPiltcartYEDFQAAAAAdAAAAABAE" alt="Map Placeholder">
+
+        <div class="floating-card-settings-filters-view" cdkDragLockAxis="x" cdkDrag [cdkDragFreeDragPosition]="dragDisplayPositions.settingsView">
+            <div class="settings-container">
+                <div class="header-2 font-primary-heavy">View Places</div>
+            
+                <label for="distance" class="font-primary-normal">Distance from User (km): <span id="distance-val">10</span></label>
+                <input type="range" id="distance" min="1" max="100" value="10">
+            
+                <label for="area" class="font-primary-normal">Area Size (km<sup>2</sup>): <span id="area-val">50</span></label>
+                <input type="range" id="area" min="1" max="200" value="50">
+            
+                <div class="header-3 font-primary-heavy">Filters</div>
+                
+                <mat-form-field appearance="outline" class="distance-select-card">
+                    <mat-select>
+                        <mat-option value="closest">Closest</mat-option>
+                        <mat-option value="furthest">Furthest</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            
+                <ul>
+                    <li *ngFor="let point of interestPoints">
+                        <mat-checkbox>{{point.label}}</mat-checkbox>
+                    </li>
+                </ul>
+            
+                <button class="settings-button">Apply Filters</button>
+            </div>
+        </div>
+
+        <div class="floating-card-buildings-view" cdkDragLockAxis="x" cdkDrag [cdkDragFreeDragPosition]="dragDisplayPositions.buildingsView">
+            <!-- Scrollable list (initially hidden) -->
+            <div *ngIf="isListVisible" class="scrollable-list">
+                <img src="path/to/image1.jpg" alt="">
+                <!-- ... -->
+            </div>
+
+            <div class="carousel">
+                <div class="gpt-card" *ngFor="let building of PATH_BUILDINGS; let i = index">
+                    <img [src]="building.images[0].url" [alt]="building.images[0].alt" class="gpt-card-image">
+                    <div class="gpt-card-title-group">
+                        <div class="building-title">
+                            <mat-icon>
+                                apartment
+                            </mat-icon>
+                            <h3 class="gpt-card-title font-primary-heavy">{{building.title ?? building.address}}</h3>
+                        </div>
+                        <div class="action-button-container">
+                            <button mat-stroked-button class="building-detail-button">
+                                <span class="font-primary-normal">
+                                    VIEW LISTINGS
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="toggleExpand" class="expand-button">
+                <mat-icon class="expand-more-less-icon">
+                    {{ isListVisible ? 'expand_less': 'expand_more' }}
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,185 @@
+.page-body {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+}
+
+.settings-column {
+    width: 300px;
+    background-color: white;
+    padding: 15px;
+}
+
+.map {
+    flex: 1;
+    position: relative;
+    width: 100%;
+}
+
+.map img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.floating-card-buildings-view {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.floating-card-settings-filters-view {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.scrollable-list {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.yellow-bg {
+    background-color: yellow;
+}
+
+.orange-bg {
+    background-color: orange;
+}
+
+.red-bg {
+    background-color: red;
+}
+
+#toggleExpand {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 0 8px 8px;
+}
+
+#toggleExpand:hover {
+    background-color: #0056b3;
+}
+
+.gpt-card {
+    max-width: 15rem;
+    height: fit-content;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gpt-card-image {
+    width: 100%;
+    height: 65%;
+    object-fit: cover;
+}
+
+.gpt-card-title-group {
+    padding: 20px;
+    background-color: #f7f7f7;
+    height: 35%;
+}
+
+.gpt-card-title {
+    padding-left: 0.3rem;
+    display: flex;
+    font-size: 20px;
+    margin: 0;
+    justify-content: center;
+}
+
+.gpt-card-subtitle {
+    font-size: 16px;
+    margin: 5px 0 0;
+}
+
+.action-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.building-detail-button {
+    margin-top: 1rem;
+}
+
+.building-title {
+    display: flex;
+    justify-content: center;
+}
+
+.expand-button {
+    height: 2.5rem;
+    background-color: salmon;
+}
+
+.expand-more-less-icon {
+    margin-bottom: 1rem;
+}
+
+.settings-container {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.header-2,
+.hearder-3 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.settings-button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 0.45rem;
+}
+
+.distance-select-card {
+    width: 100%;
+    padding: 0.5rem 0 0.5rem 0;
+}
+
+.filter-checkbox-card {
+    width: 100%;
+    padding-bottom: 0.25rem;
+}
+
+ul {
+    list-style-type: none;
+}

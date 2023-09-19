@@ -13,6 +13,7 @@ import {
   MOCK_8_SPRUCE_BUILDING,
   MOCK_15_CLIFF_BUILDING,
 } from 'src/app/utils/buildings/resources';
+import { GptMapActivity } from '../gpt-map-activity/gpt-map-activity.component';
 
 @Component({
   selector: 'view-places',
@@ -24,6 +25,7 @@ import {
     CommonModule,
     PlacesSearchBar,
     BuildingPlaceListItem,
+    GptMapActivity,
   ],
 })
 export class ViewPlacesComponent {
