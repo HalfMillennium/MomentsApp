@@ -1,0 +1,31 @@
+.chip-set-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chip {
+    background-color: #f4f4f4;
+    border-radius: 10rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chip.checked {
+    background-color: salmon;
+    color: white;
+}
+
+.chip img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.chip span {
+    margin-left: 8px;
+}

@@ -1,3 +1,5 @@
+@use 'src/styles';
+
 .page-body {
     height: 100%;
     margin: 0;
@@ -182,4 +184,23 @@ input[type="checkbox"] {
 
 ul {
     list-style-type: none;
+}
+
+li {
+    margin-left: -2rem;
+}
+
+.icon-text {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    /* optional */
+}
+
+.text-md {
+    font-size: medium;
+}
+
+.icon-text-padding-bottom {
+    margin-bottom: 5px;
 }
