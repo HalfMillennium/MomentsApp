@@ -37,6 +37,7 @@ export class GptMapActivity {
     { label: 'Office', id: 'office', icon: 'business' },
     { label: 'Cafes', id: 'cafes', icon: 'local_cafe' },
     { label: 'Subway', id: 'subway', icon: 'subway' },
+    { label: 'Nightlife', id: 'nightlife', icon: 'local_bar' },
     { label: 'Entertainment', id: 'entertainment', icon: 'local_movies' },
     { label: 'Friends', id: 'friends', icon: 'people' },
   ];

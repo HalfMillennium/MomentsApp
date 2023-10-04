@@ -13,6 +13,8 @@ import { MaterialModule } from 'src/material.module';
 })
 export class ChipToggleSet {
   @Input() chipSet?: ChipToggle[];
+  @Input() transparent: boolean = false;
+  @Input() readonly: boolean = false;
 
   toggleChip(chip: ChipToggle) {
     chip.checked = !chip.checked;

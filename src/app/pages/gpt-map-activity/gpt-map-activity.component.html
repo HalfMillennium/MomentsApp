@@ -7,7 +7,16 @@
                 <h2 class="header-2 font-primary-heavy">View Places</h2>
             
                 <div>
-                    <mat-icon>filter_list</mat-icon><span class="font-primary-light icon-text">Filters</span>
+                    <chip-toggle-set 
+                        [chipSet]="[{
+                            label: 'Filters',
+                            icon: 'filter_list',
+                            available: true,
+                            checked: false,
+                            }]"
+                        [transparent]="true"
+                        [readonly]="true">
+                    </chip-toggle-set>
                 </div>
                 
                 <mat-form-field appearance="outline" class="distance-select-card">
@@ -28,7 +37,11 @@
                     </chip-toggle-set>
                 </div>
             
-                <button class="settings-button">Apply Filters</button>
+                <button 
+                    mat-button
+                    class="apply-settings-button">
+                    Apply Filters
+                </button>
             </div>
         </div>
 

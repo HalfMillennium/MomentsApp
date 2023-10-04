@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+// Cool and cozy colors
+$soft-gray: #f5f5f5;
+$warm-beige: #e0d7c1;
+$deep-taupe: #5c493f;
+$crisp-white: #ffffff;
+$cozy-brown: #7b5a4f;
+$pop-teal: #008080;
+$soft-blue-green: #a8d8b9;
+
 $font-primary: 'Poppins', sans-serif;
 $font-title: 'Moirai One', sans-serif;
 
@@ -36,3 +45,4 @@ $font-title: 'Moirai One', sans-serif;
 .right-panel {
     flex-basis: 35%;
 }
+

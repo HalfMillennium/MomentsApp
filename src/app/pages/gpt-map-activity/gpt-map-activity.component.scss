@@ -161,13 +161,11 @@ input[type="checkbox"] {
     margin-right: 5px;
 }
 
-.settings-button {
+.apply-settings-button {
+    background-color: salmon;
     display: block;
     width: 100%;
-    padding: 8px 10px;
     color: #fff;
-    border: none;
-    cursor: pointer;
     margin-top: 10px;
     border-radius: 0.45rem;
 }
@@ -203,4 +201,22 @@ li {
 
 .icon-text-padding-bottom {
     margin-bottom: 5px;
+}
+
+.text-chip-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-chip {
+    border-radius: 10rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 4px;
+}
+
+chip-toggle-set.display-chips {
+    background-color: transparent;
 }

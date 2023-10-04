@@ -1,7 +1,10 @@
 <div class="chip-set-body">
     <div id="chipContainer">
         <ng-container *ngFor="let chip of chipSet">
-            <div *ngIf="chip.available" class="chip" [class.checked]="chip.checked" (click)="toggleChip(chip)">
+            <div *ngIf="chip.available" class="chip" 
+                [class.transparent-bg]="transparent"
+                [class.checked]="chip.checked"
+                (click)="toggleChip(chip)">
                 <ng-container>
                     <mat-icon>
                         {{chip.icon}}
