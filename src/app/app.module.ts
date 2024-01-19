@@ -25,9 +25,12 @@ import { APP_REDUCERS, APP_EFFECTS } from './utils/resources';
 import { FirebaseAuthService } from './shared/auth/service';
 import { FirestoreService } from './shared/database/service';
 
+import { ChipToggleSet } from './pages/components/chip-toggle-set/chip-toggle-set.component';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ChipToggleSet,
     BrowserModule,
     MatMenuModule,
     MatButtonModule,

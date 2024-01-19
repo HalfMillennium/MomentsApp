@@ -11,6 +11,7 @@ import { AuthState, MenuItem, MetaStores } from './utils/interfaces';
 import { FirebaseAuthService } from './shared/auth/service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+import { ChipToggle } from './pages/components/chip-toggle-set/utils';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,10 @@ export class AppComponent {
   readonly destroyObs$ = new ReplaySubject(1);
 
   userCredentialCookie = this.cookieService.get('userCredential');
+
+  poweredByChip: ChipToggle[] = [
+    { label: 'powered by ChatGPT', icon: 'power', checked: false },
+  ];
 
   currentUserCredential = parseUserAuthState(this.userCredentialCookie);
 

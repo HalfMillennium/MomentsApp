@@ -17,6 +17,6 @@ export class ChipToggleSet {
   @Input() readonly: boolean = false;
 
   toggleChip(chip: ChipToggle) {
-    chip.checked = !chip.checked;
+    this.readonly ? undefined : (chip.checked = !chip.checked);
   }
 }
